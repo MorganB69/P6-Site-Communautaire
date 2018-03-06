@@ -13,6 +13,12 @@
      
     <context:component-scan base-package="fr.mb.projet"/>
     
+    <bean id="dataSourceSite" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiName" value="java:comp/env/jdbc/Climber"/>
+	</bean>
+    
+    
+    
      <!-- ===== Déclaration des Managers ===== -->
     <bean id="siteManager" class="fr.mb.projet.impl.SiteManagerImpl"/>
    

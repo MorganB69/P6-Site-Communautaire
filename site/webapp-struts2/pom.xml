@@ -79,6 +79,13 @@
             <artifactId>struts2-config-browser-plugin</artifactId>
             <version>${struts2.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+            
+
 
         <!-- Servlet & Jsp -->
         <dependency>

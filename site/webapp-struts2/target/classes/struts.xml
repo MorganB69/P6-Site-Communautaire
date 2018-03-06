@@ -24,6 +24,11 @@
         	<result name="input">/WEB-INF/jsp/formulaire.jsp</result>
         	<result>/WEB-INF/jsp/resultat.jsp</result>
         </action>
+        
+            <action name="site" class="fr.mb.projet.SiteAction">
+        	
+        	<result>/WEB-INF/jsp/resultat.jsp</result>
+        </action>
 
     </package>
 

@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="
             http://www.springframework.org/schema/beans
-            http://www.springframework.org/schema/beans/spring-beans.xsd">
-            
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+        	http://www.springframework.org/schema/context/spring-context.xsd">
+        	
+    <!-- Prend en compte la configuration des injections (@Inject...) -->
+    <context:annotation-config/>
+     
+    <context:component-scan base-package="fr.mb.projet"/>
+    
+     <!-- ===== Déclaration des Managers ===== -->
+    <bean id="siteManager" class="fr.mb.projet.impl.SiteManagerImpl"/>
+   
+
+    <!-- ===== ManagerFactory ===== -->
+    <bean id="managerFactory" class="fr.mb.projet.impl.ManagerFactoryImpl">
+        <property name="siteManager" ref="siteManager"/>
+        
+    </bean>
+    
+        <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="fr.mb.projet.Helper"/>
+        <property name="targetMethod" value="setManagerFactory"/>
+        <property name="arguments" ref="managerFactory"/>
+    </bean>
+    
+
+    
+    
+
 </beans>
 

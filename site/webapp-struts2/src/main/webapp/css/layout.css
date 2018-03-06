@@ -1,11 +1,27 @@
+
+section{
+	padding-top : 30px;
+}
+
+h2{
+	padding-bottom:30px;
+}
+
+
 body {
-  padding-top: 54px;
+  padding-top: 100px;
 }
 
 
 @media (min-width: 992px) {
   body {
-    padding-top: 56px;
+    padding-top: 100px;
+  }
+}
+
+@media (max-width: 240px) {
+  body {
+    padding-top: 150px;
   }
 }
 
@@ -17,6 +33,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  margin-bottom : 30px;
   
 }
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC 
+﻿<!DOCTYPE html PUBLIC 
 	"-//W3C//DTD XHTML 1.1 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -17,11 +17,12 @@
 </head>
 
 <body>
-
+	
+	<div class="container">
 	<!-- Navigation -->
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-light bg-light" >
-	<div class="container">
+	
 		<a class="navbar-brand" href="index.action">
 			<img id='logo' class='img-responsive' alt="Climber" src="image/logo5.png">
 			
@@ -64,13 +65,15 @@
 					</div>
 				</li>
 
+				<a href="saisir.action" class="btn btn-outline-primary my-2 my-sm-0">Identification</a>
 				
-				<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Identification</button>
 			</ul>
 		</div>
-	</div>
+	
 	
 	</nav>
+	
+	</div>
 	
 
 

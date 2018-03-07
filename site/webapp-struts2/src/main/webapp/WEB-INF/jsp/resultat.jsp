@@ -10,6 +10,11 @@
 <title>Résultat</title>
 </head>
 <body>
-	Voici la description du projet <s:property value="description"/>  <br/>
+	Nombre de sites :  <s:property value="nbSite"/>  <br/>
+	
+	Site iD : <s:property value="idSite"/>  <br/>
+	
+	Description site: <s:property value="description"/>  <br/>
+	
 </body>
 </html>

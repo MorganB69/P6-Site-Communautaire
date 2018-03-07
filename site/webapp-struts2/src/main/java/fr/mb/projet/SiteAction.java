@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import fr.mb.projet.bean.Site;
 import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.impl.ManagerFactoryImpl;
 
@@ -23,11 +24,14 @@ public class SiteAction extends ActionSupport{
 	
 
 	
+	Site site=Helper.getManagerFactory().getSiteManager().getSite(4);
 	
 	
-	String description=Helper.getManagerFactory().getSiteManager().getSite(1).getDescription();
+	int nbSite=Helper.getManagerFactory().getSiteManager().getCountSite();
 	
-	//String description=managerFactory.getSiteManager().getSite(1).getDescription();
+	
+	int idSite=site.getSiteId();
+	String description=site.getDescription();
 	
 	
 	
@@ -35,14 +39,23 @@ public class SiteAction extends ActionSupport{
 	
 	//int description=managerFactory.getSiteManager().getSite(1).getSiteId();
 	
-    public void setDescription(String description) { this.description = description; }
-    public String getDescription() { return description; }
-	
+    public void setNbSite(int nbSite) { this.nbSite = nbSite; }
+    public int getNbSite() { return nbSite; }
 	
 	
 
-	
-	
+public int getIdSite() {
+		return idSite;
+	}
+	public void setIdSite(int idSite) {
+		this.idSite = idSite;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 public String execute() throws Exception {
         
         return SUCCESS;

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import fr.mb.projet.recherche.RechercheSite;
+
 public abstract class AbstractDaoImpl {
 	
 	@Autowired
@@ -17,5 +19,8 @@ public abstract class AbstractDaoImpl {
 	protected DataSource getDataSource() {
 		return datasource;
 	}
+
+
+
 
 }

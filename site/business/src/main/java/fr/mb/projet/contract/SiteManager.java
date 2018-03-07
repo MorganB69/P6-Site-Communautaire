@@ -10,5 +10,7 @@ public interface SiteManager {
 	public Site getSite (Integer siteId);
 	
 	public List<Site> getListSite();
+
+	public int getCountSite();
 		
 }

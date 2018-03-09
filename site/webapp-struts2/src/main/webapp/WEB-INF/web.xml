@@ -10,34 +10,22 @@
 
 	
 	<!-- Filters -->
-	<filter>
-        <filter-name>struts2-prepare</filter-name>
-        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareFilter</filter-class>
-    </filter>
-
     <filter>
-        <filter-name>struts2-execute</filter-name>
-        <filter-class>org.apache.struts2.dispatcher.filter.StrutsExecuteFilter</filter-class>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
     </filter>
-	
-	<filter-mapping>
-        <filter-name>struts2-prepare</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
     <filter-mapping>
-        <filter-name>struts2-execute</filter-name>
+        <filter-name>struts2</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 	
-	<!-- Listeners -->
+<!-- Listener Spring -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:/applicationContext.xml</param-value>
+        <param-value>classpath:/bootstrapContext.xml</param-value>
     </context-param>
     
     
@@ -48,6 +36,8 @@
     	<servlet-class>org.apache.struts2.views.JspSupportServlet</servlet-class>
     	<load-on-startup>5</load-on-startup>
     </servlet>
+    
+
     
     <resource-ref>
     

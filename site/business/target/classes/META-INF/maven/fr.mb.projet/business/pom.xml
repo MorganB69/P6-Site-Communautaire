@@ -7,44 +7,38 @@
     <artifactId>site</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <groupId>fr.mb.projet</groupId>
+  
+  
   <artifactId>business</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <name>business</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+
+
   <dependencies>
-          <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+  
+  	    <dependency>
+            <groupId>org.apache.bval</groupId>
+            <artifactId>bval-jsr</artifactId>
         </dependency>
+
+    
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
     </dependency>
+    
     <dependency>
-    	<groupId>fr.mb.projet</groupId>
+    	<groupId>${project.groupId}</groupId>
     	<artifactId>model</artifactId>
     </dependency>
     <dependency>
-    	<groupId>fr.mb.projet</groupId>
+    	<groupId>${project.groupId}</groupId>
     	<artifactId>persistence</artifactId>
     </dependency>
-    <!-- JSR-250 -->
-		<dependency>
-		    <groupId>javax.annotation</groupId>
-		    <artifactId>javax.annotation-api</artifactId>
-		    <version>1.2</version>
-		</dependency>
-		<!-- JSR-330 -->
-		<dependency>
-		    <groupId>javax.inject</groupId>
-		    <artifactId>javax.inject</artifactId>
-		    <version>1</version>
-		</dependency>
+    
+       <dependency>
+    	<groupId>${project.groupId}</groupId>
+    	<artifactId>technical</artifactId>
+    </dependency>
+
   </dependencies>
 </project>

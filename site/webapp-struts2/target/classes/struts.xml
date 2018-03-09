@@ -5,7 +5,7 @@
 
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+
 
     <package name="myPackage" extends="struts-default">
 
@@ -25,7 +25,7 @@
         	<result>/WEB-INF/jsp/resultat.jsp</result>
         </action>
         
-            <action name="site" class="fr.mb.projet.SiteAction">
+            <action name="site" class="siteAction" method="doList">
         	
         	<result>/WEB-INF/jsp/resultat.jsp</result>
         </action>

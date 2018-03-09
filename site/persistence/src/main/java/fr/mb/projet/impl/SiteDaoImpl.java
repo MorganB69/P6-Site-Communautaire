@@ -3,19 +3,31 @@ package fr.mb.projet.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.inject.Named;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+
 
 import fr.mb.projet.bean.Site;
 import fr.mb.projet.contract.SiteDao;
 import fr.mb.projet.recherche.RechercheSite;
 
-@Component
+
+@Named("siteDao")
 public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 	
+	
+	
     
-    public int getCountSite(RechercheSite pRechercheSite) {
+    public SiteDaoImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+    @Override
+	public int getCountSite(RechercheSite pRechercheSite) {
         String vSQL
             = "SELECT COUNT(*) FROM site";
 
@@ -28,7 +40,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
     
 }
     
-    
+    @Override
     public Site getSite(int SiteId) {
         String vSQL
             = "SELECT * FROM site WHERE site_id="+SiteId+"";

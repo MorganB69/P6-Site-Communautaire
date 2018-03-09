@@ -1,0 +1,5 @@
+fr\mb\projet\bean\Situation.class
+fr\mb\projet\bean\Coordonnee.class
+fr\mb\projet\exception\NotFoundException.class
+fr\mb\projet\bean\Site.class
+fr\mb\projet\recherche\RechercheSite.class

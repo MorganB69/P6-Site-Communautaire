@@ -5,12 +5,39 @@
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="dataSourceSite" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/jdbc/Climber" />
-	</bean>
+
 	
 	<bean id="siteAction" class="fr.mb.projet.SiteAction">
 		
 	</bean>
+		
+   <bean id="hibernateDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/Climber" />
+		<property name="username" value="postgres" />
+		<property name="password" value="admin" />
+	</bean> 
+      
+    <bean id="mysessionFactory"  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">  
+        <property name="dataSource" ref="hibernateDataSource"></property>  
+          
+        <property name="mappingResources">  
+        <list>  
+        <value>fr/mb/projet/bean/spot/Site.hbm.xml</value>  
+        </list>  
+        </property>  
+          
+        <property name="hibernateProperties">  
+            <props>  
+               <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+            </props>  
+        </property>  
+    </bean>  
+      
+    <bean id="template" class="org.springframework.orm.hibernate5.HibernateTemplate">  
+    <property name="sessionFactory" ref="mysessionFactory"></property>  
+    </bean>
 
 </beans>

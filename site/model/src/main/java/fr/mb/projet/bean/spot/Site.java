@@ -1,27 +1,34 @@
-package fr.mb.projet.bean;
+package fr.mb.projet.bean.spot;
 
-public class Site {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import fr.mb.projet.bean.detail.Info;
+import fr.mb.projet.bean.detail.Situation;
+
+public class Site implements Serializable{
 	
-	private int siteId;
+	private int id;
 	private String nom;
 	private String description;
 	private String acces;
 	private String image;
 	private int nbSecteur;
+	private int nbVoie;
 	private Situation situation;
+	private ArrayList <Voie> listeVoie;
+	private Info info;
 	
-	public Site(int siteId) {
-		
-		this.siteId = siteId;
+	public Site() {
 
 	}
 
-	public int getSiteId() {
-		return siteId;
+	public int getId() {
+		return id;
 	}
 
-	public void setSiteId(int siteId) {
-		this.siteId = siteId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNom() {
@@ -70,6 +77,33 @@ public class Site {
 
 	public void setSituation(Situation situation) {
 		this.situation = situation;
+	}
+
+
+	
+
+	public Info getInfo() {
+		return info;
+	}
+
+	public void setInfo(Info info) {
+		this.info = info;
+	}
+
+	public int getNbVoie() {
+		return nbVoie;
+	}
+
+	public void setNbVoie(int nbVoie) {
+		this.nbVoie = nbVoie;
+	}
+
+	public ArrayList <Voie> getListeVoie() {
+		return listeVoie;
+	}
+
+	public void setListeVoie(ArrayList <Voie> listeVoie) {
+		this.listeVoie = listeVoie;
 	}
 	
 	

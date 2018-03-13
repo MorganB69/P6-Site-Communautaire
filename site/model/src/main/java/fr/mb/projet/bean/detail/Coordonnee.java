@@ -1,4 +1,4 @@
-package fr.mb.projet.bean;
+package fr.mb.projet.bean.detail;
 
 public class Coordonnee {
 	private double x;

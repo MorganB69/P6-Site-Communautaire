@@ -9,8 +9,7 @@ import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-
-import fr.mb.projet.bean.Site;
+import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.SiteDao;
 import fr.mb.projet.contract.SiteManager;
 import fr.mb.projet.recherche.RechercheSite;
@@ -21,8 +20,11 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 
 	
 	
-	@Inject
+	//@Inject
 	SiteDao siteDao;
+	
+	@Inject
+	SiteDaoImpl2 siteDao2;
 	
 	
 	RechercheSite rechercheSite = new RechercheSite();
@@ -32,21 +34,19 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 	public SiteManagerImpl() {
 		
 	}
+	
+	
 
-	@Override
-	public int getCountSite() {
-		
-		int count=siteDao.getCountSite(rechercheSite);
-		
-		return count;
-		
-	}
+
+	
+	
 	
 	@Override
 	public Site getSite(Integer siteId) {
 		// TODO Auto-generated method stub
 		
-		Site vSite=siteDao.getSite(siteId);
+		Site vSite=siteDao2.getById(siteId);
+		
 		
 		return vSite;
 	}
@@ -56,7 +56,7 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 		
 		List<Site> vList = new ArrayList();
 			for(int i=0;i<4;i++) {
-				Site vSite= new Site(i);
+				Site vSite= new Site();
 				vList.add(vSite);
 			}
 		

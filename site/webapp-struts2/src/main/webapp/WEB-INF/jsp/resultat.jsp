@@ -10,7 +10,7 @@
 <title>Résultat</title>
 </head>
 <body>
-	Nombre de sites :  <s:property value="nbSite"/>  <br/>
+	
 	
 	Site iD : <s:property value="idSite"/>  <br/>
 	

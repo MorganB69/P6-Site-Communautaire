@@ -66,6 +66,8 @@
 			<artifactId>postgresql</artifactId>
 		</dependency>
 		
+
+		
 		 <dependency>
     	<groupId>${project.groupId}</groupId>
     	<artifactId>technical</artifactId>

@@ -2,7 +2,7 @@ package fr.mb.projet.contract;
 
 import java.util.List;
 
-import fr.mb.projet.bean.Site;
+import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.exception.NotFoundException;
 
 public interface SiteManager {
@@ -11,6 +11,6 @@ public interface SiteManager {
 	
 	public List<Site> getListSite();
 
-	public int getCountSite();
+	
 		
 }

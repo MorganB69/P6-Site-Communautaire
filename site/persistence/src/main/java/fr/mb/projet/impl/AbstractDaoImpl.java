@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 public abstract class AbstractDaoImpl {
 	
-	@Inject
-	@Named("dataSourceSite")
-	private DataSource datasource;
+//	@Inject
+//	@Named("dataSourceSite")
+//	private DataSource datasource;
 	
 	
-	protected DataSource getDataSource() {
-		return datasource;
-	}
+//	protected DataSource getDataSource() {
+//		return datasource;
+//	}
 
 
 

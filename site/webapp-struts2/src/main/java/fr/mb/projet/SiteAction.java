@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import fr.mb.projet.bean.Site;
+import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.ManagerFactory;
 
 
@@ -14,7 +14,7 @@ public class SiteAction extends ActionSupport{
 	@Inject
 	private ManagerFactory managerFactory;
 
-	int nbSite;
+	
 	int idSite;
 	String description;
 	Site site;
@@ -30,8 +30,8 @@ public class SiteAction extends ActionSupport{
 
 	 public String doList() {
 		 	site=managerFactory.getSiteManager().getSite(4);
-		 	nbSite=managerFactory.getSiteManager().getCountSite();
-		 	idSite=site.getSiteId();
+		 	
+		 	idSite=site.getId();
 			description=site.getDescription();
 			
 	        return ActionSupport.SUCCESS;
@@ -79,17 +79,7 @@ public void setSite(Site site) {
 
 
 
-public int getNbSite() {
-	return nbSite;
-}
 
-
-
-
-
-public void setNbSite(int nbSite) {
-	this.nbSite = nbSite;
-}
 
 
 

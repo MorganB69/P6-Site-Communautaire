@@ -1,20 +1,17 @@
 package fr.mb.projet.bean.detail;
 
 public class Cotation {
-	private int cotId;
+	private Integer cotId;
 	private String typeCot;
 	private String cot;
 	
-	public Cotation(int cotId, String typeCot, String cot) {
-		super();
-		this.cotId = cotId;
-		this.typeCot = typeCot;
-		this.cot = cot;
+	public Cotation() {
+
 	}
-	public int getCotId() {
+	public Integer getCotId() {
 		return cotId;
 	}
-	public void setCotId(int cotId) {
+	public void setCotId(Integer cotId) {
 		this.cotId = cotId;
 	}
 	public String getTypeCot() {

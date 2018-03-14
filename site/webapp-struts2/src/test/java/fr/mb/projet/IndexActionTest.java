@@ -19,6 +19,8 @@ import junit.framework.TestCase;
 
 import com.opensymphony.xwork2.Action;
 
+import fr.mb.projet.action.IndexAction;
+
 /**
  * 
  */

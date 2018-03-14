@@ -8,13 +8,13 @@ import fr.mb.projet.bean.detail.Situation;
 
 public class Site implements Serializable{
 	
-	private int id;
+	private Integer id;
 	private String nom;
 	private String description;
 	private String acces;
 	private String image;
-	private int nbSecteur;
-	private int nbVoie;
+	private Integer nbSecteur;
+	private Integer nbVoie;
 	private Situation situation;
 	private ArrayList <Voie> listeVoie;
 	private Info info;
@@ -23,11 +23,11 @@ public class Site implements Serializable{
 
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -63,11 +63,11 @@ public class Site implements Serializable{
 		this.image = image;
 	}
 
-	public int getNbSecteur() {
+	public Integer getNbSecteur() {
 		return nbSecteur;
 	}
 
-	public void setNbSecteur(int nbSecteur) {
+	public void setNbSecteur(Integer nbSecteur) {
 		this.nbSecteur = nbSecteur;
 	}
 
@@ -90,11 +90,11 @@ public class Site implements Serializable{
 		this.info = info;
 	}
 
-	public int getNbVoie() {
+	public Integer getNbVoie() {
 		return nbVoie;
 	}
 
-	public void setNbVoie(int nbVoie) {
+	public void setNbVoie(Integer nbVoie) {
 		this.nbVoie = nbVoie;
 	}
 

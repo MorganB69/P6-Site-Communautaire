@@ -19,8 +19,8 @@
 
 
 	<header> 
-		<s:include value="menu.jsp"></s:include> 
-		<s:include value="carrousel.jsp"></s:include> 
+		<s:include value="include/menu.jsp"></s:include> 
+		<s:include value="include/carrousel.jsp"></s:include> 
 	</header>
 
 	<div class="container">
@@ -42,7 +42,7 @@
 
 	</div>
 
-	<s:include value="footer.jsp"></s:include>
+	<s:include value="include/footer.jsp"></s:include>
 
 
 

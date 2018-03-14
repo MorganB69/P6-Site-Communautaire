@@ -3,28 +3,23 @@ package fr.mb.projet.bean.detail;
 import java.util.ArrayList;
 
 public class Info {
-	int infoId;
+	Integer infoId;
 	ArrayList <Orientation> orientationList;
 	ArrayList <Altitude> altituteList;
 	ArrayList <Cotation> cotationList;
 	
 	
-	public Info(int infoId, ArrayList<Orientation> orientationList, ArrayList<Altitude> altituteList,
-			ArrayList<Cotation> cotationList) {
-		super();
-		this.infoId = infoId;
-		this.orientationList = orientationList;
-		this.altituteList = altituteList;
-		this.cotationList = cotationList;
+	public Info() {
+
 	}
 
 
-	public int getInfoId() {
+	public Integer getInfoId() {
 		return infoId;
 	}
 
 
-	public void setInfoId(int infoId) {
+	public void setInfoId(Integer infoId) {
 		this.infoId = infoId;
 	}
 

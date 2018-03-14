@@ -5,10 +5,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 
 <head>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+
 <title>Menu</title>
+
 <link
 	href="<s:url value='webjars/bootstrap/4.0.0-1/css/bootstrap.min.css'/>"
 	rel="stylesheet" />
@@ -47,8 +50,8 @@
 						aria-haspopup="true" aria-expanded="false"> SPOTS </a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
+						<s:a class="dropdown-item" action="add_site">Proposer un spot:</s:a>
 						<a class="dropdown-item" href="#">Recherche d'un spot</a>
-						<a class="dropdown-item" href="#">Proposer un spot</a>
 						<a class="dropdown-item" href="#">Les meilleurs spots</a>
 
 					</div>

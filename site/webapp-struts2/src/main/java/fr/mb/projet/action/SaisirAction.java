@@ -1,4 +1,4 @@
-package fr.mb.projet;
+package fr.mb.projet.action;
 
 
 

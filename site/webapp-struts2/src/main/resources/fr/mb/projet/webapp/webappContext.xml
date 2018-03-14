@@ -7,9 +7,7 @@
 
 
 	
-	<bean id="siteAction" class="fr.mb.projet.SiteAction">
-		
-	</bean>
+
 		
    <bean id="hibernateDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -20,7 +18,8 @@
 	</bean> 
       
     <bean id="mysessionFactory"  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">  
-        <property name="dataSource" ref="hibernateDataSource"></property>  
+        <property name="dataSource" ref="hibernateDataSource"></property> 
+         
           
         <property name="mappingResources">  
         <list>  
@@ -37,7 +36,9 @@
     </bean>  
       
     <bean id="template" class="org.springframework.orm.hibernate5.HibernateTemplate">  
-    <property name="sessionFactory" ref="mysessionFactory"></property>  
+    <property name="sessionFactory" ref="mysessionFactory"></property>
+    <property name="checkWriteOperations" value="false"></property>
+ 
     </bean>
 
 </beans>

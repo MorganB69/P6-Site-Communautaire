@@ -4,26 +4,25 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.recherche.RechercheSite;
 
-public interface SiteDao<T,Id extends Serializable>{
-
-	public void persist(T entity);
+public interface SiteDao extends Serializable{
 	
-	public void update(T entity);
 	
-	public T findById(Id id);
+	public void persist(Site entity);
 	
-	public void delete(T entity);
+	public void update(Site entity);
 	
-	public List<T> findAll();
+	public Site findById(int id);
+	
+	public void delete(Site entity);
+	
+	public List<Site> findAll();
 	
 	public void deleteAll();
 
-	public Session openCurrentSession();
-
-	public void closeCurrentSession();
-
+	
 }

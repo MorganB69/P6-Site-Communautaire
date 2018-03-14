@@ -3,27 +3,22 @@ package fr.mb.projet.bean.spot;
 import fr.mb.projet.bean.detail.Info;
 
 public class Voie {
-	private int voieId;
+	private Integer voieId;
 	private String typeVoie;
 	private String nom;
 	private String description;
-	private int nbPoint;
+	private Integer nbPoint;
 	private Info info;
 	
-	public Voie(int voieId, String typeVoie, String nom, int nbPoint, Info info) {
-		super();
-		this.voieId = voieId;
-		this.typeVoie = typeVoie;
-		this.nom = nom;
-		this.nbPoint = nbPoint;
-		this.info = info;
+	public Voie() {
+	
 	}
 
-	public int getVoieId() {
+	public Integer getVoieId() {
 		return voieId;
 	}
 
-	public void setVoieId(int voieId) {
+	public void setVoieId(Integer voieId) {
 		this.voieId = voieId;
 	}
 
@@ -43,11 +38,11 @@ public class Voie {
 		this.nom = nom;
 	}
 
-	public int getNbPoint() {
+	public Integer getNbPoint() {
 		return nbPoint;
 	}
 
-	public void setNbPoint(int nbPoint) {
+	public void setNbPoint(Integer nbPoint) {
 		this.nbPoint = nbPoint;
 	}
 

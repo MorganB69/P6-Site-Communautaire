@@ -1,20 +1,17 @@
 package fr.mb.projet.bean.detail;
 
 public class Altitude {
-	private int altId;
+	private Integer altId;
 	private String typeAlt;
-	private int alt;
+	private Integer alt;
 	
-	public Altitude(int altId, String typeAlt, int alt) {
-		super();
-		this.altId = altId;
-		this.typeAlt = typeAlt;
-		this.alt = alt;
+	public Altitude() {
+
 	}
-	public int getAltId() {
+	public Integer getAltId() {
 		return altId;
 	}
-	public void setAltId(int altId) {
+	public void setAltId(Integer altId) {
 		this.altId = altId;
 	}
 	public String getTypeAlt() {
@@ -23,10 +20,10 @@ public class Altitude {
 	public void setTypeAlt(String typeAlt) {
 		this.typeAlt = typeAlt;
 	}
-	public int getAlt() {
+	public Integer getAlt() {
 		return alt;
 	}
-	public void setAlt(int alt) {
+	public void setAlt(Integer alt) {
 		this.alt = alt;
 	}
 	

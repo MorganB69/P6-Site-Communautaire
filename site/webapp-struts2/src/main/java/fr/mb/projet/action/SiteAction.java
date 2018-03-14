@@ -1,4 +1,6 @@
-package fr.mb.projet;
+package fr.mb.projet.action;
+
+import java.util.Collections;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -7,6 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.ManagerFactory;
+import fr.mb.projet.exception.NotFoundException;
 
 
 public class SiteAction extends ActionSupport{
@@ -15,7 +18,7 @@ public class SiteAction extends ActionSupport{
 	private ManagerFactory managerFactory;
 
 	
-	int idSite;
+	Integer idSite=3;
 	String description;
 	Site site;
 	
@@ -29,16 +32,32 @@ public class SiteAction extends ActionSupport{
 	//int description=managerFactory.getSiteManager().getSite(1).getSiteId();
 
 	 public String doList() {
-		 	site=managerFactory.getSiteManager().getSite(4);
 		 	
-		 	idSite=site.getId();
-			description=site.getDescription();
+		 	
+
 			
 	        return ActionSupport.SUCCESS;
 	    }
+	 
+	    public String doDetail() {
+	        if (idSite == null) {
+	            this.addActionError(getText("error.project.missing.id"));
+	        } else {
+	            try {
+	            	site=managerFactory.getSiteManager().getSite(idSite);
+	    		 	idSite=site.getId();
+	    			description=site.getDescription();
+	    			
+	            } catch (NotFoundException pE) {
+	                this.addActionError(getText("error.project.notfound", Collections.singletonList(idSite)));
+	            }
+	        }
+
+	        return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
+	    }
 	
 
-public String execute() throws Exception {
+public String execute() {
         
         return SUCCESS;
     }

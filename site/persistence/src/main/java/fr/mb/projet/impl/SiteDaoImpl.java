@@ -25,11 +25,9 @@ import fr.mb.projet.recherche.RechercheSite;
 
 
 @Named("siteDao")
-public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao<Site,Integer> {
+public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 	
-	private Session currentSession;
-	
-	private Transaction currentTransaction;
+
 	
     
     public SiteDaoImpl() {
@@ -38,74 +36,9 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao<Site,Integer
 	}
     
     
-
-
-
-
-	public Session openCurrentSession() {
-		currentSession = getSessionFactory().openSession();
-		return currentSession;
-	}
-
-	public Session openCurrentSessionwithTransaction() {
-		currentSession = getSessionFactory().openSession();
-		currentTransaction = (Transaction) currentSession.beginTransaction();
-		return currentSession;
-	}
-	
-	public void closeCurrentSession() {
-		currentSession.close();
-	}
-	
-	public void closeCurrentSessionwithTransaction() {
-		try {
-			currentTransaction.commit();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RollbackException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HeuristicMixedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HeuristicRollbackException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		currentSession.close();
-	}
-	
-	private static SessionFactory getSessionFactory() {
-		Configuration configuration = new Configuration().configure();
-		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
-				.applySettings(configuration.getProperties());
-		SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
-		return sessionFactory;
-	}
-
-	public Session getCurrentSession() {
-		return currentSession;
-	}
-
-	public void setCurrentSession(Session currentSession) {
-		this.currentSession = currentSession;
-	}
-
-	public Transaction getCurrentTransaction() {
-		return currentTransaction;
-	}
-
-	public void setCurrentTransaction(Transaction currentTransaction) {
-		this.currentTransaction = currentTransaction;
-	}
-
 	@Override
 	public void persist(Site entity) {
-		// TODO Auto-generated method stub
+		template.save(entity);
 		
 	}
 
@@ -116,10 +49,11 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao<Site,Integer
 	}
 
 	@Override
-	public Site findById(Integer id) {
-		Site site = (Site) getCurrentSession().get(Site.class, id);
+	public Site findById(int id) {
+		Site e=(Site)template.get(fr.mb.projet.bean.spot.Site.class,id);  
+	    return e;
 
-		return site;
+		
 	}
 
 	@Override

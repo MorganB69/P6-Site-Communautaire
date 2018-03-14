@@ -2,26 +2,21 @@ package fr.mb.projet.bean.detail;
 
 public class Situation {
 	
-	private int situationId;
+	private Integer situationId;
 	private String pays;
 	private String departement;
 	private String situation;
 	private Coordonnee coord;
 	
-	public Situation(int situationId, String pays, String departement, String situation, Coordonnee coord) {
-		super();
-		this.situationId = situationId;
-		this.pays = pays;
-		this.departement = departement;
-		this.situation = situation;
-		this.coord = coord;
+	public Situation() {
+
 	}
 
-	public int getSituationId() {
+	public Integer getSituationId() {
 		return situationId;
 	}
 
-	public void setSituationId(int situationId) {
+	public void setSituationId(Integer situationId) {
 		this.situationId = situationId;
 	}
 

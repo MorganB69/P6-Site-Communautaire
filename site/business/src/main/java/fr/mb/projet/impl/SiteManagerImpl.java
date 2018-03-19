@@ -96,13 +96,13 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 
 
 	@Override
-	public void insert(Site site) throws FunctionalException {
+	public void insert(Object object) throws FunctionalException {
 		
-        if (site == null) {
+        if (object == null) {
             throw new FunctionalException("Le site est null !");
         }
 
-        Set<ConstraintViolation<Site>> vViolations = getConstraintValidator().validate(site);
+        Set<ConstraintViolation<Object>> vViolations = getConstraintValidator().validate(object);
         
         if (!vViolations.isEmpty()) {
             throw new FunctionalException("L'objet Site est invalide",
@@ -110,7 +110,7 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
         }
 
         
-        siteDao.persist(site);
+        siteDao.persist(object);
 
 	}
 	

@@ -37,7 +37,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
     
     
 	@Override
-	public void persist(Site entity) {
+	public void persist(Object entity) {
 		template.save(entity);
 		
 	}

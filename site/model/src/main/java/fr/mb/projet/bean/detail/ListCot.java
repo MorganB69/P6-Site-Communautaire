@@ -8,47 +8,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "coordonnee")
-public class Coordonnee {
+@Table(name = "list_cotation")
+public class ListCot {
+	
 	@Id
-	@Column(name = "coordonnee_id")
+	@Column(name = "cot_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "latitude")
-	private Double x;
-	@Column(name = "longitude")
-	private Double y;
-	
-	public Coordonnee() {
+	@Column(name = "cot")
+	private String cot;
+	public ListCot(int id, String cot) {
 
 	}
-
-	public Double getX() {
-		return x;
-	}
-
-	public void setX(Double x) {
-		this.x = x;
-	}
-
-	public Double getY() {
-		return y;
-	}
-
-	public void setY(Double y) {
-		this.y = y;
-	}
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getCot() {
+		return cot;
+	}
+	public void setCot(String cot) {
+		this.cot = cot;
 	}
 	
 	
 	
-	
-	
+
 }

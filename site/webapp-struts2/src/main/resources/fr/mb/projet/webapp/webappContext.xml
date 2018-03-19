@@ -12,14 +12,14 @@
    <bean id="hibernateDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://localhost:5432/Climber" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/P6 OCR" />
 		<property name="username" value="postgres" />
 		<property name="password" value="admin" />
 	</bean> 
       
     <bean id="mysessionFactory"  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">  
         <property name="dataSource" ref="hibernateDataSource"></property> 
-         
+         <property name="packagesToScan" value="fr.mb.projet.bean" />
           
         <property name="mappingResources">  
         <list>  

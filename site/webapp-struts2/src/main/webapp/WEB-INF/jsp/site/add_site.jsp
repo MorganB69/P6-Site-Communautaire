@@ -8,26 +8,45 @@
 <title>Ajouter un Spot</title>
 </head>
 <body>
-	<header> <s:include value="include/menu.jsp"></s:include> </header>
+	<header> <%@ include file="../include/menu.jsp"%>  </header>
 	<s:actionerror/>
 	
+	<div class="container">
+	
+	<section class="row justify-content-center"> 
 	
 	<h2> Partage d'un Spot</h2>
 	
-	    <s:form action="add_site">
-        <s:textfield name="site.nom" label="Nom du site" requiredLabel="true" />
-        <s:textfield name="site.description" label="Description du site" requiredLabel="true" />
-        <s:textfield name="site.image" label="Lien image" requiredLabel="true" />
-        <s:textfield name="site.acces" label="Accès au site" requiredLabel="true"/>
-        <s:textfield name="site.nbVoie" label="Nombre de voies" requiredLabel="true" />
-        <s:textfield name="site.nbSecteur" label="Nombre de secteurs" requiredLabel="true"/>
-        
-        
-
-
-        <s:submit value="OK"/>
-    </s:form>
+	</section>
 	
-	<footer> <s:include value="include/footer.jsp"></s:include> </footer>
+	<section class="row justify-content-center"> 
+	
+	    <s:form action="add_site" class="form-group">
+        <s:textfield class="form-control" name="site.nom" label="Nom du site" requiredLabel="true" />
+       	
+       
+        <s:textfield class="form-control" name="site.description" label="Description du site" requiredLabel="true" />
+        <s:textfield class="form-control" name="site.image" label="Lien image" requiredLabel="true" />
+        <s:textfield class="form-control" name="site.acces" label="Accès au site" requiredLabel="true"/>
+        <s:textfield class="form-control" name="site.nbVoie" label="Nombre de voies" requiredLabel="true" />
+        <s:textfield class="form-control" name="site.nbSecteur" label="Nombre de secteurs" requiredLabel="true"/>
+        
+        
+        
+        
+		<s:textfield class="form-control" name="situation.pays" label="Pays" requiredLabel="true"/>
+		<s:textfield class="form-control" name="situation.departement" label="Departement" requiredLabel="true"/>
+		<s:textfield class="form-control" name="situation.type" label="Type de spot" requiredLabel="true"/>
+		
+		<s:textfield class="form-control" name="coordonnee.x" label="latitude" requiredLabel="true"/>
+		<s:textfield class="form-control" name="coordonnee.y" label="longitude" requiredLabel="true"/>
+		
+		
+        <s:submit class="btn btn-primary" value="Validation"/>
+    </s:form>
+    </section>
+    </div>
+	
+	<footer> <%@ include file="../include/footer.jsp"%> </footer>
 </body>
 </html>

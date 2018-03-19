@@ -19,15 +19,19 @@
 		<action name="index" class="fr.mb.projet.action.IndexAction">
 			<result>/WEB-INF/jsp/index.jsp</result>
 		</action>
-		
-		       
-        <action name="site_list" class="fr.mb.projet.action.site.GestionSiteAction" method="doList">
-            <result>/jsp/site/list.jsp</result>
-        </action>
+
+
+
+		<!-- GESTION SITE ACTIONS -->
+		<action name="site_list" class="fr.mb.projet.action.site.GestionSiteAction"
+			method="doList">
+			<result>/jsp/site/list.jsp</result>
+		</action>
 
 		<action name="add_site" class="fr.mb.projet.action.site.GestionSiteAction"
 			method="add">
 			<result name="input">/WEB-INF/jsp/site/add_site.jsp </result>
+
 			<result name="success" type="redirectAction">
 				<param name="actionName"> detail_site </param>
 				<param name="id">${site.id}</param>
@@ -42,16 +46,7 @@
 
 
 
-		<action name="helloWorld" class="fr.mb.projet.HelloWorldAction">
-			<result name="input">/jsp/index.jsp</result>
-			<result>/WEB-INF/jsp/helloWorld.jsp</result>
-		</action>
-
-		<action name="saisir" class="fr.mb.projet.SaisirAction">
-			<result name="input">/WEB-INF/jsp/formulaire.jsp</result>
-			<result>/WEB-INF/jsp/resultat.jsp</result>
-		</action>
-
+		<!-- Classe de test -->
 		<action name="site" class="siteAction" method="doDetail">
 
 			<result>/WEB-INF/jsp/resultat.jsp</result>

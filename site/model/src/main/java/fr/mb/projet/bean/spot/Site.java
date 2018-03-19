@@ -2,8 +2,15 @@ package fr.mb.projet.bean.spot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import fr.mb.projet.bean.detail.Info;
+import fr.mb.projet.bean.detail.Altitude;
+import fr.mb.projet.bean.detail.Coordonnee;
+import fr.mb.projet.bean.detail.Cotation;
+
+import fr.mb.projet.bean.detail.Orientation;
 import fr.mb.projet.bean.detail.Situation;
 
 public class Site implements Serializable{
@@ -15,9 +22,18 @@ public class Site implements Serializable{
 	private String image;
 	private Integer nbSecteur;
 	private Integer nbVoie;
+	private Date dateAjout;
+	
 	private Situation situation;
-	private ArrayList <Voie> listeVoie;
-	private Info info;
+	private Coordonnee coordonnee;
+	
+	private Set <Voie> listeVoie=new HashSet<Voie>();
+	private Set <Secteur> listeSecteur=new HashSet<Secteur>();
+	
+	private Set <Altitude> listeAltitude=new HashSet<Altitude>();
+	private Set <Orientation> listeOrientation=new HashSet<Orientation>();
+	private Set <Cotation> listeCotation=new HashSet<Cotation>();
+	
 	
 	public Site() {
 
@@ -71,25 +87,6 @@ public class Site implements Serializable{
 		this.nbSecteur = nbSecteur;
 	}
 
-	public Situation getSituation() {
-		return situation;
-	}
-
-	public void setSituation(Situation situation) {
-		this.situation = situation;
-	}
-
-
-	
-
-	public Info getInfo() {
-		return info;
-	}
-
-	public void setInfo(Info info) {
-		this.info = info;
-	}
-
 	public Integer getNbVoie() {
 		return nbVoie;
 	}
@@ -98,13 +95,73 @@ public class Site implements Serializable{
 		this.nbVoie = nbVoie;
 	}
 
-	public ArrayList <Voie> getListeVoie() {
+	public Situation getSituation() {
+		return situation;
+	}
+
+	public void setSituation(Situation situation) {
+		this.situation = situation;
+	}
+
+	public Coordonnee getCoordonnee() {
+		return coordonnee;
+	}
+
+	public void setCoordonnee(Coordonnee coordonnee) {
+		this.coordonnee = coordonnee;
+	}
+
+	public Set<Voie> getListeVoie() {
 		return listeVoie;
 	}
 
-	public void setListeVoie(ArrayList <Voie> listeVoie) {
+	public void setListeVoie(Set<Voie> listeVoie) {
 		this.listeVoie = listeVoie;
 	}
+
+	public Set<Secteur> getListeSecteur() {
+		return listeSecteur;
+	}
+
+	public void setListeSecteur(Set<Secteur> listeSecteur) {
+		this.listeSecteur = listeSecteur;
+	}
+
+	public Set<Altitude> getListeAltitude() {
+		return listeAltitude;
+	}
+
+	public void setListeAltitude(Set<Altitude> listeAltitude) {
+		this.listeAltitude = listeAltitude;
+	}
+
+	public Set<Orientation> getListeOrientation() {
+		return listeOrientation;
+	}
+
+	public void setListeOrientation(Set<Orientation> listeOrientation) {
+		this.listeOrientation = listeOrientation;
+	}
+
+	public Set<Cotation> getListeCotation() {
+		return listeCotation;
+	}
+
+	public void setListeCotation(Set<Cotation> listeCotation) {
+		this.listeCotation = listeCotation;
+	}
+
+
+
+	public Date getDateAjout() {
+		return dateAjout;
+	}
+
+	public void setDateAjout(Date dateAjout) {
+		this.dateAjout = dateAjout;
+	}
+
+
 	
 	
 	

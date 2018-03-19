@@ -12,7 +12,7 @@ import fr.mb.projet.recherche.RechercheSite;
 public interface SiteDao extends Serializable{
 	
 	
-	public void persist(Site entity);
+	public void persist(Object object);
 	
 	public void update(Site entity);
 	

@@ -1,8 +1,24 @@
 package fr.mb.projet.bean.detail;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "altitude")
 public class Altitude {
+	
+	@Id
+	@Column(name = "alt_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer altId;
+	
+	@Column(name = "type_alt")
 	private String typeAlt;
+	@Column(name = "alt")
 	private Integer alt;
 	
 	public Altitude() {

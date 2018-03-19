@@ -9,7 +9,7 @@
 <title>Detail d'un spot</title>
 </head>
 <body>
-	<header> <s:include value="include/menu.jsp"></s:include> </header>
+	<header> <%@ include file="../include/menu.jsp"%>  </header>
 	
 	
 	<h2><s:property value="site.nom"/>	</h2>
@@ -24,8 +24,8 @@
 	
 	<h3>Situation géographique</h3>
 
+	pays: <s:property value="situation.pays"/>  <br/>
 
-
-	<footer> <s:include value="include/footer.jsp"></s:include> </footer>
+	<footer> <%@ include file="../include/footer.jsp"%> </footer>
 </body>
 </html>

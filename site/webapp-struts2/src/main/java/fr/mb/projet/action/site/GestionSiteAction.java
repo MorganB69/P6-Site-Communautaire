@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import fr.mb.projet.bean.detail.Coordonnee;
+import fr.mb.projet.bean.detail.Situation;
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.exception.FunctionalException;
@@ -20,10 +22,14 @@ public class GestionSiteAction extends ActionSupport {
 	private ManagerFactory managerFactory;
 
 	// Attributs
+	
+		//Entrée
 	private Integer id;
-
+		//Sortie
 	private List<Site> listSite;
 	private Site site;
+	private Coordonnee coordonnee;
+	private Situation situation;
 
 	// Getters et Setters
 	public ManagerFactory getManagerFactory() {
@@ -60,6 +66,22 @@ public class GestionSiteAction extends ActionSupport {
 
 	// Méthodes
 
+	public Coordonnee getCoordonnee() {
+		return coordonnee;
+	}
+
+	public void setCoordonnee(Coordonnee coordonnee) {
+		this.coordonnee = coordonnee;
+	}
+
+	public Situation getSituation() {
+		return situation;
+	}
+
+	public void setSituation(Situation situation) {
+		this.situation = situation;
+	}
+
 	public String doList() {
 		listSite = managerFactory.getSiteManager().getListSite();
 		return ActionSupport.SUCCESS;
@@ -70,9 +92,12 @@ public class GestionSiteAction extends ActionSupport {
 			this.addActionError(getText("error.project.missing.id"));
 		} else {
 			try {
-				site = managerFactory.getSiteManager().getSite(id);
+				
+				site = (Site) managerFactory.getSiteManager().getSite(id);
+				
+				
 
-			} catch (NotFoundException pE) {
+			} catch (NotFoundException Notfound) {
 				this.addActionError(getText("error.project.notfound", Collections.singletonList(id)));
 			}
 		}
@@ -82,33 +107,38 @@ public class GestionSiteAction extends ActionSupport {
 
 	public String add() {
 
-		String vResult = ActionSupport.INPUT;
+		String result = ActionSupport.INPUT;
 
-		// ===== Validation de l'ajout
-		if (this.site != null) {
+		
 
-			// Si pas d'erreur, ajout du projet...
+			// Si pas d'erreur, rajout du site
 			if (!this.hasErrors()) {
 				try {
+					
+					managerFactory.getSiteManager().insert(this.coordonnee);
+					managerFactory.getSiteManager().insert(this.situation);
+					this.site.setSituation(this.situation);
+					this.site.setCoordonnee(this.coordonnee);
+					
 					managerFactory.getSiteManager().insert(this.site);
-					// Si ajout avec succès -> Result "success"
-					vResult = ActionSupport.SUCCESS;
+
+					result = ActionSupport.SUCCESS;
+
 					this.addActionMessage("Site ajouté avec succès");
 
-				} catch (FunctionalException pEx) {
-					// Sur erreur fonctionnelle on reste sur la page de saisie
-					// et on affiche un message d'erreur
-					this.addActionError(pEx.getMessage());
+				} catch (FunctionalException functExcep) {
+					// On reste sur la saisie
+					this.addActionError(functExcep.getMessage());
 
-				} catch (TechnicalException pEx) {
-					// Sur erreur technique on part sur le result "error"
-					this.addActionError(pEx.getMessage());
-					vResult = ActionSupport.ERROR;
+				} catch (TechnicalException techExcep) {
+					// on part sur le result "error"
+					this.addActionError(techExcep.getMessage());
+					result = ActionSupport.ERROR;
 				}
 			}
-		}
+		
 
-		return vResult;
+		return result;
 	}
 
 }

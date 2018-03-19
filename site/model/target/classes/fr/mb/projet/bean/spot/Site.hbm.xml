@@ -22,6 +22,35 @@
 <property name="image" column="image"/>
 <property name="nbSecteur" column="nb_secteur"/>
 <property name="nbVoie" column="nb_voie"/>
+<property name="dateAjout" column="date_ajout"/>
+
+<many-to-one name="situation" class="fr.mb.projet.bean.detail.Situation" column="situation_id" fetch="select" cascade="save-update"/>
+<many-to-one name="coordonnee" class="fr.mb.projet.bean.detail.Coordonnee" column="coordonnee_id" fetch="select" cascade="save-update"/>
+
+<set name="listeVoie"  table="voie" >
+        <key column="site_id"/>
+        <one-to-many class="fr.mb.projet.bean.spot.Voie" />
+</set>
+
+<set name="listeSecteur" table="secteur">
+        <key column="site_id" />
+        <one-to-many class="fr.mb.projet.bean.spot.Secteur"/>
+</set>
+
+<set name="listeAltitude" table="altitude">
+        <key column="site_id"/>
+        <one-to-many class="fr.mb.projet.bean.detail.Altitude"/>
+</set>
+
+<set name="listeOrientation" table="info_orientation">
+        <key column="site_id"/>
+        <many-to-many column="orientation_id" class="fr.mb.projet.bean.detail.Orientation"/>
+</set>
+
+<set name="listeCotation" table="cotation">
+        <key column="site_id"/>
+        <one-to-many class="fr.mb.projet.bean.detail.Cotation"/>
+</set>
 
 
 

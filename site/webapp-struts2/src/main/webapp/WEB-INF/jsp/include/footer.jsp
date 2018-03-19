@@ -8,11 +8,11 @@
 </head>
 <body>
 
- <footer class="py-5 bg-dark">
+ <div id="footer" class="py-5 bg-dark ">
       
         <p class="m-0 text-center text-white">Copyright  &copy; Climber 2018</p>
      
       <!-- /.container -->
-    </footer>
+    </div>
 </body>
 </html>

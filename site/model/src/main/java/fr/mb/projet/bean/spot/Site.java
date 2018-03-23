@@ -6,6 +6,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
 import fr.mb.projet.bean.detail.Altitude;
 import fr.mb.projet.bean.detail.Coordonnee;
 import fr.mb.projet.bean.detail.Cotation;
@@ -24,7 +30,12 @@ public class Site implements Serializable{
 	private Integer nbVoie;
 	private Date dateAjout;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
 	private Situation situation;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
 	private Coordonnee coordonnee;
 	
 	private Set <Voie> listeVoie=new HashSet<Voie>();
@@ -36,7 +47,7 @@ public class Site implements Serializable{
 	
 	
 	public Site() {
-
+		System.out.println("création d'un site");
 	}
 
 	public Integer getId() {
@@ -101,6 +112,7 @@ public class Site implements Serializable{
 
 	public void setSituation(Situation situation) {
 		this.situation = situation;
+		System.out.println("setter d'un situation");
 	}
 
 	public Coordonnee getCoordonnee() {

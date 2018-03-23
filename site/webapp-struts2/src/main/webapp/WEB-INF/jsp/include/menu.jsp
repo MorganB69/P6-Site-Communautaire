@@ -67,8 +67,17 @@
 						
 					</div>
 				</li>
+			<s:if test="#session.user">
+            Utilisateur connecté :
+            
+            <s:property value="#session.user.nom" />
 
-				<a href="saisir.action" class="btn btn-outline-primary my-2 my-sm-0">Identification</a>
+            <s:a action="logout" class="btn btn-outline-primary my-2 my-sm-0">Deconnexion</s:a>
+    		</s:if>
+    			<s:else>
+       				 <s:a action="login" class="btn btn-outline-primary my-2 my-sm-0">Connexion</s:a>
+    			</s:else>
+				
 				
 			</ul>
 		</div>

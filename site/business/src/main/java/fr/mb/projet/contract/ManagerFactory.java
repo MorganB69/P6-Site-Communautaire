@@ -6,6 +6,10 @@ public interface ManagerFactory {
 	
 	public void setSiteManager(SiteManager pSiteManager);
 	
+	public UserManager getUserManager();
+	
+	public void setUserManager(UserManager pUserManager);
+	
 	public String message();
 
 }

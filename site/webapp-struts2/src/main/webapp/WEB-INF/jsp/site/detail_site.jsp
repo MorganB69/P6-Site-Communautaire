@@ -14,7 +14,7 @@
 	
 	<h2><s:property value="site.nom"/>	</h2>
 	<br/>
-	<img src=<s:property value="site.image"/> alt="Site image">
+	<img src="image/site/<s:property value="site.image"/>" alt="Site image">
 	
 	Site iD : <s:property value="site.id"/>  <br/>
 	Description site: <s:property value="site.description"/>  <br/>

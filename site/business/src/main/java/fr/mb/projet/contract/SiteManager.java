@@ -13,8 +13,8 @@ public interface SiteManager {
 	
 	public List<Site> getListSite();
 
-	public void insert(Object obj) throws FunctionalException, TechnicalException;
+	public void insert(Site site) throws FunctionalException, TechnicalException;
 
-	
+	public void update(Site site);
 		
 }

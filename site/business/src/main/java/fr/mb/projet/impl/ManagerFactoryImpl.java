@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.contract.SiteManager;
+import fr.mb.projet.contract.UserManager;
 
 
 
@@ -26,6 +27,8 @@ public class ManagerFactoryImpl implements ManagerFactory {
 
 	@Inject
 	private SiteManager siteManager;
+	@Inject
+	private UserManager userManager;
 
 	@Override
 	public SiteManager getSiteManager() {
@@ -43,6 +46,18 @@ public class ManagerFactoryImpl implements ManagerFactory {
 
 		
 		return "Bonjour la factory existe";
+	}
+
+	@Override
+	public UserManager getUserManager() {
+		// TODO Auto-generated method stub
+		return userManager;
+	}
+
+	@Override
+	public void setUserManager(UserManager pUserManager) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -6,7 +6,7 @@
 <struts>
 
 
-
+	<!-- Action par défaut x -->
 	<package name="myPackage" extends="struts-default">
 
 		<default-action-ref name="index" />
@@ -23,13 +23,24 @@
 
 
 		<!-- GESTION SITE ACTIONS -->
+
+		<!-- LISTE DES SITES -->
 		<action name="site_list" class="fr.mb.projet.action.site.GestionSiteAction"
 			method="doList">
 			<result>/jsp/site/list.jsp</result>
 		</action>
 
+		<!-- AJOUTER DES SITES -->
 		<action name="add_site" class="fr.mb.projet.action.site.GestionSiteAction"
-			method="add">
+				method="add">
+	
+<interceptor-ref name="defaultStack">
+    <param name="fileUpload.maximumSize">2097152</param>
+    <param name="fileUpload.allowedTypes">
+        image/png,image/gif,image/jpeg,image/pjpeg
+    </param>            
+</interceptor-ref>
+				
 			<result name="input">/WEB-INF/jsp/site/add_site.jsp </result>
 
 			<result name="success" type="redirectAction">
@@ -38,11 +49,41 @@
 			</result>
 		</action>
 
+		<!-- DETAIL DES SITES -->
 		<action name="detail_site" class="fr.mb.projet.action.site.GestionSiteAction"
 			method="doDetail">
 
 			<result>/WEB-INF/jsp/site/detail_site.jsp</result>
 		</action>
+
+		<!-- Actions Login/Logout -->
+		<action name="login"
+			class="fr.mb.projet.action.user.LoginAction" method="doLogin">
+			<result name="input">/WEB-INF//jsp/login.jsp</result>
+			<result name="success" type="redirectAction">index</result>
+		</action>
+		
+		<action name="logout"
+			class="fr.mb.projet.action.user.LoginAction" method="doLogout">
+			<result type="redirectAction">index</result>
+		</action>
+		
+		<!-- Actions Utilisateurs -->
+		<action name="add_user" class="fr.mb.projet.action.user.GestionUserAction"
+			method="add">
+			<result name="input">/WEB-INF/jsp/inscription.jsp </result>
+
+			<result name="success" type="redirectAction">
+				<param name="actionName"> login </param>
+				
+			</result>
+		</action>
+
+
+
+
+
+
 
 
 

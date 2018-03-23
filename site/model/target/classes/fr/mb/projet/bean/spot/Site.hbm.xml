@@ -24,8 +24,7 @@
 <property name="nbVoie" column="nb_voie"/>
 <property name="dateAjout" column="date_ajout"/>
 
-<many-to-one name="situation" class="fr.mb.projet.bean.detail.Situation" column="situation_id" fetch="select" cascade="save-update"/>
-<many-to-one name="coordonnee" class="fr.mb.projet.bean.detail.Coordonnee" column="coordonnee_id" fetch="select" cascade="save-update"/>
+
 
 <set name="listeVoie"  table="voie" >
         <key column="site_id"/>

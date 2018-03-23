@@ -21,16 +21,19 @@
 	
 	<section class="row justify-content-center"> 
 	
-	    <s:form action="add_site" class="form-group">
+		
+	
+	    <s:form action="add_site" method="post" class="form-group" enctype="multipart/form-data">
         <s:textfield class="form-control" name="site.nom" label="Nom du site" requiredLabel="true" />
        	
        
         <s:textfield class="form-control" name="site.description" label="Description du site" requiredLabel="true" />
-        <s:textfield class="form-control" name="site.image" label="Lien image" requiredLabel="true" />
+        
         <s:textfield class="form-control" name="site.acces" label="Accès au site" requiredLabel="true"/>
         <s:textfield class="form-control" name="site.nbVoie" label="Nombre de voies" requiredLabel="true" />
         <s:textfield class="form-control" name="site.nbSecteur" label="Nombre de secteurs" requiredLabel="true"/>
         
+        <s:file name="file" label="File"/>
         
         
         

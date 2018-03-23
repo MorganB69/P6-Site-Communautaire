@@ -11,6 +11,8 @@ import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.SiteDao;
@@ -22,6 +24,8 @@ import fr.mb.projet.recherche.RechercheSite;
 
 
 @Named("siteManager")
+@Service
+@Transactional
 public class SiteManagerImpl extends AbstractManager implements SiteManager {
 
 	
@@ -47,6 +51,7 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 	
 	
 	@Override
+	@Transactional
 	public Site getSite(Integer siteId) throws NotFoundException {
 		// TODO Auto-generated method stub
 		
@@ -96,6 +101,7 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 
 
 	@Override
+	@Transactional
 	public void insert(Site site) throws FunctionalException {
 		
         if (site == null) {

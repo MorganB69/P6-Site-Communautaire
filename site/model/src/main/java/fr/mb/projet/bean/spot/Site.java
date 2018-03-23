@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.mb.projet.bean.detail.Altitude;
 import fr.mb.projet.bean.detail.Coordonnee;
 import fr.mb.projet.bean.detail.Cotation;
@@ -20,6 +23,8 @@ import fr.mb.projet.bean.detail.Orientation;
 import fr.mb.projet.bean.detail.Situation;
 
 public class Site implements Serializable{
+	
+	private static final Logger logger = LogManager.getLogger(Site.class);
 	
 	private Integer id;
 	private String nom;
@@ -30,12 +35,10 @@ public class Site implements Serializable{
 	private Integer nbVoie;
 	private Date dateAjout;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+
 	private Situation situation;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+
 	private Coordonnee coordonnee;
 	
 	private Set <Voie> listeVoie=new HashSet<Voie>();
@@ -47,7 +50,7 @@ public class Site implements Serializable{
 	
 	
 	public Site() {
-		System.out.println("création d'un site");
+		logger.info("création d'un site");
 	}
 
 	public Integer getId() {
@@ -112,7 +115,7 @@ public class Site implements Serializable{
 
 	public void setSituation(Situation situation) {
 		this.situation = situation;
-		System.out.println("setter d'un situation");
+		logger.info("setter d'un situation");
 	}
 
 	public Coordonnee getCoordonnee() {

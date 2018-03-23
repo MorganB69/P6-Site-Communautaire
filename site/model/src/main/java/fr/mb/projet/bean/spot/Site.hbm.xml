@@ -24,7 +24,11 @@
 <property name="nbVoie" column="nb_voie"/>
 <property name="dateAjout" column="date_ajout"/>
 
+<one-to-one name="situation" class="fr.mb.projet.bean.detail.Situation"
+			cascade="all"></one-to-one>
 
+<one-to-one name="coordonnee" class="fr.mb.projet.bean.detail.Coordonnee"
+			cascade="all"></one-to-one>
 
 <set name="listeVoie"  table="voie" >
         <key column="site_id"/>

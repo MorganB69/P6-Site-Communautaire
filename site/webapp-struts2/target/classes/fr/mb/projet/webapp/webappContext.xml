@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
 	
@@ -17,7 +20,7 @@
 		<property name="password" value="admin" />
 	</bean> 
       
-    <bean id="mysessionFactory"  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">  
+    <bean id="sessionFactory"  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">  
         <property name="dataSource" ref="hibernateDataSource"></property> 
          <property name="packagesToScan" value="fr.mb.projet.bean" />
           
@@ -36,9 +39,16 @@
     </bean>  
       
     <bean id="template" class="org.springframework.orm.hibernate5.HibernateTemplate">  
-    <property name="sessionFactory" ref="mysessionFactory"></property>
+    <property name="sessionFactory" ref="sessionFactory"></property>
     <property name="checkWriteOperations" value="false"></property>
  
     </bean>
+    <tx:annotation-driven/>
+       <bean id="transactionManager"
+         class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+     <property name="sessionFactory" ref="sessionFactory" />
+   </bean>
+   
+   
 
 </beans>

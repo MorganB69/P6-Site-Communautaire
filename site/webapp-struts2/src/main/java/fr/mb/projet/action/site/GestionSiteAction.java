@@ -192,8 +192,12 @@ public class GestionSiteAction extends ActionSupport {
 					this.site.setImage(this.fileFileName);
 					this.site.setDateAjout(new Date());
 					
+					
+					this.situation.setSite(this.site);
+					this.coordonnee.setSite(this.site);
 					this.site.setSituation(this.situation);
 					this.site.setCoordonnee(this.coordonnee);
+					
 					
 					managerFactory.getSiteManager().insert(this.site);
 

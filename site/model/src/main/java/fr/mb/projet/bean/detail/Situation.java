@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,7 +26,8 @@ import fr.mb.projet.bean.spot.Site;
 @Entity
 @Table(name = "situation")
 public class Situation implements Serializable {
-
+	
+	private static final Logger logger = LogManager.getLogger(Situation.class);
 
 	@Id
 	@Column(name = "situ_id")
@@ -40,8 +43,14 @@ public class Situation implements Serializable {
 	private String type;
 	
 	
+    @OneToOne
+    @MapsId
+    @JoinColumn(name="situ_id")
+	private Site site;
+	
+	
 	public Situation() {
-		System.out.println("création d'un situation");
+		logger.info("création d'un situation");
 	}
 
 
@@ -53,12 +62,6 @@ public class Situation implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
-
-
-
-
 
 
 	public String getPays() {
@@ -88,6 +91,18 @@ public class Situation implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+
+
+	public Site getSite() {
+		return site;
+	}
+
+
+
+	public void setSite(Site site) {
+		this.site = site;
 	}
 
 	

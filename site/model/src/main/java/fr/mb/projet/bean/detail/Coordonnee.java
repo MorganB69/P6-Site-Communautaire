@@ -36,6 +36,11 @@ public class Coordonnee implements Serializable{
 	@Column(name = "longitude")
 	private Double y;
 	
+    @OneToOne
+    @MapsId
+    @JoinColumn(name="coord_id")
+	private Site site;
+	
 	public Coordonnee() {
 
 	}
@@ -70,6 +75,18 @@ public class Coordonnee implements Serializable{
 
 	public void setY(Double y) {
 		this.y = y;
+	}
+
+
+
+	public Site getSite() {
+		return site;
+	}
+
+
+
+	public void setSite(Site site) {
+		this.site = site;
 	}
 
 

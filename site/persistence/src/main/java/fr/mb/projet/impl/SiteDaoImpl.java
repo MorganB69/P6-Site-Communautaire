@@ -1,30 +1,16 @@
 package fr.mb.projet.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Named;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
-import javax.transaction.Transaction;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.SiteDao;
-import fr.mb.projet.recherche.RechercheSite;
 
 
 @Named("siteDao")
+@Transactional
 public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 	
 
@@ -37,6 +23,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
     
     
 	@Override
+	@Transactional
 	public void persist(Site site) {
 		
 		template.save(site);
@@ -52,6 +39,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 	}
 
 	@Override
+	@Transactional
 	public Site findById(int id) {
 		Site e=(Site)template.get(fr.mb.projet.bean.spot.Site.class,id);  
 	    return e;

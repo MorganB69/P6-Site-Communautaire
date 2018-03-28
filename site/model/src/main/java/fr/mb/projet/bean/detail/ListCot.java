@@ -1,5 +1,7 @@
 package fr.mb.projet.bean.detail;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "list_cotation")
-public class ListCot {
+public class ListCot implements Serializable{
 	
 	@Id
 	@Column(name = "cot_id")
@@ -17,7 +19,7 @@ public class ListCot {
 	private int id;
 	@Column(name = "cot")
 	private String cot;
-	public ListCot(int id, String cot) {
+	public ListCot() {
 
 	}
 	public int getId() {

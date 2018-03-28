@@ -24,11 +24,7 @@
         <property name="dataSource" ref="hibernateDataSource"></property> 
          <property name="packagesToScan" value="fr.mb.projet.bean" />
           
-        <property name="mappingResources">  
-        <list>  
-        <value>fr/mb/projet/bean/spot/Site.hbm.xml</value>  
-        </list>  
-        </property>  
+         
           
         <property name="hibernateProperties">  
             <props>  

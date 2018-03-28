@@ -1,5 +1,6 @@
 package fr.mb.projet.bean.detail;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,16 +18,14 @@ import javax.persistence.Table;
 import fr.mb.projet.bean.spot.Site;
 
 @Entity
-@Table(name = "orientation")
-public class Orientation {
+@Table(name = "orientation",catalog = "projet")
+public class Orientation implements Serializable{
 	@Id
 	@Column(name = "orientation_id")
 	private Integer orientationId;
 	@Column(name = "valeur")
 	private String orientation;
-	@ManyToMany
-	@JoinTable(name = "info_orientation")
-	@JoinColumn(name = "site_id")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listeOrientation")
 	private Set<Site> sites= new HashSet<Site>();
 	
 	public Orientation() {

@@ -26,7 +26,17 @@
 
 	pays: <s:property value="site.situation.pays"/>  <br/>
 	
-
+	Orientation <s:iterator value="site.listeOrientation">
+  						<li><s:property value="orientation" /></li>
+				</s:iterator>
+				
+	Cotation 	<s:iterator value="site.listeCotation">
+  						<li> Cotation <s:property value="typeCot" /> : <s:property value="cot.cot" /></li>
+				</s:iterator>
+				
+	Altitude 	<s:iterator value="site.listeAltitude">
+  						<li> Altitude <s:property value="typeAlt" /> : <s:property value="alt" /></li>
+				</s:iterator>
 
 	<footer> <%@ include file="../include/footer.jsp"%> </footer>
 </body>

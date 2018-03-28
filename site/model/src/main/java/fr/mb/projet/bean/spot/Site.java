@@ -7,10 +7,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,36 +30,60 @@ import fr.mb.projet.bean.detail.Cotation;
 
 import fr.mb.projet.bean.detail.Orientation;
 import fr.mb.projet.bean.detail.Situation;
-
+@Entity
+@Table(name = "site",catalog = "projet")
 public class Site implements Serializable{
 	
-	private static final Logger logger = LogManager.getLogger(Site.class);
 	
+	
+	@Id
+	@Column(name = "site_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name = "nom")
 	private String nom;
+	@Column(name = "description")
 	private String description;
+	@Column(name = "acces")
 	private String acces;
+	@Column(name = "image")
 	private String image;
+	@Column(name = "nb_secteur")
 	private Integer nbSecteur;
+	@Column(name = "nb_voie")
 	private Integer nbVoie;
+	@Column(name = "date_ajout")
 	private Date dateAjout;
 	
-
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "site", cascade = CascadeType.ALL)
 	private Situation situation;
 	
-
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "site", cascade = CascadeType.ALL)
 	private Coordonnee coordonnee;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "site")
 	private Set <Voie> listeVoie=new HashSet<Voie>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "site")
 	private Set <Secteur> listeSecteur=new HashSet<Secteur>();
 	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
 	private Set <Altitude> listeAltitude=new HashSet<Altitude>();
+	
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "info_orientation",catalog = "projet", joinColumns = { 
+	@JoinColumn(name = "site_id",  nullable = false, updatable = false) }, 
+				inverseJoinColumns = { @JoinColumn(name = "orientation_id", 
+				nullable = false, updatable = false) })
 	private Set <Orientation> listeOrientation=new HashSet<Orientation>();
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
 	private Set <Cotation> listeCotation=new HashSet<Cotation>();
 	
 	
 	public Site() {
-		logger.info("création d'un site");
+		
 	}
 
 	public Integer getId() {
@@ -115,7 +148,7 @@ public class Site implements Serializable{
 
 	public void setSituation(Situation situation) {
 		this.situation = situation;
-		logger.info("setter d'un situation");
+		
 	}
 
 	public Coordonnee getCoordonnee() {

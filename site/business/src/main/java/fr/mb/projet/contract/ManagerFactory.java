@@ -10,9 +10,13 @@ public interface ManagerFactory {
 	
 	public void setUserManager(UserManager pUserManager);
 	
-	public DetailManager<?> getDetailManager();
+	public DetailManager<?> getOrientationManager();
 	
-	public void setDetailManager(DetailManager<?> pDetailManager);
+	public void setOrientationManager(DetailManager<?> pDetailManager);
+	
+	public DetailManager<?> getCotationManager();
+	
+	public void setCotationManager(DetailManager<?> pDetailManager);
 	
 	public String message();
 

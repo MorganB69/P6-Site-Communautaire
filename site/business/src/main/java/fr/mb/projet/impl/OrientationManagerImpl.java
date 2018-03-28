@@ -18,10 +18,10 @@ import fr.mb.projet.exception.NotFoundException;
 import fr.mb.projet.exception.TechnicalException;
 
 
-@Named("detailManager")
+@Named("orientationManager")
 @Service
 @Transactional
-public class DetailManagerImpl implements DetailManager<Orientation> {
+public class OrientationManagerImpl implements DetailManager<Orientation> {
 
 	@Inject
 	DetailDao<Orientation> orientationDao;

@@ -26,8 +26,11 @@ import fr.mb.projet.bean.spot.Site;
 public class Coordonnee implements Serializable{
 	
 
-	@Id
-	@Column(name = "coord_id")
+	@GenericGenerator(name = "generator", strategy = "foreign", 
+			parameters = @Parameter(name = "property", value = "site"))
+			@Id
+			@GeneratedValue(generator = "generator")
+			@Column(name = "coord_id", unique = true, nullable = false)
 	private Integer id;
 	
 
@@ -36,9 +39,8 @@ public class Coordonnee implements Serializable{
 	@Column(name = "longitude")
 	private Double y;
 	
-    @OneToOne
-    @MapsId
-    @JoinColumn(name="coord_id")
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
 	private Site site;
 	
 	public Coordonnee() {

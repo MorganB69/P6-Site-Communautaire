@@ -33,7 +33,12 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	private UserManager userManager;
 	
 	@Inject
-	private DetailManager<?> detailManager;
+	private DetailManager<?> cotationManager;
+	
+	@Inject
+	private DetailManager<?> orientationManager;
+	
+	
 
 	@Override
 	public SiteManager getSiteManager() {
@@ -65,16 +70,22 @@ public class ManagerFactoryImpl implements ManagerFactory {
 		
 	}
 
-	@Override
-	public DetailManager<?> getDetailManager() {
-		// TODO Auto-generated method stub
-		return detailManager;
+	public DetailManager<?> getCotationManager() {
+		return cotationManager;
 	}
 
-	@Override
-	public void setDetailManager(DetailManager<?> detailManager) {
-		detailManager=this.detailManager;
-		
+	public void setCotationManager(DetailManager<?> cotationManager) {
+		this.cotationManager = cotationManager;
 	}
+
+	public DetailManager<?> getOrientationManager() {
+		return orientationManager;
+	}
+
+	public void setOrientationManager(DetailManager<?> orientationManager) {
+		this.orientationManager = orientationManager;
+	}
+
+
 
 }

@@ -29,8 +29,11 @@ public class Situation implements Serializable {
 	
 	private static final Logger logger = LogManager.getLogger(Situation.class);
 
-	@Id
-	@Column(name = "situ_id")
+	@GenericGenerator(name = "generator", strategy = "foreign", 
+			parameters = @Parameter(name = "property", value = "site"))
+			@Id
+			@GeneratedValue(generator = "generator")
+			@Column(name = "situ_id", unique = true, nullable = false)
 	private Integer id;
 	
 
@@ -43,9 +46,8 @@ public class Situation implements Serializable {
 	private String type;
 	
 	
-    @OneToOne
-    @MapsId
-    @JoinColumn(name="situ_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
 	private Site site;
 	
 	

@@ -73,7 +73,7 @@
         	requiredLabel="true"/>
 
         
-     <h2>Situation géographique </h2>
+     <h3>Situation géographique </h3>
        
 		<s:textfield 
 			class="form-control" 
@@ -105,11 +105,11 @@
 			requiredLabel="true"/>
 	
 
-	<h2>Détail du site</h2>	
+	<h3>Détail du site</h3>	
 	
-
+	<h5>Orientation </h5>
 	
-     	 <s:select label="Orientation"
+     	 <s:select 
         name="listeOrientationValues"
         list="listeOrientation"
         listKey="orientationId"
@@ -117,11 +117,57 @@
         multiple="true"
         required="true"
         value="%{listeOrientation.{id}}"
- />
+ 		/>
      	
+	<h5>Altitude </h5>
+		
+			<s:textfield 
+			class="form-control" 
+			name="altMax.alt" 
+			label="Altitude maximum" 
+			/>
+			
+			<s:textfield 
+			class="form-control" 
+			name="altMin.alt" 
+			label="Altitude minimum" 
+			/>
+			
+			<s:textfield 
+			class="form-control" 
+			name="altMoy.alt" 
+			label="Altitude moyenne" 
+			/>
+			
+			<h5>Cotation </h5>
+			
+		<s:select 
+		label="Cotation minimum"
+        name="cotMinValue"
+        list="listeCotation"
+        listKey="id"
+        listValue="cot"
+        value="%{listeCotation.{id}}"
+ 		/>
+ 		
+ 				<s:select 
+		label="Cotation maximum"
+        name="cotMaxValue"
+        list="listeCotation"
+        listKey="id"
+        listValue="cot"
+        value="%{listeCotation.{id}}"
+ 		/>
+ 		
+ 		 <s:select 
+		label="Cotation moyenne"
+        name="cotMoyValue"
+        list="listeCotation"
+        listKey="id"
+        listValue="cot"
+        value="%{listeCotation.{id}}"
+ 		/>
 	
-	
-	<h2>Image du site</h2>	
 		<s:file name="file" label="Ajouter une image du site"/>
 		
 	

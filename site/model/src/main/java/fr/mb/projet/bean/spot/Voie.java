@@ -4,6 +4,7 @@ package fr.mb.projet.bean.spot;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,9 @@ public class Voie {
 	@JoinColumn(name="cot_id")
 	private ListCot cotation;
 	
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "site_id", nullable = false)
+	private Site site;
 
 	
 	public Voie() {
@@ -139,6 +142,20 @@ public class Voie {
 
 	public void setCotation(ListCot cotation) {
 		this.cotation = cotation;
+	}
+
+
+
+
+	public Site getSite() {
+		return site;
+	}
+
+
+
+
+	public void setSite(Site site) {
+		this.site = site;
 	}
 
 	

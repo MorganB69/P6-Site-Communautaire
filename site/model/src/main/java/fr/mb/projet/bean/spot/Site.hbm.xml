@@ -45,9 +45,9 @@
         <one-to-many class="fr.mb.projet.bean.detail.Altitude"/>
 </set>
 
-<set name="listeOrientation" table="info_orientation">
+<set name="listeOrientation" table="info_orientation" cascade="all">
         <key column="site_id"/>
-        <many-to-many column="orientation_id" class="fr.mb.projet.bean.detail.Orientation"/>
+        <many-to-many column="orientation_id"  class="fr.mb.projet.bean.detail.Orientation" />
 </set>
 
 <set name="listeCotation" table="cotation">

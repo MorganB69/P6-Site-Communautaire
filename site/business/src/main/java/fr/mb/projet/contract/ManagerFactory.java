@@ -10,6 +10,10 @@ public interface ManagerFactory {
 	
 	public void setUserManager(UserManager pUserManager);
 	
+	public DetailManager<?> getDetailManager();
+	
+	public void setDetailManager(DetailManager<?> pDetailManager);
+	
 	public String message();
 
 }

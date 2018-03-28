@@ -24,7 +24,9 @@
 	
 	<h3>Situation géographique</h3>
 
-	pays: <s:property value="situation.pays"/>  <br/>
+	pays: <s:property value="site.situation.pays"/>  <br/>
+	
+
 
 	<footer> <%@ include file="../include/footer.jsp"%> </footer>
 </body>

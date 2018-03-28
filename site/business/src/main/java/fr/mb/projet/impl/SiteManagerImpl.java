@@ -26,15 +26,12 @@ import fr.mb.projet.recherche.RechercheSite;
 @Named("siteManager")
 @Service
 @Transactional
-public class SiteManagerImpl extends AbstractManager implements SiteManager {
+public class SiteManagerImpl implements SiteManager {
 
 	
 	
 	@Inject
 	SiteDao siteDao;
-	
-
-	
 	
 	RechercheSite rechercheSite = new RechercheSite();
 	
@@ -44,16 +41,11 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 		
 	}
 	
-	
 
-
-	
-	
-	
 	@Override
 	@Transactional
 	public Site getSite(Integer siteId) throws NotFoundException {
-		// TODO Auto-generated method stub
+		
 		
 		Site vSite=siteDao.findById(siteId);
 		
@@ -62,7 +54,7 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 	}
 	@Override
 	public List<Site> getListSite() {
-		// TODO Auto-generated method stub
+		
 		
 		List<Site> vList = new ArrayList();
 			for(int i=0;i<4;i++) {
@@ -107,14 +99,6 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
         if (site == null) {
             throw new FunctionalException("Le site est null !");
         }
-
-        Set<ConstraintViolation<Object>> vViolations = getConstraintValidator().validate(site);
-        
-        if (!vViolations.isEmpty()) {
-            throw new FunctionalException("L'objet Site est invalide",
-                                          new ConstraintViolationException(vViolations));
-        }
-
         
         siteDao.persist(site);
 

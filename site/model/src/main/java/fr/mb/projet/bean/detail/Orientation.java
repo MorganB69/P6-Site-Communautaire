@@ -1,21 +1,33 @@
 package fr.mb.projet.bean.detail;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import fr.mb.projet.bean.spot.Site;
 
 @Entity
 @Table(name = "orientation")
 public class Orientation {
 	@Id
 	@Column(name = "orientation_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer orientationId;
 	@Column(name = "valeur")
 	private String orientation;
+	@ManyToMany
+	@JoinTable(name = "info_orientation")
+	@JoinColumn(name = "site_id")
+	private Set<Site> sites= new HashSet<Site>();
 	
 	public Orientation() {
 
@@ -31,6 +43,12 @@ public class Orientation {
 	}
 	public void setOrientation(String orientation) {
 		this.orientation = orientation;
+	}
+	public Set<Site> getSites() {
+		return sites;
+	}
+	public void setSites(Set<Site> sites) {
+		this.sites = sites;
 	}
 	
 	

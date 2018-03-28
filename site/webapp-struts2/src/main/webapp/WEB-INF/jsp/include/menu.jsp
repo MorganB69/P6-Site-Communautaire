@@ -13,7 +13,7 @@
 <title>Menu</title>
 
 <link
-	href="<s:url value='webjars/bootstrap/4.0.0-1/css/bootstrap.min.css'/>"
+	href="<s:url value='webjars/bootstrap/4.0.0-1/css/bootstrap.css'/>"
 	rel="stylesheet" />
 <link href="<s:url value='css/layout.css'/>" rel="stylesheet" />
 
@@ -92,6 +92,8 @@
 
 </body>
 <script src="webjars/jquery/3.0.0/jquery.min.js"></script>
-<script src="webjars/bootstrap/4.0.0-1/js/bootstrap.min.js"></script>
+<script src="webjars/popper.js/1.12.9-1/umd/popper.min.js"></script>
+<script src="webjars/bootstrap/4.0.0-1/js/bootstrap.js"></script>
+
 
 </html>

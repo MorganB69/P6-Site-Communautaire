@@ -9,6 +9,8 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
+import fr.mb.projet.contract.DetailManager;
 import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.contract.SiteManager;
 import fr.mb.projet.contract.UserManager;
@@ -29,6 +31,9 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	private SiteManager siteManager;
 	@Inject
 	private UserManager userManager;
+	
+	@Inject
+	private DetailManager<?> detailManager;
 
 	@Override
 	public SiteManager getSiteManager() {
@@ -57,6 +62,18 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	@Override
 	public void setUserManager(UserManager pUserManager) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DetailManager<?> getDetailManager() {
+		// TODO Auto-generated method stub
+		return detailManager;
+	}
+
+	@Override
+	public void setDetailManager(DetailManager<?> detailManager) {
+		detailManager=this.detailManager;
 		
 	}
 

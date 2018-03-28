@@ -11,33 +11,113 @@
 <body>
 	<header> <%@ include file="../include/menu.jsp"%>  </header>
 	
+	    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Page Heading/Breadcrumbs -->
+      <h1><s:property value="site.nom"/>
+      </h1>
+
+
+      <!-- Portfolio Item Row -->
+      <div class="row">
+
+        <div class="col-md-8">
+          <img class="img-fluid" src="image/site/<s:property value="site.image"/>"alt="Site image">
+        </div>
+        
+        <div class="card ">
+        	
+            <h3 class="card-header">Situation géographique</h3>
+            
+            <div class="card-body bg-light">
+              	<div class="row">
+                <div>
+                	<h5>Localisation</h5>
+                  <ul class="list-unstyled mb-0">        
+           				 <li>Pays: <s:property value="site.situation.pays"/></li>
+           				 <li>Département : <s:property value="site.situation.departement"/></li>
+           				 <li>Type de site : <s:property value="site.situation.type"/></li>
+                  </ul>
+                </div>
+                </div>
+                <div class="row">
+                <div>
+                	<h5>Coordonnées</h5>
+                  		<ul class="list-unstyled mb-0">
+                    
+                      	<li>Latitude : <s:property value="site.coordonnee.x"/></li>
+                      	<li>Longitude : <s:property value="site.coordonnee.y"/></li>
+                 
+                  		</ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+
+       	<div class="row">
+       	<div class="col-md-12 bg-light ">
+        	
+            <h3>Informations techniques</h3>
+            
+            
+              	<div class="col-md-4">
+                
+                	<h3>Altitude</h3>
+                  <ul class="list-unstyled mb-0">        
+           		<s:iterator value="site.listeAltitude">
+  						<li> <s:property value="typeAlt" /> : <s:property value="alt" /></li>
+				</s:iterator>
+                  </ul>
+                
+                </div>
+                <div class="col-md-4">
+                	<h3>Orientation</h3>
+                  		<ul class="list-unstyled mb-0">                  
+                 <s:iterator value="site.listeOrientation">
+  						<li><s:property value="orientation" /></li>
+				</s:iterator>                
+                  		</ul>
+           
+                </div>
+                
+                <div class="col-md-4">
+                	<h3>Difficulté</h3>
+                  		<ul class="list-unstyled mb-0">                  
+				<s:iterator value="site.listeCotation">
+  						<li> <s:property value="typeCot" /> : <s:property value="cot.cot" /></li>
+				</s:iterator>               
+                  		</ul>
+           
+                </div>
+              </div>
+            </div>
+          
+
+    
 	
-	<h2><s:property value="site.nom"/>	</h2>
-	<br/>
-	<img src="image/site/<s:property value="site.image"/>" alt="Site image">
+		
+		
+	<h3 class="md-12">Description</h3> <br>
 	
+	<p><s:property value="site.description"/></p><br>
+	
+	<h3 class="md-12">Accès au spot</h3><br>
+	
+	<p> <s:property value="site.acces"/></p><br>
+	
+	<h3 class="md-12">Autres infos</h3><br>
 	Site iD : <s:property value="site.id"/>  <br/>
-	Description site: <s:property value="site.description"/>  <br/>
-	Acces: <s:property value="site.acces"/>  <br/>
+
 	Nombre de voies : <s:property value="site.nbVoie"/>  <br/>
 	Nombre de secteurs: <s:property value="site.nbSecteur"/>  <br/>
 	
-	<h3>Situation géographique</h3>
-
-	pays: <s:property value="site.situation.pays"/>  <br/>
+	</div>
 	
-	Orientation <s:iterator value="site.listeOrientation">
-  						<li><s:property value="orientation" /></li>
-				</s:iterator>
-				
-	Cotation 	<s:iterator value="site.listeCotation">
-  						<li> Cotation <s:property value="typeCot" /> : <s:property value="cot.cot" /></li>
-				</s:iterator>
-				
-	Altitude 	<s:iterator value="site.listeAltitude">
-  						<li> Altitude <s:property value="typeAlt" /> : <s:property value="alt" /></li>
-				</s:iterator>
-
+	
 	<footer> <%@ include file="../include/footer.jsp"%> </footer>
 </body>
 </html>

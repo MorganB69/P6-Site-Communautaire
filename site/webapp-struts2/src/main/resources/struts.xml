@@ -53,7 +53,7 @@
 		<action name="detail_site" class="fr.mb.projet.action.site.GestionSiteAction"
 			method="doDetail">
 
-			<result>/WEB-INF/jsp/site/detail_site.jsp</result>
+			<result>/WEB-INF/jsp/site/detail_site2.jsp</result>
 		</action>
 
 		<!-- Actions Login/Logout -->

@@ -12,19 +12,19 @@
 	<header> <%@ include file="../include/menu.jsp"%>  </header>
 	
 	    <!-- Page Content -->
-    <div class="container">
+    <div class="container" id="detail-cont">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1><s:property value="site.nom"/>
+      <h1 class="text-center text-uppercase"><s:property value="site.nom"/>
       </h1>
 
 
-      <!-- Portfolio Item Row -->
+      
       <div class="row">
 
-        <div class="col-md-8">
-          <img class="img-fluid" src="image/site/<s:property value="site.image"/>"alt="Site image">
-        </div>
+        <figure class="figure col-md-8" id="detailImg">
+          <img class="figure-img img-fluid rounded" src="image/site/<s:property value="site.image"/>"alt="Site image">
+        </figure>
         
         <div class="card ">
         	

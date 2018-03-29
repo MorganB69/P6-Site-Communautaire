@@ -15,6 +15,9 @@ footer{
 	height: 100px; 
 
 }
+.nav-link{
+	font-size : large;
+}
 
 
 body {
@@ -23,8 +26,47 @@ body {
 	display : table;
 	width: 100%;
 	
+	background-color :#ddefff;
+	
+
+}
+.form {
+	background-color : #cbcfd2;
+}
+#couvertureDetail{
+	position:absolute;
+
+}
+#left-column{
+	
 }
 
+#right-column{
+	
+}
+
+#associated-alt{
+	
+}
+
+
+
+#couvertureCont{
+	height:350px;
+	position:relative;
+    left: 0;
+    overflow: hidden;
+}
+#detailImg{
+	margin : 1%;
+	max-height:500px;
+	max-width : 980px;
+	overflow: hidden;
+}
+
+#detail-cont{
+
+}
 
 @media (min-width: 992px) {
   body {

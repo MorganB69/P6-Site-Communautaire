@@ -1,4 +1,4 @@
-package fr.mb.projet.impl;
+package fr.mb.projet.impl.user;
 
 import javax.inject.Inject;
 import javax.inject.Named;

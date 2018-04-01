@@ -26,11 +26,11 @@
 	<div class="container">
 
 		<section class="row justify-content-center"> 
-			<s:include value="lastsite.jsp"></s:include> 
+			<s:include value="index/lastsite.jsp"></s:include> 
 		</section>
 
 		<section class="row justify-content-center"> 
-			<s:include value="lasttopo.jsp"></s:include> 
+			<s:include value="index/lasttopo.jsp"></s:include> 
 		</section>
 
 		

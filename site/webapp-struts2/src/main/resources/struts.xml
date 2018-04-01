@@ -27,7 +27,7 @@
 		<!-- LISTE DES SITES -->
 		<action name="site_list" class="fr.mb.projet.action.site.GestionSiteAction"
 			method="doList">
-			<result>/jsp/site/list.jsp</result>
+			<result>/WEB-INF/jsp/site/list.jsp</result>
 		</action>
 
 		<!-- AJOUTER DES SITES -->
@@ -38,7 +38,8 @@
     <param name="fileUpload.maximumSize">2097152</param>
     <param name="fileUpload.allowedTypes">
         image/png,image/gif,image/jpeg,image/pjpeg
-    </param>            
+    </param>  
+              
 </interceptor-ref>
 				
 			<result name="input">/WEB-INF/jsp/site/add_site.jsp </result>
@@ -53,7 +54,7 @@
 		<action name="detail_site" class="fr.mb.projet.action.site.GestionSiteAction"
 			method="doDetail">
 
-			<result>/WEB-INF/jsp/site/detail_site2.jsp</result>
+			<result>/WEB-INF/jsp/site/detail_site.jsp</result>
 		</action>
 
 		<!-- Actions Login/Logout -->
@@ -85,13 +86,6 @@
 
 
 
-
-
-		<!-- Classe de test -->
-		<action name="site" class="siteAction" method="doDetail">
-
-			<result>/WEB-INF/jsp/resultat.jsp</result>
-		</action>
 
 	</package>
 

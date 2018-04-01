@@ -1,11 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
-encoding//src/main/java/fr/mb/projet/action/HelloWorldAction.java=UTF-8
 encoding//src/main/java/fr/mb/projet/action/IndexAction.java=UTF-8
-encoding//src/main/java/fr/mb/projet/action/SaisirAction.java=UTF-8
 encoding//src/main/java/fr/mb/projet/converter/DateConverter.java=UTF-8
 encoding//src/main/resources=UTF-8
-encoding//src/main/webapp/WEB-INF/jsp/helloWorld.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/jsp/index.jsp=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

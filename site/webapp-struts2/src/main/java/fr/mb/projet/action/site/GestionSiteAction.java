@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -36,25 +37,34 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	// Factory
 	@Inject
 	private ManagerFactory managerFactory;
-	
+	//Objet de session
 	private Map<String, Object> session;
 
-	// Attributs
+	//------------ Attributs-------------
 	
-		//Entrée
+	//Entrée pour obtenir le détail d'un site
 	private Integer id;
-	private  List<Orientation> listeOrientation;
-	private  List<ListCot> listeCotation;
 	
-		//Upload fichier
+	//Attributs utilisés pour alimenter le questionnaire
+	private  List<Orientation> listeOrientation=new ArrayList<Orientation>();
+	private  List<ListCot> listeCotation=new ArrayList<ListCot>();
+	
+	//Upload fichier
     private File file;
     private String fileContentType;
     private String fileFileName;
     
     
-		//Sortie
-	private List<Site> listSite;
-	private Site site;
+	//----Sortie---
+    
+    //Classe principale en sortie du questionnaire
+    private Site site;
+    
+    //Liste pour l'affichage de site 
+    //A METTRE DANS L'ACTION DE LA RECHERCHE DE SITE??
+	private List<Site> listSite=new ArrayList<Site>();
+	
+	//Attributs en sortie pour alimenter le site
 	private Situation situation;
 	private Coordonnee coordonnee;
 	private Altitude altMin;
@@ -64,39 +74,50 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	private Cotation cotMax;
 	private Cotation cotMoy;
 	
-	
-	private List<Integer>listeOrientationValues;
-	private Integer cotMinValue;
-	private Integer cotMaxValue;
-	private Integer cotMoyValue;
-	
 	private  Set<Orientation> listeOrientationOut=new HashSet<Orientation>();
 	private  Set<Altitude> listeAltitudeOut=new HashSet<Altitude>();
 	private  Set<Cotation> listeCotationOut=new HashSet<Cotation>();
 	
-	private Orientation orient;
+	
+	//Integer en sortie du questionnaire qui serviront à alimenter les listes
+	private List<Integer>listeOrientationValues=new ArrayList<Integer>();
+	private Integer cotMinValue;
+	private Integer cotMaxValue;
+
 	
 
 
-
+	
 
 	//------------------------ Méthodes-------------------------
 	//----------------------------------------------------------
 	
 	
+	
+	
+	
+	
+	//Obtenir la liste des sites
+	//A PARAMETRER OU METTRE DANS L'ACTION RECHERCHE
 	public String doList() {
-		listSite = managerFactory.getSiteManager().getListSite();
+		this.listSite = managerFactory.getSiteManager().getListSite();
 		return ActionSupport.SUCCESS;
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	//Methode pour l'affichage d'un site en détail
 	public String doDetail() {
 		if (id == null) {
 			this.addActionError(getText("error.project.missing.id"));
 		} else {
 			try {
-				
+
 				site = (Site) managerFactory.getSiteManager().getSite(id);
-				
 
 			} catch (NotFoundException Notfound) {
 				this.addActionError(getText("error.project.notfound", Collections.singletonList(id)));
@@ -106,111 +127,162 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
 	}
 
+	
+	
+	
+	
+	//Methode d'ajout d'un site en BD
+	
 	public String add() throws NotFoundException {
 		
-		this.listeOrientation=(List<Orientation>) managerFactory.getOrientationManager().getDetailList();
+		String result = ActionSupport.INPUT;
+		
+		//Accès à la BD pour récupérer les listes prédéfinies d'Orientation et Cotation et les mettre
+		//dans une session
+		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
 		this.listeCotation=(List<ListCot>) managerFactory.getCotationManager().getDetailList();
 		session.put("listeOrientation", this.listeOrientation);
 		session.put("listeCotation", this.listeCotation);
 		
-		String result = ActionSupport.INPUT;
+		
+		
+		//----------ENREGISTREMENT DU SITE----------
+		 
+		if (this.site != null) {
+			//-------------- Validation des données saisies--------------
+			if(this.site.getNom().length()==0||this.site.getNom()==null) {
+				this.addFieldError("site.nom", "ne doit pas être vide");
+			}
+			
+			if(this.situation.getPays().length()==0||this.situation.getPays()==null) {
+				this.addFieldError("situation.pays", "ne doit pas être vide");
+			}
+			
+			if(this.situation.getDepartement().length()==0||this.situation.getDepartement()==null) {
+				this.addFieldError("situation.departement", "ne doit pas être vide");
+			}
+			
+		
+			
+			
+			
+			
+			// Enregistrement de l'image
+			if (this.file != null) {
+				String filePath = ServletActionContext.getServletContext().getRealPath("/image/site/");
+				;
+				File saveFilePath = new File(filePath, this.fileFileName);
+				try {
+					FileUtils.copyFile(this.file, saveFilePath);
+					//Ajout du lien de l'image au site
+					this.site.setImage(this.fileFileName);
+				} catch (IOException ex) {
+					this.addActionError("Enregistrement de l'image impossible: " + ex.getMessage());
+				}
+			}
+			//Si image null, enregistrement d'une image par défaut
+			else this.site.setImage("defaut.jpg");
 
-		if (this.site!=null) {
-			//Enregistrement de l'image
-			String filePath = ServletActionContext.getServletContext().getRealPath("/image/site/");;
-			File saveFilePath = new File(filePath,this.fileFileName);
-	        try {
-	            FileUtils.copyFile(this.file, saveFilePath);
-	        } catch (IOException ex) {
-	            this.addActionError("Enregistrement de l'image impossible: " + ex.getMessage());
-	        }
-	        
-			// Si pas d'erreur, rajout du site
+			// Si pas d'erreur, rajout des différents attributs au site enregistrement du site
 			if (!this.hasErrors()) {
 				try {
 
-					
-					this.site.setImage(this.fileFileName);
+					//Ajout d'une date au site
 					this.site.setDateAjout(new Date());
 					
+					//Ajouter d'abord le site aux différents éléments
+					//pour les relations en base de données
 					
+					//Situation et Coordonnées
 					this.situation.setSite(this.site);
 					this.coordonnee.setSite(this.site);
-					
-					this.altMax.setTypeAlt("max");
-					this.altMax.setSite(this.site);
-					this.listeAltitudeOut.add(this.altMax);
-					this.altMin.setTypeAlt("min");
-					this.altMin.setSite(this.site);
-					this.listeAltitudeOut.add(this.altMin);
-					this.altMoy.setTypeAlt("moy");
-					this.altMoy.setSite(this.site);
-					this.listeAltitudeOut.add(this.altMoy);
-					
-					this.cotMin=new Cotation();
-					this.cotMin.setSite(this.site);
-					this.cotMin.setTypeCot("min");
-					for (ListCot l : this.listeCotation) {
-						if (this.cotMinValue==l.getId()) {
-							this.cotMin.setCot(l);
-						}
-					}
-					this.cotMax=new Cotation();
-					this.cotMax.setSite(this.site);
-					this.cotMax.setTypeCot("max");
-					for (ListCot j : this.listeCotation) {
-						if (this.cotMaxValue==j.getId()) {
-							this.cotMax.setCot(j);
-						}
-					}
-					
-					this.cotMoy=new Cotation();
-					this.cotMoy.setSite(this.site);
-					this.cotMoy.setTypeCot("moy");
-					for (ListCot h : this.listeCotation) {
-						if (this.cotMoyValue==h.getId()) {
-							this.cotMoy.setCot(h);
-						}
-					}
 
+					//Altitudes
+					if(this.altMax.getAlt()!=null) {
+						System.out.println("non null");
+						this.altMax.setTypeAlt("max");
+						this.altMax.setSite(this.site);
+						this.listeAltitudeOut.add(this.altMax);
+					}
+					if(this.altMin.getAlt()!=null) {
+						System.out.println("non null");
+						this.altMin.setTypeAlt("min");
+						this.altMin.setSite(this.site);
+						this.listeAltitudeOut.add(this.altMin);
+					}
+					if (this.altMoy.getAlt()!=null) {
+						System.out.println("non null");
+						this.altMoy.setTypeAlt("moy");
+						this.altMoy.setSite(this.site);
+						this.listeAltitudeOut.add(this.altMoy);
+					}
 					
-					this.listeCotationOut.add(this.cotMin);
-					this.listeCotationOut.add(this.cotMax);
-					this.listeCotationOut.add(this.cotMoy);
+					//Cotations
 					
+					//Récupération des objets en session
+					if (session.containsKey("listCotation"))
+						this.listeCotation = (List<ListCot>) session.get("listCotation");
 					
 					if (session.containsKey("listOrientation"))
-					    this.listeOrientation=(List<Orientation>)session.get("listOrientation");
+						this.listeOrientation = (List<Orientation>) session.get("listOrientation");
 					
-					for (Orientation o : this.listeOrientation) {
-						System.out.println(o.getOrientationId());
+					
+					if (this.cotMinValue!=null) {
+						this.cotMin = new Cotation();
+						this.cotMin.setSite(this.site);
+						this.cotMin.setTypeCot("min");
+						
+						//Récupération des objets dans les listes précédemment récupérée en BD
+						for (ListCot l : this.listeCotation) {
+							if (this.cotMinValue == l.getId()) {
+								this.cotMin.setCot(l);
+							}
 						}
+						//Ajout à la liste qui sera insérée dans le site
+						this.listeCotationOut.add(this.cotMin);
+					}
 					
+					if (this.cotMaxValue != null) {
+						this.cotMax = new Cotation();
+						this.cotMax.setSite(this.site);
+						this.cotMax.setTypeCot("max");
+						//Récupération des objets dans les listes précédemment récupérée en BD
+						for (ListCot j : this.listeCotation) {
+							if (this.cotMaxValue == j.getId()) {
+								this.cotMax.setCot(j);
+							}
+						}
+						//Ajout à la liste qui sera insérée dans le site
+						this.listeCotationOut.add(this.cotMax);
+					}
 					
+
 					
-					for (Integer val : this.listeOrientationValues) {
-						for (Orientation o : this.listeOrientation) {
-							if (val==o.getOrientationId()) {
-								this.listeOrientationOut.add(o);
+					//Orientation
+					
+					//Récupération des objets dans les listes précédemment récupérée en BD
+					if (this.listeOrientationValues != null) {
+						for (Integer val : this.listeOrientationValues) {
+							for (Orientation o : this.listeOrientation) {
+								if (val == o.getOrientationId()) {
+									//Ajout à la liste qui sera insérée dans le site
+									this.listeOrientationOut.add(o);
+								}
 							}
 						}
 					}
-							
-
 					
-					
+					//Insertion de chaque élément dans le site avant insertion en BD
 					this.site.setSituation(this.situation);
 					this.site.setCoordonnee(this.coordonnee);
-					this.site.setListeOrientation(this.listeOrientationOut);
-					this.site.setListeAltitude(this.listeAltitudeOut);
-					this.site.setListeCotation(listeCotationOut);
-					
+					if(this.listeOrientationOut!=null)this.site.setListeOrientation(this.listeOrientationOut);
+					if(this.listeAltitudeOut!=null)this.site.setListeAltitude(this.listeAltitudeOut);
+					if(this.listeCotationOut!=null)this.site.setListeCotation(listeCotationOut);
+
+					//Insertion du site en BD
 					managerFactory.getSiteManager().insert(this.site);
 
-					
-	
-					
-
+					//Fin de l'action
 					result = ActionSupport.SUCCESS;
 
 					this.addActionMessage("Site ajouté avec succès");
@@ -225,17 +297,18 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 					result = ActionSupport.ERROR;
 				}
 			}
-		
+
 		}
 		return result;
 	}
 	
+
 	
 	
 	
+	//-------------- Getters et Setters----------------
+	//-------------------------------------------------
 	
-	
-	// Getters et Setters
 	public ManagerFactory getManagerFactory() {
 		return managerFactory;
 	}
@@ -251,8 +324,6 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
 
 	public File getFile() {
 		return file;
@@ -321,13 +392,6 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		this.listeOrientation = listeOrientation;
 	}
 
-	public Orientation getOrientation() {
-		return orient;
-	}
-
-	public void setOrientation(Orientation orientation) {
-		this.orient = orientation;
-	}
 
 	public Set<Orientation> getListeOrientationOut() {
 		return listeOrientationOut;
@@ -443,20 +507,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		this.cotMaxValue = cotMaxValue;
 	}
 
-	public Integer getCotMoyValue() {
-		return cotMoyValue;
-	}
 
-	public void setCotMoyValue(Integer cotMoyValue) {
-		this.cotMoyValue = cotMoyValue;
-	}
 
-	public Orientation getOrient() {
-		return orient;
-	}
-
-	public void setOrient(Orientation orient) {
-		this.orient = orient;
-	}
 	
 }

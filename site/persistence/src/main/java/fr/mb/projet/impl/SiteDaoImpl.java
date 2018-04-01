@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Named;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.mb.projet.bean.detail.ListCot;
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.SiteDao;
 
@@ -55,8 +56,9 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 
 	@Override
 	public List<Site> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Site>list=template.loadAll(Site.class);
+		return list;
+		
 	}
 
 	@Override

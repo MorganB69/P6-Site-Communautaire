@@ -24,6 +24,7 @@
 			pour renseigner les différents
 			éléments du site d'escalade
 			<br>
+			* Champ obligatoire
 	
 		</section>
 	
@@ -38,7 +39,7 @@
 	
 
 		<s:textfield
-			class="col-6"
+			class="form-control col-6"
             label="Nom du site" 
             name="site.nom" 
             requiredLabel="true"
@@ -49,7 +50,7 @@
         	rows="5" 
         	name="site.description" 
         	label="Ajouter une description du site" 
-        	requiredLabel="true" 
+        	 
         	/>
         
         <s:textarea 
@@ -57,20 +58,20 @@
         	rows="5" 
         	name="site.acces" 
         	label="Description de l'accès au site" 
-        	requiredLabel="true"/>
+        	/>
         	
         <s:textfield
-        	class="col-sm-3" 
+        	class="form-control col-sm-3" 
         	name="site.nbVoie" 
         	label="Nombre de voies" 
-        	requiredLabel="true" />
+        	/>
         	
         	
         <s:textfield 
-        	class="col-sm-3" 
+        	class="form-control col-sm-3" 
         	name="site.nbSecteur" 
         	label="Nombre de secteurs" 
-        	requiredLabel="true"/>
+        	/>
 
         
      <h3>Situation géographique </h3>
@@ -90,28 +91,30 @@
 			class="form-control" 
 			name="situation.type" 
 			label="Type de spot" 
-			requiredLabel="true"/>
+			/>
 		
 		<s:textfield 
 			class="form-control" 
 			name="coordonnee.x" 
 			label="Latitude" 
-			requiredLabel="true"/>
+			/>
 			
 		<s:textfield 
 			class="form-control" 
 			name="coordonnee.y" 
 			label="Longitude" 
-			requiredLabel="true"/>
+			/>
 	
 
 	<h3>Détail du site</h3>	
 	
 	<h5>Orientation </h5>
+	choix multiple possible *
 	
      	 <s:select 
+     	class="form-control"
         name="listeOrientationValues"
-        list="listeOrientation"
+        list="session.listeOrientation"
         listKey="orientationId"
         listValue="orientation"
         multiple="true"
@@ -143,8 +146,9 @@
 			
 		<s:select 
 		label="Cotation minimum"
+		required="false"
         name="cotMinValue"
-        list="listeCotation"
+        list="session.listeCotation"
         listKey="id"
         listValue="cot"
         value="%{listeCotation.{id}}"
@@ -152,21 +156,15 @@
  		
  				<s:select 
 		label="Cotation maximum"
+		required="false"
         name="cotMaxValue"
-        list="listeCotation"
+        list="session.listeCotation"
         listKey="id"
         listValue="cot"
         value="%{listeCotation.{id}}"
  		/>
  		
- 		 <s:select 
-		label="Cotation moyenne"
-        name="cotMoyValue"
-        list="listeCotation"
-        listKey="id"
-        listValue="cot"
-        value="%{listeCotation.{id}}"
- 		/>
+
 	
 		<s:file name="file" label="Ajouter une image du site"/>
 		

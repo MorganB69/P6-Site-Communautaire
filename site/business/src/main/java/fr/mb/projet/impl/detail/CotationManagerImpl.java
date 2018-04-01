@@ -1,4 +1,4 @@
-package fr.mb.projet.impl;
+package fr.mb.projet.impl.detail;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ import javax.inject.Named;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.mb.projet.bean.detail.Cotation;
+import fr.mb.projet.bean.detail.ListCot;
 import fr.mb.projet.bean.detail.Orientation;
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.DetailDao;
@@ -18,38 +20,38 @@ import fr.mb.projet.exception.NotFoundException;
 import fr.mb.projet.exception.TechnicalException;
 
 
-@Named("orientationManager")
+@Named("cotationManager")
 @Service
 @Transactional
-public class OrientationManagerImpl implements DetailManager<Orientation> {
+public class CotationManagerImpl implements DetailManager<ListCot> {
 
 	@Inject
-	DetailDao<Orientation> orientationDao;
+	DetailDao<ListCot> cotationDao;
 	
 	@Override
 	@Transactional
-	public Orientation getDetail(Integer detailId) throws NotFoundException {
-		Orientation vOrientation=orientationDao.findById(detailId);
+	public ListCot getDetail(Integer detailId) throws NotFoundException {
+		ListCot vCotation=cotationDao.findById(detailId);
 		
 		
-		return vOrientation;
+		return vCotation;
 	}
 
 	@Override
 	@Transactional
-	public List<Orientation> getDetailList() {
-		List<Orientation>list=orientationDao.findAll();
+	public List<ListCot> getDetailList() {
+		List<ListCot>list=cotationDao.findAll();
 		return list;
 	}
 
 	@Override
-	public void insert(Orientation detail) throws FunctionalException, TechnicalException {
+	public void insert(ListCot detail) throws FunctionalException, TechnicalException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void update(Orientation detail) {
+	public void update(ListCot detail) {
 		// TODO Auto-generated method stub
 		
 	}

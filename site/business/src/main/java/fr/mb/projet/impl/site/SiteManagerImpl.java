@@ -1,4 +1,4 @@
-package fr.mb.projet.impl;
+package fr.mb.projet.impl.site;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.mb.projet.bean.detail.Orientation;
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.SiteDao;
 import fr.mb.projet.contract.SiteManager;
@@ -56,13 +57,9 @@ public class SiteManagerImpl implements SiteManager {
 	public List<Site> getListSite() {
 		
 		
-		List<Site> vList = new ArrayList();
-			for(int i=0;i<4;i++) {
-				Site vSite= new Site();
-				vList.add(vSite);
-			}
+		List<Site>list=siteDao.findAll();
 		
-		return vList;
+		return list;
 	
 		}
 

@@ -45,6 +45,12 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	//Entrée pour obtenir le détail d'un site
 	private Integer id;
 	
+	//Paramètres Pagination
+	private Integer pageSize;
+	private Integer lastPage;
+	private Integer start=0;
+	private Integer currentPage;
+	
 	//Attributs utilisés pour alimenter le questionnaire
 	private  List<Orientation> listeOrientation=new ArrayList<Orientation>();
 	private  List<ListCot> listeCotation=new ArrayList<ListCot>();
@@ -100,7 +106,14 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	//Obtenir la liste des sites
 	//A PARAMETRER OU METTRE DANS L'ACTION RECHERCHE
 	public String doList() {
-		this.listSite = managerFactory.getSiteManager().getListSite();
+		
+		this.pageSize=12;
+		
+
+		this.lastPage=managerFactory.getSiteManager().getCount(this.pageSize,this.start);
+		
+		
+		this.listSite = managerFactory.getSiteManager().getListSite(this.pageSize,this.start);
 		return ActionSupport.SUCCESS;
 	}
 	
@@ -505,6 +518,66 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 	public void setCotMaxValue(Integer cotMaxValue) {
 		this.cotMaxValue = cotMaxValue;
+	}
+
+
+
+
+
+
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+
+
+
+
+
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
+
+
+
+
+
+
+	public Integer getStart() {
+		return start;
+	}
+
+
+
+
+
+
+
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+
+
+
+
+
+
+
+	public Integer getLastPage() {
+		return lastPage;
+	}
+
+
+
+
+
+
+
+	public void setLastPage(Integer lastPage) {
+		this.lastPage = lastPage;
 	}
 
 

@@ -33,17 +33,9 @@ body {
 
 #couvertureDetail{
 	position:absolute;
-
 }
-#left-column{
-	
-}
-
-#right-column{
-	
-}
-
-#associated-alt{
+#card-list{
+ 
 	
 }
 
@@ -91,5 +83,10 @@ body {
 }
 
 .portfolio-item {
-  margin-bottom: 30px;
+	margin-top: 15px;
+  	margin-bottom: 15px;
+ 	max-height:500px;
+ 	max-width:450px;
+  	overflow: hidden;
+	text-overflow: ellipsis;
 }

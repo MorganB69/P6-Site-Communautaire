@@ -20,9 +20,11 @@ public interface SiteDao extends Serializable{
 	
 	public void delete(Site entity);
 	
-	public List<Site> findAll();
+	public List<Site> findAll(Integer nbPage, Integer start);
 	
 	public void deleteAll();
+
+	public Long getCount();
 
 	
 }

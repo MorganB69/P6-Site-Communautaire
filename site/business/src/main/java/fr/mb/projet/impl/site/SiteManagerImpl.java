@@ -54,15 +54,54 @@ public class SiteManagerImpl implements SiteManager {
 		return vSite;
 	}
 	@Override
-	public List<Site> getListSite() {
+	public List<Site> getListSite(Integer nbPage, Integer start) {
 		
-		
-		List<Site>list=siteDao.findAll();
+		Integer offset=(start-1)*nbPage;
+		List<Site>list=siteDao.findAll(nbPage,offset);
 		
 		return list;
 	
 		}
 
+
+
+	@Override
+	@Transactional
+	public void insert(Site site) throws FunctionalException {
+		
+        if (site == null) {
+            throw new FunctionalException("Le site est null !");
+        }
+        
+        siteDao.persist(site);
+
+	}
+
+	
+
+	@Override
+	public void update(Site site) {
+		 siteDao.update(site);
+		
+	}
+
+
+	@Override
+	public Integer getCount(Integer pageSize, Integer start) {
+		Long nbSite= siteDao.getCount();
+		
+		System.out.println(nbSite);
+		double page=(double)pageSize;
+	
+		double lastPageNumber = (Math.ceil(nbSite / page));
+		System.out.println(lastPageNumber);
+		int value=(int) lastPageNumber;
+		return value;
+	}
+	
+	
+	
+	
 	
 	public SiteDao getSiteDao() {
 		return siteDao;
@@ -82,36 +121,4 @@ public class SiteManagerImpl implements SiteManager {
 	public void setRechercheSite(RechercheSite rechercheSite) {
 		this.rechercheSite = rechercheSite;
 	}
-
-
-
-
-
-
-
-	@Override
-	@Transactional
-	public void insert(Site site) throws FunctionalException {
-		
-        if (site == null) {
-            throw new FunctionalException("Le site est null !");
-        }
-        
-        siteDao.persist(site);
-
-	}
-
-
-
-
-
-
-
-	@Override
-	public void update(Site site) {
-		 siteDao.update(site);
-		
-	}
-	
-
 }

@@ -3,6 +3,9 @@ package fr.mb.projet.impl;
 import java.util.List;
 
 import javax.inject.Named;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.mb.projet.bean.detail.ListCot;
@@ -55,8 +58,21 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 	}
 
 	@Override
-	public List<Site> findAll() {
-		List<Site>list=template.loadAll(Site.class);
+	public List<Site> findAll(Integer nbPage, Integer start) {
+		
+		Session session= sessionFactory.openSession();
+		session.beginTransaction();
+		Query query=session.createQuery("FROM Site ORDER BY id DESC");
+		
+		query.setFirstResult(start);
+		query.setMaxResults(nbPage);
+		
+
+		
+		List<Site>list=query.list();
+		
+		 session.close();
+		
 		return list;
 		
 	}
@@ -65,6 +81,20 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 	public void deleteAll() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public Long getCount() {
+		Session session= sessionFactory.openSession();
+		session.beginTransaction();
+		String countQ = "SELECT COUNT(*) FROM Site";
+	    Query countQuery = session.createQuery(countQ);
+	    Long countResults = (Long) countQuery.uniqueResult();
+	 
+	    
+	    session.close();
+		return countResults;
 	}
     
     

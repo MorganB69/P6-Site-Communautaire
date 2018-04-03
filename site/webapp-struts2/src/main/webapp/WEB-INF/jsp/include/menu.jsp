@@ -53,7 +53,7 @@
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
 						<s:a class="dropdown-item" action="add_site">PARTAGER UN SPOT</s:a>
-						<a class="dropdown-item" href="#">RECHERCHE D'UN SPOT</a>
+						<s:a class="dropdown-item" action="site_list">RECHERCHE D'UN SPOT</s:a>
 						
 
 					</div>

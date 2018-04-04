@@ -24,7 +24,7 @@ import java.util.Date;
 import com.opensymphony.xwork2.conversion.TypeConversionException;
 
 /**
- * 
+ * Classe Action de conversion des dates
  */
 public class DateConverter extends StrutsTypeConverter {
     public Object convertFromString(Map context, String[] values, Class toClass) {

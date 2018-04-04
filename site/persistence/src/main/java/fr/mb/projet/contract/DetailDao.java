@@ -4,17 +4,21 @@ import java.util.List;
 
 import fr.mb.projet.bean.spot.Site;
 
+/**
+ * Interface générique pour l'obtention des listes de détails d'un site (Listes fixes ex: Orientation etc.)
+ * @author Morgan
+ *
+ * @param <T>
+ */
 public interface DetailDao<T> {
 	
-	public void persist(T detail);
 	
-	public void update(T detail);
 	
-	public T findById(int id);
-	
-	public void delete(T detail);
-	
+	/**
+	 * Méthode pour l'obtention de la liste en bd
+	 * @return
+	 */
 	public List<T> findAll();
 	
-	public void deleteAll();
+
 }

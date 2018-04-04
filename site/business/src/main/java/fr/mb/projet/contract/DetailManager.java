@@ -7,14 +7,22 @@ import fr.mb.projet.exception.FunctionalException;
 import fr.mb.projet.exception.NotFoundException;
 import fr.mb.projet.exception.TechnicalException;
 
+/**
+ * Interface pour l'obtention d'une liste de détails d'un site
+ * @author Morgan
+ *
+ * @param <T>
+ */
 public interface DetailManager <T> {
 	
-	public T getDetail (Integer detailId) throws NotFoundException;
 	
+	
+	/**
+	 * Obtenir la liste
+	 * @return
+	 */
 	public List<T> getDetailList();
 
-	public void insert(T detail) throws FunctionalException, TechnicalException;
 
-	public void update(T detail);
 
 }

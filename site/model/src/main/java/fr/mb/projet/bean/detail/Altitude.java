@@ -12,20 +12,37 @@ import javax.persistence.Table;
 
 import fr.mb.projet.bean.spot.Site;
 
+/**
+ * Classe permettant de définir l'Altitude d'un Site
+ * @author Morgan
+ *
+ */
 @Entity
 @Table(name = "altitude")
 public class Altitude {
 	
+	/**
+	 * L'Id de l'objet généré automatiquement
+	 */
 	@Id
 	@Column(name = "alt_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer altId;
 	
+	/**
+	 * le type de l'altitude (ex: maximum, minimum, moyenne)
+	 */
 	@Column(name = "type_alt")
 	private String typeAlt;
+	/**
+	 * Valeur de l'altitude
+	 */
 	@Column(name = "alt")
 	private Integer alt;
 	
+	/**
+	 * Relation ManytoOne avec un Site
+	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "site_id", nullable = false)
 	private Site site;
@@ -33,6 +50,9 @@ public class Altitude {
 	public Altitude() {
 
 	}
+	
+	
+	
 	public Integer getAltId() {
 		return altId;
 	}

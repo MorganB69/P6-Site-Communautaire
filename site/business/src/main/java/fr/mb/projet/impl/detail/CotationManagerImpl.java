@@ -20,23 +20,26 @@ import fr.mb.projet.exception.NotFoundException;
 import fr.mb.projet.exception.TechnicalException;
 
 
+/**
+ * Manager pour l'obtention des cotations
+ * @author Morgan
+ *
+ */
 @Named("cotationManager")
 @Service
 @Transactional
 public class CotationManagerImpl implements DetailManager<ListCot> {
 
+	/**
+	 * Dao pour l'obtention des données
+	 */
 	@Inject
 	DetailDao<ListCot> cotationDao;
 	
-	@Override
-	@Transactional
-	public ListCot getDetail(Integer detailId) throws NotFoundException {
-		ListCot vCotation=cotationDao.findById(detailId);
-		
-		
-		return vCotation;
-	}
 
+	/* (non-Javadoc)
+	 * @see fr.mb.projet.contract.DetailManager#getDetailList()
+	 */
 	@Override
 	@Transactional
 	public List<ListCot> getDetailList() {
@@ -44,16 +47,6 @@ public class CotationManagerImpl implements DetailManager<ListCot> {
 		return list;
 	}
 
-	@Override
-	public void insert(ListCot detail) throws FunctionalException, TechnicalException {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void update(ListCot detail) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

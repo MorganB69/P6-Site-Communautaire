@@ -7,6 +7,11 @@ import fr.mb.projet.exception.FunctionalException;
 import fr.mb.projet.exception.NotFoundException;
 import fr.mb.projet.exception.TechnicalException;
 
+/**
+ * Interface manager des Site
+ * @author Morgan
+ *
+ */
 public interface SiteManager {
 
 	public Site getSite (Integer siteId) throws NotFoundException;

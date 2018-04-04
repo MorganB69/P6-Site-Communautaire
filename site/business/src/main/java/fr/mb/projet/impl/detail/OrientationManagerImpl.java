@@ -18,23 +18,26 @@ import fr.mb.projet.exception.NotFoundException;
 import fr.mb.projet.exception.TechnicalException;
 
 
+/**
+ * Manager pour l'obtention des Orientations
+ * @author Morgan
+ *
+ */
 @Named("orientationManager")
 @Service
 @Transactional
 public class OrientationManagerImpl implements DetailManager<Orientation> {
 
+	/**
+	 *DAO pour les Orientations 
+	 */
 	@Inject
 	DetailDao<Orientation> orientationDao;
 	
-	@Override
-	@Transactional
-	public Orientation getDetail(Integer detailId) throws NotFoundException {
-		Orientation vOrientation=orientationDao.findById(detailId);
-		
-		
-		return vOrientation;
-	}
 
+	/* (non-Javadoc)
+	 * @see fr.mb.projet.contract.DetailManager#getDetailList()
+	 */
 	@Override
 	@Transactional
 	public List<Orientation> getDetailList() {
@@ -42,16 +45,6 @@ public class OrientationManagerImpl implements DetailManager<Orientation> {
 		return list;
 	}
 
-	@Override
-	public void insert(Orientation detail) throws FunctionalException, TechnicalException {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void update(Orientation detail) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

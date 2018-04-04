@@ -12,19 +12,36 @@ import javax.persistence.Table;
 
 import fr.mb.projet.bean.spot.Site;
 
+/**
+ * Classe de Cotation d'un Site
+ * @author Morgan
+ *
+ */
 @Entity
 @Table(name = "cotation")
 public class Cotation {
+	/**
+	 * l'Id est généré automatiquement
+	 */
 	@Id
 	@Column(name = "cotation_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cotationId;
+	/**
+	 * le type de cotation (minimum ou maximum)
+	 */
 	@Column(name = "type_cot")
 	private String typeCot;
+	/**
+	 * La liste des différentes cotations (liste fixe en bd)
+	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="cot_id")
 	private ListCot cot;
 	
+	/**
+	 * La classe Site permettant de définir la relation manytoone
+	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "site_id", nullable = false)
 	private Site site;

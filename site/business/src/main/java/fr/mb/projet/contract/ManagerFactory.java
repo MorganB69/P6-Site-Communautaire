@@ -1,5 +1,10 @@
 package fr.mb.projet.contract;
 
+/**
+ * Interface pour la Manager factory
+ * @author Morgan
+ *
+ */
 public interface ManagerFactory {
 	
 	public SiteManager getSiteManager();

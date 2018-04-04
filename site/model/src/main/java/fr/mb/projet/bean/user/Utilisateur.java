@@ -7,23 +7,44 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Classe pour définir un Utilisateur
+ * 
+ * @author Morgan
+ *
+ */
 @Entity
 @Table(name = "utilisateur")
 public class Utilisateur {
-	
+
+	/**
+	 * l'Id est généré automatiquement
+	 */
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	/**
+	 * Le nom de l'utilisateur
+	 */
 	@Column(name = "nom")
 	private String nom;
+	/**
+	 * Le pseudo de l'utilisateur
+	 */
 	@Column(name = "pseudo")
 	private String pseudo;
+	/**
+	 * Le mot de passe de l'utilisateur
+	 */
 	@Column(name = "mdp")
 	private String mdp;
+	/**
+	 * Le mail de l'utilisateur
+	 */
 	@Column(name = "mail")
 	private String mail;
-	
+
 	public Utilisateur() {
 
 	}
@@ -67,9 +88,5 @@ public class Utilisateur {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	
-	
-	
-	
-	
+
 }

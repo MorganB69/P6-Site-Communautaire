@@ -11,11 +11,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 
+/**
+ * Classe abstraite permettant l'injection du template hibernate ou d'une sessionFactory
+ * @author Morgan
+ *
+ */
 public abstract class AbstractDaoImpl {
 	
+	/**
+	 * Template hibernate utilisé pour les requêtes basiques
+	 */
 	@Inject
 	HibernateTemplate template;
 	
+	/**
+	 * Permet de créer des sessions personnalisées pour des requêtes plus complexes
+	 */
 	@Inject
 	SessionFactory sessionFactory;
 	

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,47 +31,94 @@ import fr.mb.projet.bean.detail.Cotation;
 
 import fr.mb.projet.bean.detail.Orientation;
 import fr.mb.projet.bean.detail.Situation;
+/**
+ * Classe principale permettant de définir un Site
+ * @author Morgan
+ *
+ */
 @Entity
 @Table(name = "site",catalog = "projet")
 public class Site implements Serializable{
 	
 	
 	
+	/**
+	 * l'Id est généré automatiquement
+	 */
 	@Id
 	@Column(name = "site_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	/**
+	 * Nom du site
+	 */
 	@Column(name = "nom")
 	private String nom;
+	/**
+	 * Description du site
+	 */
 	@Column(name = "description")
 	private String description;
+	/**
+	 * Description de l'accès au site
+	 */
 	@Column(name = "acces")
 	private String acces;
+	/**
+	 * lien vers l'image du site
+	 */
 	@Column(name = "image")
 	private String image;
+	/**
+	 * le nombre de secteur du site
+	 */
 	@Column(name = "nb_secteur")
 	private Integer nbSecteur;
+	/**
+	 * le nombre de voie du site
+	 */
 	@Column(name = "nb_voie")
 	private Integer nbVoie;
+	/**
+	 * date d'ajout du site
+	 */
 	@Column(name = "date_ajout")
 	private Date dateAjout;
 	
+	/**
+	 * Relation 1-1 avec Situation
+	 */
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "site", cascade = CascadeType.ALL)
 	private Situation situation;
 	
+	/**
+	 * Relation 1-1 avec Coordonnee
+	 */
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "site", cascade = CascadeType.ALL)
 	private Coordonnee coordonnee;
 	
+	/**
+	 * Relation 1-n avec Voie
+	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "site")
 	private Set <Voie> listeVoie=new HashSet<Voie>();
 	
+	/**
+	 * Relation 1-n avec Secteur
+	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "site")
 	private Set <Secteur> listeSecteur=new HashSet<Secteur>();
 	
+	/**
+	 * Relation 1-n avec Altitude
+	 */
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
 	private Set <Altitude> listeAltitude=new HashSet<Altitude>();
 	
 	
+	/**
+	 * Relation n-n avec les Orientation
+	 */
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "info_orientation",catalog = "projet", joinColumns = { 
 	@JoinColumn(name = "site_id",  nullable = false, updatable = false) }, 
@@ -78,6 +126,9 @@ public class Site implements Serializable{
 				nullable = false, updatable = false) })
 	private Set <Orientation> listeOrientation=new HashSet<Orientation>();
 	
+	/**
+	 * Relation 1-n avec Cotation
+	 */
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
 	private Set <Cotation> listeCotation=new HashSet<Cotation>();
 	
@@ -147,6 +198,7 @@ public class Site implements Serializable{
 	}
 
 	public void setSituation(Situation situation) {
+		situation.setSite(this);
 		this.situation = situation;
 		
 	}
@@ -156,6 +208,7 @@ public class Site implements Serializable{
 	}
 
 	public void setCoordonnee(Coordonnee coordonnee) {
+		coordonnee.setSite(this);
 		this.coordonnee = coordonnee;
 	}
 
@@ -164,6 +217,12 @@ public class Site implements Serializable{
 	}
 
 	public void setListeVoie(Set<Voie> listeVoie) {
+		for (Iterator<Voie> iterator = listeVoie.iterator(); iterator.hasNext();) {
+			Voie voie = (Voie) iterator.next();
+			voie.setSite(this);
+			
+		}
+		
 		this.listeVoie = listeVoie;
 	}
 
@@ -172,14 +231,26 @@ public class Site implements Serializable{
 	}
 
 	public void setListeSecteur(Set<Secteur> listeSecteur) {
+		for (Iterator<Secteur> iterator = listeSecteur.iterator(); iterator.hasNext();) {
+			Secteur secteur = (Secteur) iterator.next();
+			secteur.setSite(this);
+			
+		}
 		this.listeSecteur = listeSecteur;
 	}
 
 	public Set<Altitude> getListeAltitude() {
+
+		
 		return listeAltitude;
 	}
 
 	public void setListeAltitude(Set<Altitude> listeAltitude) {
+		for (Iterator<Altitude> iterator = listeAltitude.iterator(); iterator.hasNext();) {
+			Altitude altitude = (Altitude) iterator.next();
+			altitude.setSite(this);
+		}
+		
 		this.listeAltitude = listeAltitude;
 	}
 
@@ -188,6 +259,8 @@ public class Site implements Serializable{
 	}
 
 	public void setListeOrientation(Set<Orientation> listeOrientation) {
+
+		
 		this.listeOrientation = listeOrientation;
 	}
 
@@ -196,6 +269,11 @@ public class Site implements Serializable{
 	}
 
 	public void setListeCotation(Set<Cotation> listeCotation) {
+		for (Iterator<Cotation> iterator = listeCotation.iterator(); iterator.hasNext();) {
+			Cotation cotation = (Cotation) iterator.next();
+			cotation.setSite(this);
+		}
+		
 		this.listeCotation = listeCotation;
 	}
 

@@ -18,6 +18,11 @@ import fr.mb.projet.contract.UserManager;
 
 
 
+/**
+ * Implémentation de la factory des managers
+ * @author Morgan
+ *
+ */
 @Named("managerFactory")
 public class ManagerFactoryImpl implements ManagerFactory {
 	

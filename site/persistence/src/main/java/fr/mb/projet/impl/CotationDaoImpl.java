@@ -12,42 +12,20 @@ import fr.mb.projet.bean.detail.Orientation;
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.DetailDao;
 
+/**
+ * Classe pour l'obtention de la liste des cotations en bd
+ * @author Morgan
+ *
+ */
 @Named("cotationDao")
 @Transactional
 public class CotationDaoImpl extends AbstractDaoImpl implements DetailDao<ListCot> {
 
-	@Override
-	public void persist(ListCot detail) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(ListCot detail) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	@Transactional
-	public ListCot findById(int id) {
-		ListCot e=(ListCot)template.get(fr.mb.projet.bean.detail.ListCot.class,id);  
-	    return e;
-	}
-
-	@Override
-	public void delete(ListCot detail) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
-	@Override
-	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/* (non-Javadoc)
+	 * @see fr.mb.projet.contract.DetailDao#findAll()
+	 */
 	@Override
 	@Transactional
 	public List<ListCot> findAll() {

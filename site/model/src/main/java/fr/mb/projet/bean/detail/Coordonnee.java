@@ -21,47 +21,54 @@ import org.hibernate.annotations.Parameter;
 
 import fr.mb.projet.bean.spot.Site;
 
+/**
+ * Classe permettant de définir les coordonnées d'un Site
+ * 
+ * @author Morgan
+ *
+ */
 @Entity
 @Table(name = "coordonnee")
-public class Coordonnee implements Serializable{
-	
+public class Coordonnee implements Serializable {
 
-	@GenericGenerator(name = "generator", strategy = "foreign", 
-			parameters = @Parameter(name = "property", value = "site"))
-			@Id
-			@GeneratedValue(generator = "generator")
-			@Column(name = "coord_id", unique = true, nullable = false)
+	/**
+	 * L'ID est défini par le Site (strategy foreign car relation 1-1)
+	 */
+	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "site"))
+	@Id
+	@GeneratedValue(generator = "generator")
+	@Column(name = "coord_id", unique = true, nullable = false)
 	private Integer id;
-	
 
+	/**
+	 * La latitude des coordonnées
+	 */
 	@Column(name = "latitude")
 	private Double x;
+	/**
+	 * La longitude des coordonnées
+	 */
 	@Column(name = "longitude")
 	private Double y;
-	
+
+	/**
+	 * Classe site pour définir la relation 1-1
+	 */
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	private Site site;
-	
+
 	public Coordonnee() {
 
 	}
-
-
 
 	public Integer getId() {
 		return id;
 	}
 
-
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
-
-
 
 	public Double getX() {
 		return x;
@@ -79,22 +86,12 @@ public class Coordonnee implements Serializable{
 		this.y = y;
 	}
 
-
-
 	public Site getSite() {
 		return site;
 	}
-
-
 
 	public void setSite(Site site) {
 		this.site = site;
 	}
 
-
-	
-	
-	
-	
-	
 }

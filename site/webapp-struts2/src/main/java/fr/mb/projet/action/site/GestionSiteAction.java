@@ -31,6 +31,7 @@ import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.exception.FunctionalException;
 import fr.mb.projet.exception.NotFoundException;
 import fr.mb.projet.exception.TechnicalException;
+import fr.mb.projet.recherche.RechercheSite;
 
 /**
  * @author Morgan
@@ -57,18 +58,18 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 */
 	private Integer id;
 
-	// Paramètres Pagination
+	//-----------Paramètres Pagination-------
 
 	/**
 	 * Nombre de sites à afficher par page
 	 */
-	private Integer pageSize;
+	private Integer pageSize = 12;
 
 	/**
 	 * Nombre de page nécessaire pour tous les objets (soit le numéro de la dernière
 	 * page)
 	 */
-	private Integer lastPage;
+	private Integer lastPage=0;
 
 	/**
 	 * Page sélectionnée et permet de définir l'Offset pour le changement de page
@@ -164,7 +165,10 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Integer en sortie du questionnaire qui serviront à alimenter les listes
 	 */
 	private Integer cotMaxValue;
-
+	
+	
+	private RechercheSite recherche;
+	
 	// ------------------------ Méthodes-------------------------
 	// ----------------------------------------------------------
 
@@ -175,12 +179,37 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 */
 	public String doList() {
 
-		this.pageSize = 12;
+		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
+		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
+		session.put("listeOrientation", this.listeOrientation);
+		session.put("listeCotation", this.listeCotation);
 
 		this.lastPage = managerFactory.getSiteManager().getCount(this.pageSize, this.start);
 
 		this.listSite = managerFactory.getSiteManager().getListSite(this.pageSize, this.start);
+		session.put("lastPage", this.lastPage);
+		session.put("listSite", this.listSite);
 		return ActionSupport.SUCCESS;
+	}
+	
+	/**
+	 * Méthode de recherche de site en fonction des critères
+	 * @return
+	 */
+	public String rechercheSite() {
+		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
+		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
+		session.put("listeOrientation", this.listeOrientation);
+		session.put("listeCotation", this.listeCotation);
+		
+		
+		//this.lastPage = managerFactory.getSiteManager().getCountRecherche(this.pageSize, this.start,this.recherche);
+
+		this.listSite = managerFactory.getSiteManager().getListSiteRecherche(this.pageSize, this.start, this.recherche);
+		session.replace("listSite", this.listSite);
+		
+		return ActionSupport.SUCCESS;
+		
 	}
 
 	/**
@@ -579,6 +608,14 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 	public void setLastPage(Integer lastPage) {
 		this.lastPage = lastPage;
+	}
+
+	public RechercheSite getRecherche() {
+		return recherche;
+	}
+
+	public void setRecherche(RechercheSite recherche) {
+		this.recherche = recherche;
 	}
 
 }

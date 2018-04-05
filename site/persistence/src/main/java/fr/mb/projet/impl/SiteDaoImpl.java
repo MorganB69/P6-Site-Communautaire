@@ -1,5 +1,6 @@
 package fr.mb.projet.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Named;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.mb.projet.bean.detail.ListCot;
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.SiteDao;
+import fr.mb.projet.recherche.RechercheSite;
 
 /**
  * Implémentation de la DAO pour les classes de Site
@@ -125,6 +127,43 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 
 		session.close();
 		return countResults;
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.mb.projet.contract.SiteDao#recherche(java.lang.Integer, java.lang.Integer, fr.mb.projet.recherche.RechercheSite)
+	 */
+	@Override
+	public List<Site> recherche(Integer nbPage, Integer offset, RechercheSite recherche) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("SELECT site FROM Site as site"
+				+ " JOIN site.listeAltitude as altitude"
+				+ " WHERE altitude.typeAlt=(:altMinType) AND altitude.alt>(:altMin)"
+				+ " ORDER BY site.id DESC");
+		
+		query.setParameter("altMinType", "min");
+		query.setParameter("altMin", recherche.getrAltMin());
+
+		//query.setFirstResult(offset);
+		query.setMaxResults(nbPage);
+		
+
+		List<Site> list = query.getResultList();
+		
+
+		session.close();
+		
+		
+		return list;
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.mb.projet.contract.SiteDao#getCountRecherche()
+	 */
+	@Override
+	public Long getCountRecherche() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

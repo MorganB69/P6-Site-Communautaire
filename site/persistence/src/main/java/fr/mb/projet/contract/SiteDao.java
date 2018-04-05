@@ -62,5 +62,20 @@ public interface SiteDao extends Serializable{
 	 */
 	public Long getCount();
 
+	/**
+	 * Récupère la liste de site en fonction des différents critères
+	 * @param nbPage
+	 * @param offset
+	 * @param recherche
+	 * @return
+	 */
+	public List<Site> recherche(Integer nbPage, Integer offset, RechercheSite recherche);
+
+	/**
+	 * Retourne la dernière page en fonction des critères de recherche
+	 * @return
+	 */
+	public Long getCountRecherche();
+
 	
 }

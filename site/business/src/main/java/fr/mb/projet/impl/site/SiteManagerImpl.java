@@ -112,14 +112,35 @@ public class SiteManagerImpl implements SiteManager {
 	public Integer getCount(Integer pageSize, Integer start) {
 		Long nbSite = siteDao.getCount();
 
-		System.out.println(nbSite);
+	
 		double page = (double) pageSize;
 
 		double lastPageNumber = (Math.ceil(nbSite / page));
-		System.out.println(lastPageNumber);
+
 		int value = (int) lastPageNumber;
 		return value;
 	}
+	
+	@Override
+	public List<Site> getListSiteRecherche(Integer nbPage, Integer start, RechercheSite recherche) {
+		Integer offset = (start - 1) * nbPage;
+		List<Site> list = siteDao.recherche(nbPage, offset,recherche);
+		return list;
+	}
+
+	@Override
+	public Integer getCountRecherche(Integer pageSize, Integer start, RechercheSite recherche) {
+		Long nbSite = siteDao.getCountRecherche();
+
+		double page = (double) pageSize;
+
+		double lastPageNumber = (Math.ceil(nbSite / page));
+
+		int value = (int) lastPageNumber;
+		return value;
+	}
+	
+	
 
 	// Getters et Setters
 
@@ -130,5 +151,7 @@ public class SiteManagerImpl implements SiteManager {
 	public void setSiteDao(SiteDao siteDao) {
 		this.siteDao = siteDao;
 	}
+
+
 
 }

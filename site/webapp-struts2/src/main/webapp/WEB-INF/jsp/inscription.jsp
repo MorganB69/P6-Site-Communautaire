@@ -28,7 +28,7 @@
 	    <s:actionmessage/>
 	    
 	    <div>
-	    <s:form action="add_user" cssClass="well form-vertical">
+	    <s:form action="add_user" cssClass="well form-vertical" theme="bootstrap" enctype="multipart/form-data">
 	    <div>
         <s:textfield class="form-control" name="user.pseudo" label="Identifiant" requiredLabel="true" />
        	</div>

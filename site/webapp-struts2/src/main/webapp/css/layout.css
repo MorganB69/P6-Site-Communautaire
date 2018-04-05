@@ -35,11 +35,14 @@ body {
 	position:absolute;
 }
 #card-list{
- 
+ 	
 	
 }
 
-
+#img-card{
+	max-height:175px;
+	overflow:hidden;
+}
 
 #couvertureCont{
 	height:350px;
@@ -68,7 +71,14 @@ body {
   body {
     padding-top: 150px;
   }
+  #card-list{
+ max-width:200px;	
+
+	
 }
+  
+}
+
 
 .carousel-item {
   height: 65vh;

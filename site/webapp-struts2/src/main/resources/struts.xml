@@ -29,6 +29,14 @@
 			method="doList">
 			<result>/WEB-INF/jsp/site/list.jsp</result>
 		</action>
+		
+				<!-- LISTE DES SITES -->
+		<action name="recherche_site" class="fr.mb.projet.action.site.GestionSiteAction"
+			method="rechercheSite">
+			<result name="input">/WEB-INF/jsp/site/list.jsp </result>
+
+			<result>/WEB-INF/jsp/site/list.jsp</result>
+		</action>
 
 		<!-- AJOUTER DES SITES -->
 		<action name="add_site" class="fr.mb.projet.action.site.GestionSiteAction"
@@ -60,7 +68,7 @@
 		<!-- Actions Login/Logout -->
 		<action name="login"
 			class="fr.mb.projet.action.user.LoginAction" method="doLogin">
-			<result name="input">/WEB-INF//jsp/login.jsp</result>
+			<result name="input">/WEB-INF/jsp/login.jsp</result>
 			<result name="success" type="redirectAction">index</result>
 		</action>
 		

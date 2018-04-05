@@ -27,7 +27,7 @@
 		<s:actionmessage/>
 		<s:actionerror/>
 		
-	    <s:form action="login" class="form-group">
+	    <s:form action="login" cssClass="well form-vertical" theme="bootstrap" enctype="multipart/form-data">
         <s:textfield class="form-control" name="login" label="Identifiant" requiredLabel="true" />
        	
        

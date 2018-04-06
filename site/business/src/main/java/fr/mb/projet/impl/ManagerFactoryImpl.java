@@ -43,6 +43,12 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	@Inject
 	private DetailManager<?> orientationManager;
 	
+	@Inject
+	private DetailManager<?> paysManager;
+	
+	@Inject
+	private DetailManager<?> stateManager;
+	
 	
 
 	@Override
@@ -89,6 +95,18 @@ public class ManagerFactoryImpl implements ManagerFactory {
 
 	public void setOrientationManager(DetailManager<?> orientationManager) {
 		this.orientationManager = orientationManager;
+	}
+
+	@Override
+	public DetailManager<?> getPaysManager() {
+		// TODO Auto-generated method stub
+		return paysManager;
+	}
+
+	@Override
+	public DetailManager<?> getStateManager() {
+		// TODO Auto-generated method stub
+		return stateManager;
 	}
 
 

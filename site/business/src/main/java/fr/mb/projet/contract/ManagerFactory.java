@@ -25,4 +25,8 @@ public interface ManagerFactory {
 	
 	public String message();
 
+	public DetailManager<?> getPaysManager();
+
+	public DetailManager<?> getStateManager();
+
 }

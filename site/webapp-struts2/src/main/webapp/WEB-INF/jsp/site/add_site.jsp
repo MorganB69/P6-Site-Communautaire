@@ -82,10 +82,31 @@
 			label="Pays" 
 			requiredLabel="true"/>
 			
+			
+		<s:select 
+		label="Pays"
+		required="true"
+        name="paysIdOut"
+        list="session.listePays"
+        listKey="id"
+        listValue="name"
+        value="%{session.listePays.{id}}"
+ 		/>
+			
 		<s:textfield 
 			class="form-control" 
 			name="situation.departement" 
 			label="Departement" requiredLabel="true"/>
+			
+		<s:select 
+		label="Région"
+		required="true"
+        name="stateIdOut"
+        list="session.listeState"
+        listKey="id"
+        listValue="name"
+        value="%{session.listeState.{id}}"
+ 		/>
 			
 		<s:textfield 
 			class="form-control" 

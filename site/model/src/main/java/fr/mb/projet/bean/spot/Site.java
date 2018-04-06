@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -30,7 +31,9 @@ import fr.mb.projet.bean.detail.Coordonnee;
 import fr.mb.projet.bean.detail.Cotation;
 
 import fr.mb.projet.bean.detail.Orientation;
+import fr.mb.projet.bean.detail.Pays;
 import fr.mb.projet.bean.detail.Situation;
+import fr.mb.projet.bean.detail.State;
 /**
  * Classe principale permettant de définir un Site
  * @author Morgan
@@ -131,6 +134,14 @@ public class Site implements Serializable{
 	 */
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
 	private Set <Cotation> listeCotation=new HashSet<Cotation>();
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="country_id")
+	private Pays pays;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="state_id")
+	private State state;
 	
 	
 	public Site() {
@@ -285,6 +296,22 @@ public class Site implements Serializable{
 
 	public void setDateAjout(Date dateAjout) {
 		this.dateAjout = dateAjout;
+	}
+
+	public Pays getPays() {
+		return pays;
+	}
+
+	public void setPays(Pays pays) {
+		this.pays = pays;
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
 	}
 
 

@@ -57,7 +57,7 @@
         	list="session.listeCotation"
        	 	listKey="id"
         	listValue="cot"
-        	value="%{listeCotation.{id}}"    
+        	  
         /> 
         </div>
         <div class="form-group col-6">
@@ -69,10 +69,31 @@
         list="session.listeCotation"
         listKey="id"
         listValue="cot"
-        value="%{listeCotation.{id}}"     
+            
         /> 
         </div>
         </div>
+        
+                <h5>Orientation</h5>
+		<div class="row">
+		<div class="form-group col-6">
+		<s:select
+			class="col-12"
+			label="Orientation du site"
+			required="false"
+        	name="recherche.rOrient"
+        	list="session.listeOrientation"
+       	 	listKey="orientationId"
+        	listValue="orientation"
+        	   
+        /> 
+        </div>
+
+        </div>
+        
+                        <h5>Situation géographique</h5>
+
+        
         
        <s:submit class="btn btn-primary" value="Recherche"/>
 	

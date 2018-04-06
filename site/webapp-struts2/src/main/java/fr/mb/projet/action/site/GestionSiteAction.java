@@ -25,7 +25,9 @@ import fr.mb.projet.bean.detail.Coordonnee;
 import fr.mb.projet.bean.detail.Cotation;
 import fr.mb.projet.bean.detail.ListCot;
 import fr.mb.projet.bean.detail.Orientation;
+import fr.mb.projet.bean.detail.Pays;
 import fr.mb.projet.bean.detail.Situation;
+import fr.mb.projet.bean.detail.State;
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.exception.FunctionalException;
@@ -86,6 +88,16 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Liste des différentes cotations à récupérer en bd
 	 */
 	private List<ListCot> listeCotation = new ArrayList<ListCot>();
+	
+	/**
+	 *Liste des pays à récupérer en bd 
+	 */
+	private List<Pays> listePays = new ArrayList<Pays>();
+	
+	/**
+	 *Liste des régions à récupérer en bd 
+	 */
+	private List<State>listeState=new ArrayList<State>();
 
 	// Upload fichier
 
@@ -139,6 +151,10 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Attribut en sortie pour alimenter le Site
 	 */
 	private Cotation cotMax;
+	
+	private Integer paysIdOut;
+	
+	private Integer stateIdOut;
 
 	/**
 	 * Liste d'Orientation qui sera comprise dans un Site
@@ -249,8 +265,12 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		// dans une session
 		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
 		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
+		this.listePays = (List<Pays>) managerFactory.getPaysManager().getDetailList();
+		this.listeState = (List<State>) managerFactory.getStateManager().getDetailList();
 		session.put("listeOrientation", this.listeOrientation);
 		session.put("listeCotation", this.listeCotation);
+		session.put("listePays", this.listePays);
+		session.put("listeState", this.listeState);
 
 		// ----------ENREGISTREMENT DU SITE----------
 
@@ -371,6 +391,27 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 							}
 						}
 					}
+					
+					for (Pays p : this.listePays) {
+						if (this.paysIdOut.equals(p.getId())) {
+							this.site.setPays(p);
+
+						
+							
+						}
+	
+					}
+					
+					for (State s : this.listeState) {
+						if (this.stateIdOut.equals(s.getId())) {
+							this.site.setState(s);
+							
+						}
+				
+						
+					}
+					
+					
 
 					// Insertion de chaque élément dans le site avant insertion en BD
 					this.site.setSituation(this.situation);
@@ -617,5 +658,39 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	public void setRecherche(RechercheSite recherche) {
 		this.recherche = recherche;
 	}
+
+	public List<Pays> getListePays() {
+		return listePays;
+	}
+
+	public void setListePays(List<Pays> listePays) {
+		this.listePays = listePays;
+	}
+
+	public List<State> getListeState() {
+		return listeState;
+	}
+
+	public void setListeState(List<State> listeState) {
+		this.listeState = listeState;
+	}
+
+	public Integer getPaysIdOut() {
+		return paysIdOut;
+	}
+
+	public void setPaysIdOut(Integer paysIdOut) {
+		this.paysIdOut = paysIdOut;
+	}
+
+	public Integer getStateIdOut() {
+		return stateIdOut;
+	}
+
+	public void setStateIdOut(Integer stateIdOut) {
+		this.stateIdOut = stateIdOut;
+	}
+
+
 
 }

@@ -266,11 +266,11 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
 		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
 		this.listePays = (List<Pays>) managerFactory.getPaysManager().getDetailList();
-		this.listeState = (List<State>) managerFactory.getStateManager().getDetailList();
+		//this.listeState = (List<State>) managerFactory.getStateManager().getDetailList();
 		session.put("listeOrientation", this.listeOrientation);
 		session.put("listeCotation", this.listeCotation);
 		session.put("listePays", this.listePays);
-		session.put("listeState", this.listeState);
+		
 
 		// ----------ENREGISTREMENT DU SITE----------
 
@@ -348,7 +348,11 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 					if (session.containsKey("listOrientation"))
 						this.listeOrientation = (List<Orientation>) session.get("listOrientation");
-
+					
+					if (session.containsKey("listState"))
+						this.listeState = (List<State>) session.get("listState");
+					
+					
 					if (this.cotMinValue != null) {
 						this.cotMin = new Cotation();
 						//this.cotMin.setSite(this.site);
@@ -445,6 +449,8 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		}
 		return result;
 	}
+	
+
 
 	// -------------- Getters et Setters----------------
 	// -------------------------------------------------

@@ -2,6 +2,7 @@ package fr.mb.projet.contract;
 
 import java.util.List;
 
+import fr.mb.projet.bean.detail.State;
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.exception.FunctionalException;
 import fr.mb.projet.exception.NotFoundException;
@@ -22,6 +23,8 @@ public interface DetailManager <T> {
 	 * @return
 	 */
 	public List<T> getDetailList();
+
+	public List<State> getDetailListById(Integer Id);
 
 
 

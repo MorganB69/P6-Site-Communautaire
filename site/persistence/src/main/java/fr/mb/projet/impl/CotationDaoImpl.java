@@ -33,4 +33,10 @@ public class CotationDaoImpl extends AbstractDaoImpl implements DetailDao<ListCo
 		return list;
 	}
 
+	@Override
+	public List<ListCot> findById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

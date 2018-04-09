@@ -84,6 +84,7 @@
 			
 			
 		<s:select 
+		id="formPays"
 		label="Pays"
 		required="true"
         name="paysIdOut"
@@ -91,6 +92,7 @@
         listKey="id"
         listValue="name"
         value="%{session.listePays.{id}}"
+               
  		/>
 			
 		<s:textfield 
@@ -99,13 +101,12 @@
 			label="Departement" requiredLabel="true"/>
 			
 		<s:select 
+		id="formState"
 		label="Région"
 		required="true"
         name="stateIdOut"
-        list="session.listeState"
-        listKey="id"
-        listValue="name"
-        value="%{session.listeState.{id}}"
+        list="listeState"
+
  		/>
 			
 		<s:textfield 
@@ -200,5 +201,7 @@
     </div>
 	
 	<footer> <%@ include file="../include/footer.jsp"%> </footer>
+	
+	
 </body>
 </html>

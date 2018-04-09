@@ -26,6 +26,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        
+        <dependency>
+    			<groupId>com.google.code.gson</groupId>
+   				<artifactId>gson</artifactId>
+		</dependency>
 
         <dependency>
             <groupId>commons-logging</groupId>
@@ -60,6 +65,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			
+		</dependency>
+		
+		<dependency>
+    		<groupId>com.googlecode.json-simple</groupId>
+    		<artifactId>json-simple</artifactId>
 		</dependency>
 
 

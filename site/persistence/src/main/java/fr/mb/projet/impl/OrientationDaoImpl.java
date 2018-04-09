@@ -31,4 +31,10 @@ public class OrientationDaoImpl extends AbstractDaoImpl implements DetailDao<Ori
 		return list;
 	}
 
+	@Override
+	public List<Orientation> findById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

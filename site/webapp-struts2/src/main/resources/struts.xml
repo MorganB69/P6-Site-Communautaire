@@ -30,7 +30,9 @@
 			<result>/WEB-INF/jsp/site/list.jsp</result>
 		</action>
 		
-				<!-- LISTE DES SITES -->
+
+		
+		
 		<action name="recherche_site" class="fr.mb.projet.action.site.GestionSiteAction"
 			method="rechercheSite">
 			<result name="input">/WEB-INF/jsp/site/list.jsp </result>
@@ -95,6 +97,17 @@
 
 
 
+	</package>
+	<package name="json" extends="json-default">
+			<action name="list_json" class="fr.mb.projet.action.site.JSONDateAction"
+				method="getList">
+				<result name="input" type="json"/>
+					
+				<result name="success" type="json">
+					 <param name="root">result</param>
+				</result>
+			</action>
+	
 	</package>
 
 </struts>

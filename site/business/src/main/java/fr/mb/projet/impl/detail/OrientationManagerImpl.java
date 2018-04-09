@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.mb.projet.bean.detail.Orientation;
+import fr.mb.projet.bean.detail.State;
 import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.DetailDao;
 import fr.mb.projet.contract.DetailManager;
@@ -43,6 +44,13 @@ public class OrientationManagerImpl implements DetailManager<Orientation> {
 	public List<Orientation> getDetailList() {
 		List<Orientation>list=orientationDao.findAll();
 		return list;
+	}
+
+
+	@Override
+	public List<State> getDetailListById(Integer Id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

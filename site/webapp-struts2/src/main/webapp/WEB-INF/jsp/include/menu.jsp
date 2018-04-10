@@ -96,7 +96,7 @@
 <script src="webjars/jquery/3.0.0/jquery.min.js"></script>
 <script src="webjars/popper.js/1.12.9-1/umd/popper.min.js"></script>
 <script src="webjars/bootstrap/4.0.0-1/js/bootstrap.js"></script>
-<script src="form.js"></script>
+
 
 
 </html>

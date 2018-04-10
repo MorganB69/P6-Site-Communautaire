@@ -144,6 +144,10 @@ public class Site implements Serializable{
 	private State state;
 	
 	
+	@Column(name = "type")
+	private String type;
+	
+	
 	public Site() {
 		
 	}
@@ -312,6 +316,14 @@ public class Site implements Serializable{
 
 	public void setState(State state) {
 		this.state = state;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 

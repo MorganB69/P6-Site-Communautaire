@@ -31,6 +31,7 @@
 		<h5>Altitude</h5>
 		<div class="row">
 		<div class="form-group col-6">
+		
 		<s:textfield
 			class="col-6"
             label="Minimale" 
@@ -55,20 +56,26 @@
 			required="false"
         	name="recherche.rCotMin"
         	list="session.listeCotation"
+        	headerKey="1"
        	 	listKey="id"
         	listValue="cot"
+        	value="id"
+        	
         	  
         /> 
         </div>
         <div class="form-group col-6">
         		<s:select
 			class="col-6"
-            		label="maximale"
+        label="Maximale"
 		required="false"
         name="recherche.rCotMax"
         list="session.listeCotation"
+        headerKey="37"
+        headerValue="9c+"
         listKey="id"
         listValue="cot"
+        value="id"
             
         /> 
         </div>
@@ -82,18 +89,56 @@
 			label="Orientation du site"
 			required="false"
         	name="recherche.rOrient"
+        	headerKey="10000"
+        	headerValue="TOUS"
         	list="session.listeOrientation"
        	 	listKey="orientationId"
         	listValue="orientation"
+ 
         	   
         /> 
         </div>
 
         </div>
         
-                        <h5>Situation géographique</h5>
+           <h5>Situation géographique</h5>
 
-        
+        	<s:select 
+        	
+		id="formPaysList"
+		label="Pays"
+		required="true"
+        name="recherche.rPays"
+        list="session.listePays"
+        listKey="id"
+        headerKey="10000"
+        headerValue="TOUS"
+        listValue="name"
+        value="%{session.listePays.{id}}"
+               
+ 		/>
+			
+
+			
+		<s:select 
+		id="formStateList"
+		label="Région"
+		required="true"
+		headerKey="10000"
+        headerValue="TOUS"
+        name="recherche.rDepartement"
+        list="listeState"
+
+ 		/>
+ 		
+ 		
+ 		<s:select
+			class="form-control" 
+			name="recherche.rType" 
+			list="listType"
+			label="Type de spot"
+			
+		/>
         
        <s:submit class="btn btn-primary" value="Recherche"/>
 	
@@ -121,10 +166,15 @@
 					       
      							<ul>
 						 			<li>ID: <s:property value="id"/></li>
-						 			<li>Pays: <s:property value="situation.pays"/></li>
-           							<li>Département : <s:property value="situation.departement"/></li>
-           				         <s:if test="%{situation.type!=''}">
-										<li>Type de site : <s:property value="situation.type"/></li>
+						 		<s:if test="%{pays!=null}">
+						 			<li>Pays: <s:property value="pays.name"/></li>
+						 		</s:if>
+						 		<s:if test="%{state!=null}">
+           							<li>Région/Département : <s:property value="state.name"/></li>
+           				        </s:if>
+           				        
+           				         <s:if test="%{type!=null}">
+										<li>Type de site : <s:property value="type"/></li>
 								</s:if>
 								<li>Orientation : 
 									<s:iterator value="listeOrientation">
@@ -168,6 +218,6 @@
 
 
 </body>
-
+<script src="formList.js"></script>
 
 </html>

@@ -81,8 +81,8 @@
       	
         <h6> <i class="fa fa-globe"></i> Situation géographique</h6>
      	<ul>
-						 <li>Pays: <s:property value="site.situation.pays"/></li>
-           				 <li>Département : <s:property value="site.situation.departement"/></li>
+						 <li>Pays: <s:property value="site.pays.name"/></li>
+           				 <li>Région/département : <s:property value="site.state.name"/></li>
            				    
 		</ul>
 		

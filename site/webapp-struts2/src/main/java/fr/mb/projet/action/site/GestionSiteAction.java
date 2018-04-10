@@ -123,10 +123,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 */
 	private List<Site> listSite = new ArrayList<Site>();
 
-	/**
-	 * Attribut en sortie pour alimenter le Site
-	 */
-	private Situation situation;
+
 	/**
 	 * Attribut en sortie pour alimenter le Site
 	 */
@@ -155,6 +152,8 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	private Integer paysIdOut;
 	
 	private Integer stateIdOut;
+	
+	private List<String> listType=new ArrayList();
 
 	/**
 	 * Liste d'Orientation qui sera comprise dans un Site
@@ -195,10 +194,22 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 */
 	public String doList() {
 
+		// Accès à la BD pour récupérer les listes prédéfinies d'Orientation et Cotation
+		// et les mettre
+		// dans une session
 		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
 		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
+		this.listePays = (List<Pays>) managerFactory.getPaysManager().getDetailListDb();
+		this.listType.add("Falaise");
+		this.listType.add("Bloc");
+		this.listType.add("Artificiel");
+		
+		
+		
 		session.put("listeOrientation", this.listeOrientation);
 		session.put("listeCotation", this.listeCotation);
+		session.put("listePays", this.listePays);
+		session.put("listeType", this.listType);
 
 		this.lastPage = managerFactory.getSiteManager().getCount(this.pageSize, this.start);
 
@@ -215,12 +226,21 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	public String rechercheSite() {
 		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
 		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
+		this.listePays = (List<Pays>) managerFactory.getPaysManager().getDetailListDb();
+		this.listType.add("Falaise");
+		this.listType.add("Bloc");
+		this.listType.add("Artificiel");
+		
+		
 		session.put("listeOrientation", this.listeOrientation);
 		session.put("listeCotation", this.listeCotation);
-		
+		session.put("listePays", this.listePays);
+		session.put("listeType", this.listType);
 		
 		//this.lastPage = managerFactory.getSiteManager().getCountRecherche(this.pageSize, this.start,this.recherche);
 
+		
+		
 		this.listSite = managerFactory.getSiteManager().getListSiteRecherche(this.pageSize, this.start, this.recherche);
 		session.replace("listSite", this.listSite);
 		
@@ -266,10 +286,16 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
 		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
 		this.listePays = (List<Pays>) managerFactory.getPaysManager().getDetailList();
-		//this.listeState = (List<State>) managerFactory.getStateManager().getDetailList();
+		this.listType.add("Falaise");
+		this.listType.add("Bloc");
+		this.listType.add("Artificiel");
+		
+		
+		
 		session.put("listeOrientation", this.listeOrientation);
 		session.put("listeCotation", this.listeCotation);
 		session.put("listePays", this.listePays);
+		session.put("listeType", this.listType);
 		
 
 		// ----------ENREGISTREMENT DU SITE----------
@@ -280,13 +306,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 				this.addFieldError("site.nom", "ne doit pas être vide");
 			}
 
-			if (this.situation.getPays().length() == 0 || this.situation.getPays() == null) {
-				this.addFieldError("situation.pays", "ne doit pas être vide");
-			}
 
-			if (this.situation.getDepartement().length() == 0 || this.situation.getDepartement() == null) {
-				this.addFieldError("situation.departement", "ne doit pas être vide");
-			}
 
 			// Enregistrement de l'image
 			if (this.file != null) {
@@ -418,7 +438,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 					
 
 					// Insertion de chaque élément dans le site avant insertion en BD
-					this.site.setSituation(this.situation);
+					
 					this.site.setCoordonnee(this.coordonnee);
 					if (this.listeOrientationOut != null)
 						this.site.setListeOrientation(this.listeOrientationOut);
@@ -503,13 +523,6 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		this.site = site;
 	}
 
-	public Situation getSituation() {
-		return situation;
-	}
-
-	public void setSituation(Situation situation) {
-		this.situation = situation;
-	}
 
 	public Coordonnee getCoordonnee() {
 		return coordonnee;
@@ -695,6 +708,14 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 	public void setStateIdOut(Integer stateIdOut) {
 		this.stateIdOut = stateIdOut;
+	}
+
+	public List<String> getListType() {
+		return listType;
+	}
+
+	public void setListType(List<String> listType) {
+		this.listType = listType;
 	}
 
 

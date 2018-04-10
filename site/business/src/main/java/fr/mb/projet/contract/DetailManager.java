@@ -24,7 +24,11 @@ public interface DetailManager <T> {
 	 */
 	public List<T> getDetailList();
 
-	public List<State> getDetailListById(Integer Id);
+	public List<T> getDetailListById(Integer Id);
+	
+	public List<T> getDetailListDb();
+
+	public List<T> getDetailListByIdDb(Integer paysIdOut);
 
 
 

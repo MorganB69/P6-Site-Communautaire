@@ -1,5 +1,6 @@
 package fr.mb.projet.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,6 +24,8 @@ import fr.mb.projet.recherche.RechercheSite;
 @Named("siteDao")
 @Transactional
 public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
+	
+	
 
 	public SiteDaoImpl() {
 		super();
@@ -136,25 +139,164 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 	public List<Site> recherche(Integer nbPage, Integer offset, RechercheSite recherche) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("SELECT site FROM Site as site"
+		List<Site> allSite=new ArrayList<Site>();
+		List<Site> listAltMin=new ArrayList<Site>();
+		List<Site> listAltMax=new ArrayList<Site>();
+		List<Site> listCotMin=new ArrayList<Site>();
+		List<Site> listCotMax=new ArrayList<Site>();
+		List<Site> listOrient=new ArrayList<Site>();
+		List<Site> listPays=new ArrayList<Site>();
+		List<Site> listState=new ArrayList<Site>();
+		List<Site> listType=new ArrayList<Site>();
+		
+		//PAR DEFAUT TOUS LES SITES
+		
+		Query queryGeneral = session.createQuery("SELECT site FROM Site as site"
 				+ " JOIN site.listeAltitude as altitude"
-				+ " WHERE altitude.typeAlt=(:altMinType) AND altitude.alt>(:altMin)"
+				+ " WHERE (altitude.typeAlt=(:altMinType) AND altitude.alt>(:altMin) "
+				+ " AND site.id IN (SELECT site FROM Site as site"
+				+ " JOIN site.listeAltitude as altitude"
+			    + "	WHERE (altitude.typeAlt=(:altMaxType) AND altitude.alt<(:altMax))))"
 				+ " ORDER BY site.id DESC");
 		
-		query.setParameter("altMinType", "min");
-		query.setParameter("altMin", recherche.getrAltMin());
+		queryGeneral.setParameter("altMinType", "min");
+		queryGeneral.setParameter("altMin", recherche.getrAltMin());
+		queryGeneral.setParameter("altMaxType", "max");
+		queryGeneral.setParameter("altMax", recherche.getrAltMax());
+		allSite=queryGeneral.getResultList();
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
+		
+		
+		Query queryAllSite = session.createQuery("SELECT site FROM Site as site ORDER BY site.id DESC");
+		allSite=queryAllSite.getResultList();
+		
+		//ALTITUDE MINIMUM
+		if(recherche.getrAltMin()!=null) {
+		Query queryAltMin = session.createQuery("SELECT site FROM Site as site"
+				+ " JOIN site.listeAltitude as altitude"
+				+ " WHERE (altitude.typeAlt=(:altMinType) AND altitude.alt>(:altMin))"
+				+ " ORDER BY site.id DESC");
+		
+		queryAltMin.setParameter("altMinType", "min");
+		queryAltMin.setParameter("altMin", recherche.getrAltMin());
+		listAltMin = queryAltMin.getResultList();}
+		else listAltMin=allSite;
+		
+		
+		//ALTITUDE MAXIMUM
+		if(recherche.getrAltMax()!=null) {
+		Query queryAltMax = session.createQuery("SELECT site FROM Site as site"
+				+ " JOIN site.listeAltitude as altitude"
+				+ " WHERE (altitude.typeAlt=(:altMaxType) AND altitude.alt<(:altMax))"
+				+ " ORDER BY site.id DESC");
+				
+		queryAltMax.setParameter("altMaxType", "max");
+		queryAltMax.setParameter("altMax", recherche.getrAltMax());
+		listAltMax = queryAltMax.getResultList();}
+		else listAltMax=allSite;
+		
+		
+		//COTATION MAXIMUM
+		Query queryCotMax = session.createQuery("SELECT site FROM Site as site"
+				+ " JOIN site.listeCotation as cotation"
+				+ " WHERE (cotation.typeCot=(:cotMaxType) AND cotation.cot.id<=(:cotMax))"
+				+ " ORDER BY site.id DESC");
+		
+		queryCotMax.setParameter("cotMaxType", "max");
+		queryCotMax.setParameter("cotMax", recherche.getrCotMax());
+		listCotMax = queryCotMax.getResultList();
+		
+		//COTATION MINIMUM
+		Query queryCotMin = session.createQuery("SELECT site FROM Site as site"
+				+ " JOIN site.listeCotation as cotation"
+				+ " WHERE (cotation.typeCot=(:cotMinType) AND cotation.cot.id>=(:cotMin))"
+				+ " ORDER BY site.id DESC");
+		
+		queryCotMin.setParameter("cotMinType", "min");
+		queryCotMin.setParameter("cotMin", recherche.getrCotMin());
+		listCotMin = queryCotMin.getResultList();
+		
+		//ORIENTATION
+		if(recherche.getrOrient()!=10000) {
+		Query queryOrient = session.createQuery("SELECT site FROM Site as site"
+				+ " JOIN site.listeOrientation as orientation"
+				+ " WHERE (orientation.id=(:orient))"
+				+ " ORDER BY site.id DESC");
+		
+		queryOrient.setParameter("orient", recherche.getrOrient());
+		
+		listOrient = queryOrient.getResultList();}
+		else listOrient=allSite;
+		
+		//PAYS
+		if(recherche.getrPays()!=10000) {
+		Query queryPays = session.createQuery("SELECT site FROM Site as site"
+				+ " WHERE (pays.id=(:id))"
+				+ " ORDER BY site.id DESC");
+		
+		queryPays.setParameter("id", recherche.getrPays());
+		
+		listPays = queryPays.getResultList();}
+		else listPays=allSite;
+		
+		//STATE
+		if(recherche.getrDepartement()!=10000) {
+		Query queryState = session.createQuery("SELECT site FROM Site as site"
+				+ " WHERE (state.id=(:id))"
+				+ " ORDER BY site.id DESC");
+		
+		queryState.setParameter("id", recherche.getrDepartement());
+		
+		listState = queryState.getResultList();}
+		else listState=allSite;
+		
+
+		
+		
+		List <Site> listReturn=new ArrayList<Site>();
+		
+		//RECHERCHE DES SITES CORRESPONDANT AUX RECHERCHES
+		for (Iterator iterator = listAltMin.iterator(); iterator.hasNext();) {
+			Site site = (Site) iterator.next();
+			
+			if (listAltMax.contains(site)) {
+				if(listCotMax.contains(site)){
+					if(listCotMin.contains(site)) {
+						if(listOrient.contains(site)) {
+							if(listPays.contains(site)) {
+								if(listState.contains(site)) {
+									listReturn.add(site);
+								}
+							}
+							
+						}
+						
+					}
+									
+				}
+			}
+			
+		}
 
 		//query.setFirstResult(offset);
-		query.setMaxResults(nbPage);
+		//query.setMaxResults(nbPage);
 		
 
-		List<Site> list = query.getResultList();
-		
+		//List<Site> list = query.getResultList();
+		*/
 
 		session.close();
 		
 		
-		return list;
+		return allSite;
 	}
 
 	/* (non-Javadoc)

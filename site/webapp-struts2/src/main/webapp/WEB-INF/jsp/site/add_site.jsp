@@ -39,7 +39,7 @@
 	
 
 		<s:textfield
-			class="form-control col-6"
+			class="form-control col-9"
             label="Nom du site" 
             name="site.nom" 
             requiredLabel="true"
@@ -76,11 +76,7 @@
         
      <h3>Situation géographique </h3>
        
-		<s:textfield 
-			class="form-control" 
-			name="situation.pays" 
-			label="Pays" 
-			requiredLabel="true"/>
+
 			
 			
 		<s:select 
@@ -95,10 +91,7 @@
                
  		/>
 			
-		<s:textfield 
-			class="form-control" 
-			name="situation.departement" 
-			label="Departement" requiredLabel="true"/>
+
 			
 		<s:select 
 		id="formState"
@@ -109,10 +102,12 @@
 
  		/>
 			
-		<s:textfield 
+		<s:select
 			class="form-control" 
-			name="situation.type" 
-			label="Type de spot" 
+			name="site.type" 
+			list="listType"
+			label="Type de spot"
+			
 			/>
 		
 		<s:textfield 
@@ -204,4 +199,5 @@
 	
 	
 </body>
+<script src="form.js"></script>
 </html>

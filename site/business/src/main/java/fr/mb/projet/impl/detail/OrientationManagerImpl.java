@@ -48,7 +48,21 @@ public class OrientationManagerImpl implements DetailManager<Orientation> {
 
 
 	@Override
-	public List<State> getDetailListById(Integer Id) {
+	public List<Orientation> getDetailListById(Integer Id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Orientation> getDetailListDb() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Orientation> getDetailListByIdDb(Integer paysIdOut) {
 		// TODO Auto-generated method stub
 		return null;
 	}

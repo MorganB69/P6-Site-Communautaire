@@ -107,6 +107,15 @@
 					 <param name="root">result</param>
 				</result>
 			</action>
+			
+			<action name="list_jsonDb" class="fr.mb.projet.action.site.JSONDateAction"
+				method="getListDb">
+				<result name="input" type="json"/>
+					
+				<result name="success" type="json">
+					 <param name="root">result</param>
+				</result>
+			</action>
 	
 	</package>
 

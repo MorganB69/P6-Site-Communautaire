@@ -1,6 +1,7 @@
 package fr.mb.projet.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Named;
 
@@ -33,6 +34,18 @@ public class OrientationDaoImpl extends AbstractDaoImpl implements DetailDao<Ori
 
 	@Override
 	public List<Orientation> findById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Orientation> findListInDB() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Orientation> findByIdDb(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

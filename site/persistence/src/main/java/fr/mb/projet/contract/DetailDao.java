@@ -1,6 +1,7 @@
 package fr.mb.projet.contract;
 
 import java.util.List;
+import java.util.Set;
 
 import fr.mb.projet.bean.detail.State;
 import fr.mb.projet.bean.spot.Site;
@@ -20,8 +21,12 @@ public interface DetailDao<T> {
 	 * @return
 	 */
 	public List<T> findAll();
+	
+	public List<T> findListInDB();
 
 	public List<T> findById(Integer id);
+
+	public List<T> findByIdDb(Integer id);
 	
 
 }

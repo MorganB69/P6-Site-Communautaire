@@ -50,7 +50,21 @@ public class CotationManagerImpl implements DetailManager<ListCot> {
 
 
 	@Override
-	public List<State> getDetailListById(Integer Id) {
+	public List<ListCot> getDetailListById(Integer Id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<ListCot> getDetailListDb() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<ListCot> getDetailListByIdDb(Integer paysIdOut) {
 		// TODO Auto-generated method stub
 		return null;
 	}

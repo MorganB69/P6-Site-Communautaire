@@ -8,14 +8,14 @@ package fr.mb.projet.recherche;
  */
 public class RechercheSite {
 	private int rSiteId;
-	private String rPays;
-	private String rDepartement;
+	private Integer rPays;
+	private Integer rDepartement;
 	private Integer rCotMin;
 	private Integer rCotMax;
 	private Integer rAltMin;
 	private Integer rAltMax;
 	private String rtype;
-	private String rOrient;
+	private Integer rOrient;
 
 	public RechercheSite() {
 		
@@ -30,19 +30,19 @@ public class RechercheSite {
 		this.rSiteId = rSiteId;
 	}
 
-	public String getrPays() {
+	public Integer getrPays() {
 		return rPays;
 	}
 
-	public void setrPays(String rPays) {
+	public void setrPays(Integer rPays) {
 		this.rPays = rPays;
 	}
 
-	public String getrDepartement() {
+	public Integer getrDepartement() {
 		return rDepartement;
 	}
 
-	public void setrDepartement(String rDepartement) {
+	public void setrDepartement(Integer rDepartement) {
 		this.rDepartement = rDepartement;
 	}
 
@@ -86,11 +86,11 @@ public class RechercheSite {
 		this.rtype = rtype;
 	}
 
-	public String getrOrient() {
+	public Integer getrOrient() {
 		return rOrient;
 	}
 
-	public void setrOrient(String rOrient) {
+	public void setrOrient(Integer rOrient) {
 		this.rOrient = rOrient;
 	}
 

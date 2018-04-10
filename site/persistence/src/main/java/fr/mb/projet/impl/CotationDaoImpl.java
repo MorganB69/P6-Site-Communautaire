@@ -1,6 +1,7 @@
 package fr.mb.projet.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Named;
 
@@ -35,6 +36,18 @@ public class CotationDaoImpl extends AbstractDaoImpl implements DetailDao<ListCo
 
 	@Override
 	public List<ListCot> findById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ListCot> findListInDB() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ListCot> findByIdDb(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

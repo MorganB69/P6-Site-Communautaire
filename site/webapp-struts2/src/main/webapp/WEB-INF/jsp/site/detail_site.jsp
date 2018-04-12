@@ -55,7 +55,7 @@
       	   		<i class="fa fa-road"></i> Accès au site <i class="fa fa-arrow-down"></i>
       	    </h5>
       	    
-      	    <div class="collapse collapse show mt-3" id="associated-acces" aria-expanded="true">
+      	    <div class="collapse collapse show mt-3 mb-3" id="associated-acces" aria-expanded="true">
     		
       		<div class="card card-body bg-light text-dark rounded">
       	
@@ -67,6 +67,74 @@
   </div>
         
         </s:if>
+         <h5 class="collapsible-title mt-3" data-toggle="collapse" data-target="#associated-comment" aria-expanded="true" aria-controls="associated-comment">
+      	   		<i class="fa fa-tree"></i> Secteurs <i class="fa fa-arrow-down"></i>
+      	    </h5>
+      	    
+      	    <div class="collapse collapse show mt-3 mb-3" id="associated-comment" aria-expanded="true">
+    		
+      		<div class="card card-body bg-light text-dark rounded">
+      	
+        
+     		     	
+				 <s:iterator value="site.listeSecteur">
+				 		<h6><s:property value="Nom du secteur" /> <s:property value="nom" /></h6>
+  						<p><s:property value="description" /></p>
+				</s:iterator> 
+				
+		
+       		</div>
+       		</div>
+
+
+
+        	<button class="btn btn-primary btn-md m3"  data-toggle="modal" data-target="#myModal">
+  Ajouter un secteur
+			</button>
+			
+
+			
+			<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+</div>
+
+<div class="modal-body">
+<h5 class="modal-title text-left"  id="myModalLabel">
+Ajout d'un secteur
+</h5>
+<s:form action="add_secteur" method="post" cssClass="well form-vertical " theme="bootstrap" enctype="multipart/form-data">
+		    
+		    <s:textfield
+			class="form-control col-9"
+            label="Nom du secteur" 
+            name="secteur.nom" 
+            requiredLabel="true"
+            />
+		       
+       	 	<s:textarea 
+        	class="form-control" 
+        	rows="5" 
+        	name="secteur.description" 
+        	label="Description du secteur" 	
+        	requiredLabel="true" 
+        	/>
+        	
+        	<s:hidden  value="%{site.id}" name="site.id"></s:hidden>
+        	
+        	
+        	
+        	<s:submit class="btn btn-primary mb-3" value="Ajouter un secteur"/>
+        	
+        	</s:form>
+</div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
         
           <h5 class="collapsible-title mt-3" data-toggle="collapse" data-target="#associated-comment" aria-expanded="true" aria-controls="associated-comment">
       	   		<i class="fa fa-comment-o"></i> Commentaires <i class="fa fa-arrow-down"></i>
@@ -86,11 +154,16 @@
 		
        		</div>
        		</div>
-      <div class=row>
-      	<s:form action="add_comment" method="post" cssClass="well form-vertical" theme="bootstrap" enctype="multipart/form-data">
+      
+      <div class="row justify-content-center m-3">
+      <h3 class="text-center">Ajouter un commentaire sur le site </h3>
+      </div>
+      
+      <div>
+      	<s:form action="add_comment" method="post" cssClass="well form-vertical " theme="bootstrap" enctype="multipart/form-data">
+		
 	
-	
-			<h3>Ajouter un commentaire sur le site </h3>
+			
 	
                
        	 <s:textarea 
@@ -104,7 +177,7 @@
         	
         	
         	
-        	<s:submit class="btn btn-primary" value="Validation"/>
+        	<s:submit class="btn btn-primary mb-3" value="Ajouter un commentaire"/>
         	
         	</s:form>
       

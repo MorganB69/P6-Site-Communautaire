@@ -40,8 +40,8 @@ public class Secteur {
 	/**
 	 * La relation avec un Site (many to one)
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "site_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name="site_id")
 	private Site site;
 
 	public Secteur() {
@@ -77,6 +77,7 @@ public class Secteur {
 	}
 
 	public void setSite(Site site) {
+		site.getListeSecteur().add(this);
 		this.site = site;
 	}
 

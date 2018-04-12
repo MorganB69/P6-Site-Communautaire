@@ -51,7 +51,10 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	private DetailManager<?> stateManager;
 	
 	@Inject
-	private CommentManager commentManager;
+	private CommentManager<?> commentManager;
+	
+	@Inject
+	private CommentManager<?> secteurManager;
 	
 	
 	
@@ -115,17 +118,47 @@ public class ManagerFactoryImpl implements ManagerFactory {
 		return stateManager;
 	}
 
-	@Override
-	public CommentManager getCommentManager() {
-		// TODO Auto-generated method stub
+	public CommentManager<?> getCommentManager() {
 		return commentManager;
 	}
 
+
+
+	public CommentManager<?> getSecteurManager() {
+		return secteurManager;
+	}
+	
+	
+
+
+	public void setPaysManager(DetailManager<?> paysManager) {
+		this.paysManager = paysManager;
+	}
+
+	public void setStateManager(DetailManager<?> stateManager) {
+		this.stateManager = stateManager;
+	}
+
+
 	@Override
-	public void SetCommentManager(CommentManager pCommentManager) {
-		this.commentManager=pCommentManager;
+	public void SetCommentManager(CommentManager<?> pCommentManager) {
+		this.commentManager = pCommentManager;
 		
 	}
+
+	@Override
+	public void SetSecteurManager(CommentManager<?> pCommentManager) {
+		this.secteurManager = pCommentManager;
+		
+	}
+
+
+
+
+
+
+
+
 
 
 

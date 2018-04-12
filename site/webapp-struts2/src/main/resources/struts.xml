@@ -116,6 +116,22 @@
 				<param name="id">${site.id}</param>		
 			</result>
 		</action>
+		
+		<action name="add_secteur" class="fr.mb.projet.action.site.CommentAction"
+			method="addSecteur">
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>	
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			
+			<result name="input" type="redirectAction">
+				<param name="actionName"> detail_site </param>
+				<param name="id">${site.id}</param>		
+			</result>
+			
+			<result name="success" type="redirectAction">
+				<param name="actionName"> detail_site </param>
+				<param name="id">${site.id}</param>		
+			</result>
+		</action>
 
 
 

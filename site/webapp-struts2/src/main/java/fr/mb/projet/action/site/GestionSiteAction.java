@@ -72,6 +72,8 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * page)
 	 */
 	private Integer lastPage=0;
+	
+	private List<Site> listSiteOffset=new ArrayList<Site>();
 
 	/**
 	 * Page sélectionnée et permet de définir l'Offset pour le changement de page
@@ -148,6 +150,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Attribut en sortie pour alimenter le Site
 	 */
 	private Cotation cotMax;
+	private int statut=0;
 	
 	private Integer paysIdOut;
 	
@@ -224,6 +227,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * @return
 	 */
 	public String rechercheSite() {
+		
 		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
 		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
 		this.listePays = (List<Pays>) managerFactory.getPaysManager().getDetailListDb();
@@ -239,10 +243,53 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		
 		//this.lastPage = managerFactory.getSiteManager().getCountRecherche(this.pageSize, this.start,this.recherche);
 
+		if (session.containsKey("statut")) {
+		this.statut = (int) session.get("statut");}
+		
+		if(this.statut==0) {
+			System.out.println("Réinit");
+			System.out.println(this.statut);
+		this.lastPage = managerFactory.getSiteManager().getCount(this.pageSize, this.start);
+		System.out.println(this.lastPage);
+		this.listSite = managerFactory.getSiteManager().getListSite(this.pageSize, this.start);
+		if (session.containsKey("lastPage")) {
+		session.replace("lastPage", this.lastPage);}
+		else session.put("lastPage", this.lastPage);
+		
+		if (session.containsKey("listSiteOffSet")) {
+		session.replace("listSiteOffSet", this.listSite);}
+		else session.put("listSiteOffSet", this.listSite);
+		}
+		
+		ArrayList<Object> recherche= new ArrayList<Object>();
+		if(this.recherche!=null) {
+		recherche=(ArrayList<Object>) managerFactory.getSiteManager().getListSiteRecherche(this.pageSize, this.start, this.recherche);
+		
+		this.lastPage=(Integer) recherche.get(0);
+		this.listSite =(List<Site>) recherche.get(1);
+		
+		session.put("listSite", this.listSite);
+		if (session.containsKey("lastPage")) {
+		session.replace("lastPage", this.lastPage);}
+		else session.put("lastPage", this.lastPage);
+		this.statut=1;
+		if (session.containsKey("statut")) {
+		session.replace("statut", this.statut);}
+		else session.put("statut", this.statut);
 		
 		
-		this.listSite = managerFactory.getSiteManager().getListSiteRecherche(this.pageSize, this.start, this.recherche);
-		session.replace("listSite", this.listSite);
+		}
+		System.out.println(this.statut);
+		
+		
+		if (session.containsKey("statut")) {
+		this.statut = (int) session.get("statut");}
+		System.out.println(this.statut);
+		if (session.containsKey("listSite")) {
+		this.listSite = (List<Site>) session.get("listSite");}
+		if(this.statut==1) {
+		this.listSiteOffset=managerFactory.getSiteManager().doOffSet(this.listSite,this.start,this.pageSize);
+		session.replace("listSiteOffSet", this.listSiteOffset);}
 		
 		return ActionSupport.SUCCESS;
 		
@@ -716,6 +763,22 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 	public void setListType(List<String> listType) {
 		this.listType = listType;
+	}
+
+	public List<Site> getListSiteOffset() {
+		return listSiteOffset;
+	}
+
+	public void setListSiteOffset(List<Site> listSiteOffset) {
+		this.listSiteOffset = listSiteOffset;
+	}
+
+	public int getStatut() {
+		return statut;
+	}
+
+	public void setStatut(int statut) {
+		this.statut = statut;
 	}
 
 

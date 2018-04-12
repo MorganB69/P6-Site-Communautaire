@@ -10,6 +10,7 @@ import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import fr.mb.projet.contract.CommentManager;
 import fr.mb.projet.contract.DetailManager;
 import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.contract.SiteManager;
@@ -48,6 +49,11 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	
 	@Inject
 	private DetailManager<?> stateManager;
+	
+	@Inject
+	private CommentManager commentManager;
+	
+	
 	
 	
 
@@ -107,6 +113,18 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	public DetailManager<?> getStateManager() {
 		// TODO Auto-generated method stub
 		return stateManager;
+	}
+
+	@Override
+	public CommentManager getCommentManager() {
+		// TODO Auto-generated method stub
+		return commentManager;
+	}
+
+	@Override
+	public void SetCommentManager(CommentManager pCommentManager) {
+		this.commentManager=pCommentManager;
+		
 	}
 
 

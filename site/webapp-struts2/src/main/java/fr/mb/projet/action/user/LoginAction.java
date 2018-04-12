@@ -64,12 +64,15 @@ public class LoginAction extends ActionSupport implements SessionAware {
         if (!StringUtils.isAllEmpty(login, password)) {
             try {
                 this.user=managerFactory.getUserManager().getUser(login, password);
+                if (this.user!=null) {
                 this.session.put("user", user);
-                result = ActionSupport.SUCCESS;
+                result = ActionSupport.SUCCESS;}
+                else this.addActionError("Identifiant ou mot de passe invalide !");
             } catch (NotFoundException pEx) {
                 this.addActionError("Identifiant ou mot de passe invalide !");
             }
         }
+        
         return result;
 		
 	}

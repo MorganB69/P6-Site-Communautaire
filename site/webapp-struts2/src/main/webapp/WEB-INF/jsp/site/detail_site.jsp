@@ -67,6 +67,28 @@
   </div>
         
         </s:if>
+      <div class=row>
+      	<s:form action="add_comment" method="post" cssClass="well form-vertical" theme="bootstrap" enctype="multipart/form-data">
+	
+	
+			<h3>Ajouter un commentaire sur le site </h3>
+	
+               
+       	 <s:textarea 
+        	class="form-control" 
+        	rows="5" 
+        	name="comment.message" 
+        	label="Commentaire" 	 
+        	/>
+        	
+        	
+        	
+        	<s:submit class="btn btn-primary" value="Validation"/>
+        	
+        	</s:form>
+      
+      
+      </div>
         
       </div>
       <div class="col-xs-12 col-md-4 col-lg-3" id="right-column">

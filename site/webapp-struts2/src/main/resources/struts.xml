@@ -8,12 +8,21 @@
 
 	<!-- Action par défaut x -->
 	<package name="myPackage" extends="struts-default">
+	
+		<interceptors>
+			<interceptor name="loginInterceptor"
+				class="fr.mb.projet.Interceptor.LoginInterceptor"></interceptor>
+
+		</interceptors>
 
 		<default-action-ref name="index" />
 
 		<!-- Results globaux -->
 		<global-results>
 			<result name="error">/WEB-INF/jsp/error.jsp</result>
+			<result name="loginUser" type="redirectAction">
+				<param name="actionName"> login </param>
+			</result>
 		</global-results>
 
 		<action name="index" class="fr.mb.projet.action.IndexAction">
@@ -35,6 +44,7 @@
 		
 		<action name="recherche_site" class="fr.mb.projet.action.site.GestionSiteAction"
 			method="rechercheSite">
+			
 			<result name="input">/WEB-INF/jsp/site/list.jsp </result>
 
 			<result>/WEB-INF/jsp/site/list.jsp</result>
@@ -43,7 +53,7 @@
 		<!-- AJOUTER DES SITES -->
 		<action name="add_site" class="fr.mb.projet.action.site.GestionSiteAction"
 				method="add">
-	
+<interceptor-ref name="loginInterceptor"></interceptor-ref>	
 <interceptor-ref name="defaultStack">
     <param name="fileUpload.maximumSize">2097152</param>
     <param name="fileUpload.allowedTypes">
@@ -71,7 +81,7 @@
 		<action name="login"
 			class="fr.mb.projet.action.user.LoginAction" method="doLogin">
 			<result name="input">/WEB-INF/jsp/login.jsp</result>
-			<result name="success" type="redirectAction">index</result>
+			<result name="success" type="redirectAction">login</result>
 		</action>
 		
 		<action name="logout"
@@ -86,6 +96,18 @@
 
 			<result name="success" type="redirectAction">
 				<param name="actionName"> login </param>
+				
+			</result>
+		</action>
+		
+				<!-- Actions Commentaire -->
+		<action name="add_comment" class="fr.mb.projet.action.site.CommentAction"
+			method="addComment">
+
+
+			<result name="success" type="redirectAction">
+				<param name="actionName"> detail_site </param>
+				<param name="id">${site.id}</param>
 				
 			</result>
 		</action>

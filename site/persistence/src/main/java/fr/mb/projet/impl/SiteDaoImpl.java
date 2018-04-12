@@ -139,8 +139,8 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 	public List<Site> recherche(Integer nbPage, Integer offset, RechercheSite recherche) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		List<Site> allSite=new ArrayList<Site>();
-		List<Site> listAltMin=new ArrayList<Site>();
+
+		//CREATION DES LISTES POUR CHAQUE SOUS REQUETE
 		List<Site> listAltMax=new ArrayList<Site>();
 		List<Site> listCotMin=new ArrayList<Site>();
 		List<Site> listCotMax=new ArrayList<Site>();
@@ -148,35 +148,13 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		List<Site> listPays=new ArrayList<Site>();
 		List<Site> listState=new ArrayList<Site>();
 		List<Site> listType=new ArrayList<Site>();
-		
-		//PAR DEFAUT TOUS LES SITES
-		
-		Query queryGeneral = session.createQuery("SELECT site FROM Site as site"
-				+ " JOIN site.listeAltitude as altitude"
-				+ " WHERE (altitude.typeAlt=(:altMinType) AND altitude.alt>(:altMin) "
-				+ " AND site.id IN (SELECT site FROM Site as site"
-				+ " JOIN site.listeAltitude as altitude"
-			    + "	WHERE (altitude.typeAlt=(:altMaxType) AND altitude.alt<(:altMax))))"
-				+ " ORDER BY site.id DESC");
-		
-		queryGeneral.setParameter("altMinType", "min");
-		queryGeneral.setParameter("altMin", recherche.getrAltMin());
-		queryGeneral.setParameter("altMaxType", "max");
-		queryGeneral.setParameter("altMax", recherche.getrAltMax());
-		allSite=queryGeneral.getResultList();
+		List<Site>listReturn=new ArrayList<Site>();
 		
 		
 		
-		
-		
-		
-		
-		
-		/*
-		
-		
+		//QUERY POUR TOUS LES SITES
 		Query queryAllSite = session.createQuery("SELECT site FROM Site as site ORDER BY site.id DESC");
-		allSite=queryAllSite.getResultList();
+		
 		
 		//ALTITUDE MINIMUM
 		if(recherche.getrAltMin()!=null) {
@@ -187,8 +165,8 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		
 		queryAltMin.setParameter("altMinType", "min");
 		queryAltMin.setParameter("altMin", recherche.getrAltMin());
-		listAltMin = queryAltMin.getResultList();}
-		else listAltMin=allSite;
+		listReturn = queryAltMin.getResultList();}
+		
 		
 		
 		//ALTITUDE MAXIMUM
@@ -200,8 +178,14 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 				
 		queryAltMax.setParameter("altMaxType", "max");
 		queryAltMax.setParameter("altMax", recherche.getrAltMax());
-		listAltMax = queryAltMax.getResultList();}
-		else listAltMax=allSite;
+		listAltMax = queryAltMax.getResultList();
+		if(listReturn.isEmpty())listReturn=listAltMax;
+		else {
+		for (Iterator iterator = listReturn.iterator(); iterator.hasNext();) {
+			Site s = (Site) iterator.next();
+			if (listAltMax.contains(s)==false)iterator.remove();
+		}}}
+		
 		
 		
 		//COTATION MAXIMUM
@@ -213,6 +197,12 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		queryCotMax.setParameter("cotMaxType", "max");
 		queryCotMax.setParameter("cotMax", recherche.getrCotMax());
 		listCotMax = queryCotMax.getResultList();
+		if(listReturn.isEmpty())listReturn=listCotMax;
+		else {
+		for (Iterator iterator = listReturn.iterator(); iterator.hasNext();) {
+			Site s = (Site) iterator.next();
+			if (listCotMax.contains(s)==false)iterator.remove();
+		}}
 		
 		//COTATION MINIMUM
 		Query queryCotMin = session.createQuery("SELECT site FROM Site as site"
@@ -223,6 +213,12 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		queryCotMin.setParameter("cotMinType", "min");
 		queryCotMin.setParameter("cotMin", recherche.getrCotMin());
 		listCotMin = queryCotMin.getResultList();
+		if(listReturn.isEmpty())listReturn=listCotMin;
+		else {
+		for (Iterator iterator = listReturn.iterator(); iterator.hasNext();) {
+			Site s = (Site) iterator.next();
+			if (listCotMin.contains(s)==false)iterator.remove();
+		}}
 		
 		//ORIENTATION
 		if(recherche.getrOrient()!=10000) {
@@ -233,10 +229,17 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		
 		queryOrient.setParameter("orient", recherche.getrOrient());
 		
-		listOrient = queryOrient.getResultList();}
-		else listOrient=allSite;
+		listOrient = queryOrient.getResultList();
+		if(listReturn.isEmpty())listReturn=listOrient;
+		else {
+		for (Iterator iterator = listReturn.iterator(); iterator.hasNext();) {
+			Site s = (Site) iterator.next();
+			if (listOrient.contains(s)==false)iterator.remove();
+		}}}
+		
 		
 		//PAYS
+
 		if(recherche.getrPays()!=10000) {
 		Query queryPays = session.createQuery("SELECT site FROM Site as site"
 				+ " WHERE (pays.id=(:id))"
@@ -244,8 +247,15 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		
 		queryPays.setParameter("id", recherche.getrPays());
 		
-		listPays = queryPays.getResultList();}
-		else listPays=allSite;
+		listPays = queryPays.getResultList();
+		System.out.println("PAYSTAILLE"+ listPays.size());
+		if(listReturn.isEmpty())listReturn=listPays;
+		else {
+		for (Iterator iterator = listReturn.iterator(); iterator.hasNext();) {
+			Site s = (Site) iterator.next();
+			if (listPays.contains(s)==false)iterator.remove();
+		}}}
+		
 		
 		//STATE
 		if(recherche.getrDepartement()!=10000) {
@@ -255,48 +265,50 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		
 		queryState.setParameter("id", recherche.getrDepartement());
 		
-		listState = queryState.getResultList();}
-		else listState=allSite;
+		listState = queryState.getResultList();
+		System.out.println("STATETAILLE"+ listPays.size());
+		if(listReturn.isEmpty())listReturn=listState;
+		else {
+		for (Iterator iterator = listReturn.iterator(); iterator.hasNext();) {
+			Site s = (Site) iterator.next();
+			if (listState.contains(s)==false)iterator.remove();
+		}}}
+		
+		
+		//TYPE
+		if(recherche.getrType().equals("ALL")==false) {
+		Query queryType = session.createQuery("SELECT site FROM Site as site"
+				+ " WHERE (site.type=(:type))"
+				+ " ORDER BY site.id DESC");
+		System.out.println(recherche.getrType());
+		queryType.setParameter("type", recherche.getrType());
+		
+		listType = queryType.getResultList();
+		System.out.println("TYPETAILLE" + listType.size());
+		System.out.println("RETURNTAILLE"+ listReturn.size());
+		if(listReturn.isEmpty())listReturn=listType;
+		else {
+		for (Iterator iterator = listReturn.iterator(); iterator.hasNext();) {
+			Site s = (Site) iterator.next();
+			if (listType.contains(s)==false)iterator.remove();
+		}}}
 		
 
 		
 		
-		List <Site> listReturn=new ArrayList<Site>();
 		
-		//RECHERCHE DES SITES CORRESPONDANT AUX RECHERCHES
-		for (Iterator iterator = listAltMin.iterator(); iterator.hasNext();) {
-			Site site = (Site) iterator.next();
-			
-			if (listAltMax.contains(site)) {
-				if(listCotMax.contains(site)){
-					if(listCotMin.contains(site)) {
-						if(listOrient.contains(site)) {
-							if(listPays.contains(site)) {
-								if(listState.contains(site)) {
-									listReturn.add(site);
-								}
-							}
-							
-						}
-						
-					}
-									
-				}
-			}
-			
-		}
 
 		//query.setFirstResult(offset);
 		//query.setMaxResults(nbPage);
 		
 
 		//List<Site> list = query.getResultList();
-		*/
+		
 
 		session.close();
 		
 		
-		return allSite;
+		return listReturn;
 	}
 
 	/* (non-Javadoc)

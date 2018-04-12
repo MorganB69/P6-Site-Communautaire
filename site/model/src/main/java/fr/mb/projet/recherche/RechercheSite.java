@@ -14,7 +14,7 @@ public class RechercheSite {
 	private Integer rCotMax;
 	private Integer rAltMin;
 	private Integer rAltMax;
-	private String rtype;
+	private String rType;
 	private Integer rOrient;
 
 	public RechercheSite() {
@@ -78,12 +78,12 @@ public class RechercheSite {
 		this.rAltMax = rAltMax;
 	}
 
-	public String getRtype() {
-		return rtype;
+	public String getrType() {
+		return rType;
 	}
 
-	public void setRtype(String rtype) {
-		this.rtype = rtype;
+	public void setrType(String rType) {
+		this.rType = rType;
 	}
 
 	public Integer getrOrient() {

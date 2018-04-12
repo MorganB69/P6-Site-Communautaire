@@ -122,10 +122,53 @@ public class SiteManagerImpl implements SiteManager {
 	}
 	
 	@Override
-	public List<Site> getListSiteRecherche(Integer nbPage, Integer start, RechercheSite recherche) {
-		Integer offset = (start - 1) * nbPage;
-		List<Site> list = siteDao.recherche(nbPage, offset,recherche);
-		return list;
+	public List<Object> getListSiteRecherche(Integer nbPage, Integer start, RechercheSite recherche) {
+		int offset;
+		
+		//Calcul de l'offset
+		if(start!=0) {
+			offset = (start - 1) * nbPage;
+		}
+		else offset=0;
+		
+		List<Site>list=new ArrayList<Site>();
+
+		
+		list = siteDao.recherche(nbPage, offset,recherche);
+		
+
+		double page = (double) nbPage;
+		double lastPageNumber = (Math.ceil(list.size() / page));
+		int valuePage = (int) lastPageNumber;
+		
+		ArrayList<Object> returnList=new ArrayList();
+		returnList.add(valuePage);
+		returnList.add(list);
+		
+		
+		return returnList;
+	}
+	
+	public List<Site> doOffSet(List<Site>list, Integer start, Integer nbPage){
+		int offset;		
+		//Calcul de l'offset
+		if(start!=0) {
+			offset = (start - 1) * nbPage;
+		}
+		else offset=0;
+		List<Site> listOffset= new ArrayList<Site>();
+		//Application de l'offset
+		if(list.size()>(offset+nbPage))	{
+		for (int i = offset; i < offset+nbPage; i++) {
+			if(list.get(i)!=null)listOffset.add(list.get(i));
+		}}
+		else {
+			for(int i = offset; i < list.size(); i++) {
+				if(list.get(i)!=null)listOffset.add(list.get(i));
+		}}
+		
+		return listOffset;
+		
 	}
 
 	@Override
@@ -151,6 +194,8 @@ public class SiteManagerImpl implements SiteManager {
 	public void setSiteDao(SiteDao siteDao) {
 		this.siteDao = siteDao;
 	}
+
+
 
 
 

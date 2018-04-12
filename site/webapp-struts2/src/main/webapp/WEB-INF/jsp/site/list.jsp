@@ -109,10 +109,10 @@
 		label="Pays"
 		required="true"
         name="recherche.rPays"
-        list="session.listePays"
-        listKey="id"
         headerKey="10000"
         headerValue="TOUS"
+        list="session.listePays"
+        listKey="id"
         listValue="name"
         value="%{session.listePays.{id}}"
                
@@ -137,10 +137,16 @@
 			name="recherche.rType" 
 			list="listType"
 			label="Type de spot"
+			headerKey="ALL"
+        	headerValue="TOUS"
 			
 		/>
-        
-       <s:submit class="btn btn-primary" value="Recherche"/>
+		
+		
+       
+       <s:submit class="btn btn-primary" value="Recherche" />
+       
+
 	
 </s:form>
 
@@ -149,7 +155,7 @@
 </div>
 <div class="col-lg-9 col-md-9">
 <div class="row">
-<s:iterator value="session.listSite">
+<s:iterator value="session.listSiteOffSet">
 
 <div class="col-lg-4 col-md-6 col-sm-6 portfolio-item" >
 			<div class="card bg-light border-dark h-100" id="card-list">
@@ -199,7 +205,7 @@
   
   <s:iterator status="incr" begin="1" end="%{session.lastPage}">  
     <li class="page-item">
-       <s:a class="page-link" action="site_list">
+       <s:a class="page-link" action="recherche_site">
 						<s:param name="start" value="%{#incr.count}"></s:param>
 						<s:property value="%{#incr.count}"/>
 		</s:a>

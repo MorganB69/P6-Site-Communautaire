@@ -37,6 +37,7 @@ public class UserManagerImpl implements UserManager {
 	public Utilisateur getUser(String login, String mdp) throws NotFoundException {
 
 		Utilisateur user = userDao.getUtilisateur(login, mdp);
+		
 
 		return user;
 	}

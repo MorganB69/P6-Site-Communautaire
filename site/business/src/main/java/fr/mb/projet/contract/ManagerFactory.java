@@ -28,5 +28,11 @@ public interface ManagerFactory {
 	public DetailManager<?> getPaysManager();
 
 	public DetailManager<?> getStateManager();
+	
+	public CommentManager getCommentManager();
+	
+	public void SetCommentManager(CommentManager pCommentManager);
+	
+	
 
 }

@@ -10,43 +10,56 @@
 <body>
 	<header> 
 		<s:include value="include/menu.jsp"></s:include> 
-		 
+
 	</header>
 	
-	
 	<div class="container">
+	<section>
 	
-	<section class="row justify-content-center"> 
-	
-	<h2> Authentification</h2>
-	
-	</section>
-	
-	<section class="row justify-content-center"> 
+		<div class="row justify-content-center"> 
 		
-		<s:actionmessage/>
-		<s:actionerror/>
+			<h1 class="text-center"> Formulaire d'authentification</h1>
 		
-	    <s:form action="login" cssClass="well form-vertical" theme="bootstrap" enctype="multipart/form-data">
-        <s:textfield class="form-control" name="login" label="Identifiant" requiredLabel="true" />
+
+	
+		</div>
+		
+		<div class="row justify-content-center"> 
+			Veuillez saisir le formulaire pour vous identifier
+		</div>
+	
+		<div class="row justify-content-center"> 
+		
+
+	
+			<s:form action="login" cssClass="well form-vertical" theme="bootstrap" enctype="multipart/form-data">
+        		<s:textfield class="form-control" name="login" label="Identifiant" requiredLabel="true" />
        	
        
-        <s:password class="form-control" name="password" label="Mot de passe" requiredLabel="true" />
+        		<s:password class="form-control" name="password" label="Mot de passe" requiredLabel="true" />
       
        
 		
 		
-        <s:submit class="btn btn-primary" value="Validation"/>
-    </s:form>
-    
-    
-    </section>
-    
-    <section class="row justify-content-center"> 
-		<s:a class="btn btn-primary" label=" Créer un compte" action="add_user">Créer un compte</s:a>
-	</section>
-	
-	</div>
+        		<s:submit class="btn btn-primary" value="Validation"/>
+    		</s:form>
+    		
+    		</div>
+    		
+    		<div class="row justify-content-center">
+					<s:a class="btn btn-primary m-3" label=" Créer un compte" action="add_user">Créer un compte</s:a>
+			    
+			</div>
+			
+			<div class="row justify-content-center">
+					 <s:actionmessage/>
+					<s:actionerror/>
+			</div>		
+    		
+    		</section>
+    		
+			</div>
+			
 	
 	<footer> <%@ include file="./include/footer.jsp"%> </footer>
 </body>

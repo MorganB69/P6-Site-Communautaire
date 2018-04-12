@@ -19,7 +19,7 @@ public interface SiteManager {
 	
 	public List<Site> getListSite(Integer nbPage,Integer start);
 	
-	public List<Site> getListSiteRecherche(Integer nbPage,Integer start,RechercheSite recherche);
+	public List<Object> getListSiteRecherche(Integer nbPage,Integer start,RechercheSite recherche);
 
 	public void insert(Site site) throws FunctionalException, TechnicalException;
 
@@ -28,5 +28,7 @@ public interface SiteManager {
 	public Integer getCount(Integer pageSize, Integer start);
 	
 	public Integer getCountRecherche(Integer pageSize, Integer start, RechercheSite recherche);
+
+	public List<Site> doOffSet(List<Site> listSite, Integer start, Integer pageSize);
 		
 }

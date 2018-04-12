@@ -1,5 +1,7 @@
 package fr.mb.projet.bean.detail;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +21,7 @@ import fr.mb.projet.bean.spot.Site;
  */
 @Entity
 @Table(name = "altitude")
-public class Altitude {
+public class Altitude implements Serializable{
 	
 	/**
 	 * L'Id de l'objet généré automatiquement

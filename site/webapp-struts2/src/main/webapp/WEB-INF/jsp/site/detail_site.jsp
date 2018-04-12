@@ -67,6 +67,25 @@
   </div>
         
         </s:if>
+        
+          <h5 class="collapsible-title mt-3" data-toggle="collapse" data-target="#associated-comment" aria-expanded="true" aria-controls="associated-comment">
+      	   		<i class="fa fa-comment-o"></i> Commentaires <i class="fa fa-arrow-down"></i>
+      	    </h5>
+      	    
+      	    <div class="collapse collapse show mt-3" id="associated-comment" aria-expanded="true">
+    		
+      		<div class="card card-body bg-light text-dark rounded">
+      	
+        
+     		     	
+				 <s:iterator value="site.listeComment">
+				 		<h6><s:property value="date" /> <s:property value="user.pseudo" /></h6>
+  						<p><s:property value="message" /></p>
+				</s:iterator> 
+				
+		
+       		</div>
+       		</div>
       <div class=row>
       	<s:form action="add_comment" method="post" cssClass="well form-vertical" theme="bootstrap" enctype="multipart/form-data">
 	
@@ -80,6 +99,8 @@
         	name="comment.message" 
         	label="Commentaire" 	 
         	/>
+        	
+        	<s:hidden  value="%{site.id}" name="site.id"></s:hidden>
         	
         	
         	

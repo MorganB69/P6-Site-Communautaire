@@ -26,6 +26,7 @@ import javax.persistence.Table;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import fr.mb.projet.bean.comment.Comment;
 import fr.mb.projet.bean.detail.Altitude;
 import fr.mb.projet.bean.detail.Coordonnee;
 import fr.mb.projet.bean.detail.Cotation;
@@ -146,6 +147,9 @@ public class Site implements Serializable{
 	
 	@Column(name = "type")
 	private String type;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site")
+	private Set <Comment> listeComment=new HashSet<Comment>();
 	
 	
 	public Site() {
@@ -324,6 +328,14 @@ public class Site implements Serializable{
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public Set<Comment> getListeComment() {
+		return listeComment;
+	}
+
+	public void setListeComment(Set<Comment> listeComment) {
+		this.listeComment = listeComment;
 	}
 
 

@@ -73,7 +73,7 @@
 		<!-- DETAIL DES SITES -->
 		<action name="detail_site" class="fr.mb.projet.action.site.GestionSiteAction"
 			method="doDetail">
-
+			<result name="input">/WEB-INF/jsp/site/detail_site.jsp </result>
 			<result>/WEB-INF/jsp/site/detail_site.jsp</result>
 		</action>
 
@@ -103,12 +103,17 @@
 				<!-- Actions Commentaire -->
 		<action name="add_comment" class="fr.mb.projet.action.site.CommentAction"
 			method="addComment">
-
-
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>	
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			
+			<result name="input" type="redirectAction">
+				<param name="actionName"> detail_site </param>
+				<param name="id">${site.id}</param>		
+			</result>
+			
 			<result name="success" type="redirectAction">
 				<param name="actionName"> detail_site </param>
-				<param name="id">${site.id}</param>
-				
+				<param name="id">${site.id}</param>		
 			</result>
 		</action>
 

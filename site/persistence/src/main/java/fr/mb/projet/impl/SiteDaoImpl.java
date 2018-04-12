@@ -132,9 +132,13 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		return countResults;
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.mb.projet.contract.SiteDao#recherche(java.lang.Integer, java.lang.Integer, fr.mb.projet.recherche.RechercheSite)
-	 */
+	/* 
+	 * Méthode de recherche de site en fonction de multicritères
+	 * Méthode décomposée en plusieurs "sous-requêtes" appelée si le critère est renseigné
+	 * Chaque méthode renvoie une liste de Site que l'on compare à la liste de la requête précédente
+	 * pour filtrer les sites puis renvoie une liste finale
+	 * 
+ 	 */
 	@Override
 	public List<Site> recherche(Integer nbPage, Integer offset, RechercheSite recherche) {
 		Session session = sessionFactory.openSession();
@@ -156,7 +160,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		Query queryAllSite = session.createQuery("SELECT site FROM Site as site ORDER BY site.id DESC");
 		
 		
-		//ALTITUDE MINIMUM
+		//ALTITUDE MINIMUM (Requête lancée si le critère est renseigné)
 		if(recherche.getrAltMin()!=null) {
 		Query queryAltMin = session.createQuery("SELECT site FROM Site as site"
 				+ " JOIN site.listeAltitude as altitude"
@@ -169,7 +173,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		
 		
 		
-		//ALTITUDE MAXIMUM
+		//ALTITUDE MAXIMUM (Requête lancée si le critère est renseigné)
 		if(recherche.getrAltMax()!=null) {
 		Query queryAltMax = session.createQuery("SELECT site FROM Site as site"
 				+ " JOIN site.listeAltitude as altitude"
@@ -188,7 +192,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		
 		
 		
-		//COTATION MAXIMUM
+		//COTATION MAXIMUM (Requête lancée si le critère est renseigné)
 		Query queryCotMax = session.createQuery("SELECT site FROM Site as site"
 				+ " JOIN site.listeCotation as cotation"
 				+ " WHERE (cotation.typeCot=(:cotMaxType) AND cotation.cot.id<=(:cotMax))"
@@ -204,7 +208,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 			if (listCotMax.contains(s)==false)iterator.remove();
 		}}
 		
-		//COTATION MINIMUM
+		//COTATION MINIMUM (Requête lancée si le critère est renseigné)
 		Query queryCotMin = session.createQuery("SELECT site FROM Site as site"
 				+ " JOIN site.listeCotation as cotation"
 				+ " WHERE (cotation.typeCot=(:cotMinType) AND cotation.cot.id>=(:cotMin))"
@@ -220,7 +224,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 			if (listCotMin.contains(s)==false)iterator.remove();
 		}}
 		
-		//ORIENTATION
+		//ORIENTATION (Requête lancée si le critère est spécifié)
 		if(recherche.getrOrient()!=10000) {
 		Query queryOrient = session.createQuery("SELECT site FROM Site as site"
 				+ " JOIN site.listeOrientation as orientation"
@@ -238,7 +242,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		}}}
 		
 		
-		//PAYS
+		//PAYS (Requête lancée si le critère est renseigné)
 
 		if(recherche.getrPays()!=10000) {
 		Query queryPays = session.createQuery("SELECT site FROM Site as site"
@@ -257,7 +261,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		}}}
 		
 		
-		//STATE
+		//STATE (Requête lancée si le critère est renseigné)
 		if(recherche.getrDepartement()!=10000) {
 		Query queryState = session.createQuery("SELECT site FROM Site as site"
 				+ " WHERE (state.id=(:id))"
@@ -275,17 +279,15 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		}}}
 		
 		
-		//TYPE
+		//TYPE (Requête lancée si le critère est renseigné)
 		if(recherche.getrType().equals("ALL")==false) {
 		Query queryType = session.createQuery("SELECT site FROM Site as site"
 				+ " WHERE (site.type=(:type))"
 				+ " ORDER BY site.id DESC");
-		System.out.println(recherche.getrType());
+
 		queryType.setParameter("type", recherche.getrType());
 		
 		listType = queryType.getResultList();
-		System.out.println("TYPETAILLE" + listType.size());
-		System.out.println("RETURNTAILLE"+ listReturn.size());
 		if(listReturn.isEmpty())listReturn=listType;
 		else {
 		for (Iterator iterator = listReturn.iterator(); iterator.hasNext();) {
@@ -296,13 +298,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 
 		
 		
-		
 
-		//query.setFirstResult(offset);
-		//query.setMaxResults(nbPage);
-		
-
-		//List<Site> list = query.getResultList();
 		
 
 		session.close();

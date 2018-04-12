@@ -1,5 +1,7 @@
 package fr.mb.projet.bean.user;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "utilisateur")
-public class Utilisateur {
+public class Utilisateur implements Serializable {
 
 	/**
 	 * l'Id est généré automatiquement

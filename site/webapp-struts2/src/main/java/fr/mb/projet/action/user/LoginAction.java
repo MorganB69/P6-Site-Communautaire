@@ -53,10 +53,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	public void setUser(Utilisateur user) {
 		this.user = user;
 	}
-	public Map<String, Object> getSession() {
-		return session;
-	}
-	
+
 	
 	//Methodes
 	public String doLogin() {

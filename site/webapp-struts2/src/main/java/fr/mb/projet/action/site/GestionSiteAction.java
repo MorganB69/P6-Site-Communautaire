@@ -17,7 +17,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
-
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.mb.projet.bean.detail.Altitude;
@@ -36,9 +35,8 @@ import fr.mb.projet.exception.TechnicalException;
 import fr.mb.projet.recherche.RechercheSite;
 
 /**
- * @author Morgan
- * Action permettant la gestion des spots, ex : ajouter un nouveau spot
- * détail d'un spot etc.
+ * @author Morgan Action permettant la gestion des spots, ex : ajouter un
+ *         nouveau spot détail d'un spot etc.
  */
 public class GestionSiteAction extends ActionSupport implements SessionAware {
 
@@ -60,7 +58,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 */
 	private Integer id;
 
-	//-----------Paramètres Pagination-------
+	// -----------Paramètres Pagination-------
 
 	/**
 	 * Nombre de sites à afficher par page
@@ -71,9 +69,12 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Nombre de page nécessaire pour tous les objets (soit le numéro de la dernière
 	 * page)
 	 */
-	private Integer lastPage=0;
-	
-	private List<Site> listSiteOffset=new ArrayList<Site>();
+	private Integer lastPage = 0;
+
+	/**
+	 * Liste à renvoyer aux vues après l'application d'un offset
+	 */
+	private List<Site> listSiteOffset = new ArrayList<Site>();
 
 	/**
 	 * Page sélectionnée et permet de définir l'Offset pour le changement de page
@@ -90,16 +91,16 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Liste des différentes cotations à récupérer en bd
 	 */
 	private List<ListCot> listeCotation = new ArrayList<ListCot>();
-	
+
 	/**
-	 *Liste des pays à récupérer en bd 
+	 * Liste des pays à récupérer en bd
 	 */
 	private List<Pays> listePays = new ArrayList<Pays>();
-	
+
 	/**
-	 *Liste des régions à récupérer en bd 
+	 * Liste des régions à récupérer en bd
 	 */
-	private List<State>listeState=new ArrayList<State>();
+	private List<State> listeState = new ArrayList<State>();
 
 	// Upload fichier
 
@@ -125,7 +126,6 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 */
 	private List<Site> listSite = new ArrayList<Site>();
 
-
 	/**
 	 * Attribut en sortie pour alimenter le Site
 	 */
@@ -150,13 +150,26 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Attribut en sortie pour alimenter le Site
 	 */
 	private Cotation cotMax;
-	private int statut=0;
-	
+
+	/**
+	 * Attribut qui à zero permet d'obtenir la liste de tous les sites par défaut
+	 */
+	private int statut = 0;
+
+	/**
+	 * Attribut en sortie de l'ID d'un pays
+	 */
 	private Integer paysIdOut;
-	
+
+	/**
+	 * Attribut en sortie de l'ID d'une région
+	 */
 	private Integer stateIdOut;
-	
-	private List<String> listType=new ArrayList();
+
+	/**
+	 * Liste des types de site à choisir dans le formulaire de rajout d'un site
+	 */
+	private List<String> listType = new ArrayList();
 
 	/**
 	 * Liste d'Orientation qui sera comprise dans un Site
@@ -183,10 +196,13 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Integer en sortie du questionnaire qui serviront à alimenter les listes
 	 */
 	private Integer cotMaxValue;
-	
-	
+
+	/**
+	 * Classe comprenant les attributs correspondants aux critères de recherche d'un
+	 * site
+	 */
 	private RechercheSite recherche;
-	
+
 	// ------------------------ Méthodes-------------------------
 	// ----------------------------------------------------------
 
@@ -206,93 +222,112 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		this.listType.add("Falaise");
 		this.listType.add("Bloc");
 		this.listType.add("Artificiel");
-		
-		
-		
+
+		// Rajout des listes en session
 		session.put("listeOrientation", this.listeOrientation);
 		session.put("listeCotation", this.listeCotation);
 		session.put("listePays", this.listePays);
 		session.put("listeType", this.listType);
 
+		// Obtention de la dernière page
 		this.lastPage = managerFactory.getSiteManager().getCount(this.pageSize, this.start);
 
+		// Obtention de la liste
 		this.listSite = managerFactory.getSiteManager().getListSite(this.pageSize, this.start);
 		session.put("lastPage", this.lastPage);
 		session.put("listSite", this.listSite);
 		return ActionSupport.SUCCESS;
 	}
-	
+
 	/**
 	 * Méthode de recherche de site en fonction des critères
+	 * 
 	 * @return
 	 */
 	public String rechercheSite() {
-		
+
+		// Accès à la BD pour récupérer les listes prédéfinies d'Orientation et Cotation
+		// et les mettre
+		// dans une session
 		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
 		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
 		this.listePays = (List<Pays>) managerFactory.getPaysManager().getDetailListDb();
 		this.listType.add("Falaise");
 		this.listType.add("Bloc");
 		this.listType.add("Artificiel");
-		
-		
+
+		// Rajout des listes en session
 		session.put("listeOrientation", this.listeOrientation);
 		session.put("listeCotation", this.listeCotation);
 		session.put("listePays", this.listePays);
 		session.put("listeType", this.listType);
-		
-		//this.lastPage = managerFactory.getSiteManager().getCountRecherche(this.pageSize, this.start,this.recherche);
 
+		// Vérification du statut (si 0 , renvoie tous les sites par défaut)
 		if (session.containsKey("statut")) {
-		this.statut = (int) session.get("statut");}
-		
-		if(this.statut==0) {
+			this.statut = (int) session.get("statut");
+		}
+
+		// (Renvoie tous les sites par défaut (page d'accueil de la recherche))
+		if (this.statut == 0) {
 			System.out.println("Réinit");
 			System.out.println(this.statut);
-		this.lastPage = managerFactory.getSiteManager().getCount(this.pageSize, this.start);
-		System.out.println(this.lastPage);
-		this.listSite = managerFactory.getSiteManager().getListSite(this.pageSize, this.start);
-		if (session.containsKey("lastPage")) {
-		session.replace("lastPage", this.lastPage);}
-		else session.put("lastPage", this.lastPage);
-		
-		if (session.containsKey("listSiteOffSet")) {
-		session.replace("listSiteOffSet", this.listSite);}
-		else session.put("listSiteOffSet", this.listSite);
+			this.lastPage = managerFactory.getSiteManager().getCount(this.pageSize, this.start);
+			System.out.println(this.lastPage);
+			this.listSite = managerFactory.getSiteManager().getListSite(this.pageSize, this.start);
+			if (session.containsKey("lastPage")) {
+				session.replace("lastPage", this.lastPage);
+			} else
+				session.put("lastPage", this.lastPage);
+
+			if (session.containsKey("listSiteOffSet")) {
+				session.replace("listSiteOffSet", this.listSite);
+			} else
+				session.put("listSiteOffSet", this.listSite);
 		}
 		
-		ArrayList<Object> recherche= new ArrayList<Object>();
-		if(this.recherche!=null) {
-		recherche=(ArrayList<Object>) managerFactory.getSiteManager().getListSiteRecherche(this.pageSize, this.start, this.recherche);
+		//Liste qui comprendra notre liste recherchée ainsi que le numéro de la dernière apge
+		ArrayList<Object> recherche = new ArrayList<Object>();
 		
-		this.lastPage=(Integer) recherche.get(0);
-		this.listSite =(List<Site>) recherche.get(1);
-		
-		session.put("listSite", this.listSite);
-		if (session.containsKey("lastPage")) {
-		session.replace("lastPage", this.lastPage);}
-		else session.put("lastPage", this.lastPage);
-		this.statut=1;
-		if (session.containsKey("statut")) {
-		session.replace("statut", this.statut);}
-		else session.put("statut", this.statut);
-		
-		
+		//Recherche en Bd en fonction des critères 
+		if (this.recherche != null) {
+			recherche = (ArrayList<Object>) managerFactory.getSiteManager().getListSiteRecherche(this.pageSize,
+					this.start, this.recherche);
+
+			this.lastPage = (Integer) recherche.get(0);
+			this.listSite = (List<Site>) recherche.get(1);
+			
+			//Enregistrement de la liste obtenue en session
+			session.put("listSite", this.listSite);
+			//Enregistrement de la dernière page en session
+			if (session.containsKey("lastPage")) {
+				session.replace("lastPage", this.lastPage);
+			} else
+				session.put("lastPage", this.lastPage);
+			//Changement du statut pour ne plus obtenir tous les sites par défaut
+			this.statut = 1;
+			if (session.containsKey("statut")) {
+				session.replace("statut", this.statut);
+			} else
+				session.put("statut", this.statut);
+
 		}
 		System.out.println(this.statut);
-		
-		
+
 		if (session.containsKey("statut")) {
-		this.statut = (int) session.get("statut");}
+			this.statut = (int) session.get("statut");
+		}
 		System.out.println(this.statut);
 		if (session.containsKey("listSite")) {
-		this.listSite = (List<Site>) session.get("listSite");}
-		if(this.statut==1) {
-		this.listSiteOffset=managerFactory.getSiteManager().doOffSet(this.listSite,this.start,this.pageSize);
-		session.replace("listSiteOffSet", this.listSiteOffset);}
-		
+			this.listSite = (List<Site>) session.get("listSite");
+		}
+		//Offset de la liste obtenue qui sera renvoyée à la vue
+		if (this.statut == 1) {
+			this.listSiteOffset = managerFactory.getSiteManager().doOffSet(this.listSite, this.start, this.pageSize);
+			session.replace("listSiteOffSet", this.listSiteOffset);
+		}
+
 		return ActionSupport.SUCCESS;
-		
+
 	}
 
 	/**
@@ -336,14 +371,11 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		this.listType.add("Falaise");
 		this.listType.add("Bloc");
 		this.listType.add("Artificiel");
-		
-		
-		
+
 		session.put("listeOrientation", this.listeOrientation);
 		session.put("listeCotation", this.listeCotation);
 		session.put("listePays", this.listePays);
 		session.put("listeType", this.listType);
-		
 
 		// ----------ENREGISTREMENT DU SITE----------
 
@@ -352,8 +384,6 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 			if (this.site.getNom().length() == 0 || this.site.getNom() == null) {
 				this.addFieldError("site.nom", "ne doit pas être vide");
 			}
-
-
 
 			// Enregistrement de l'image
 			if (this.file != null) {
@@ -384,26 +414,26 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 					// pour les relations en base de données
 
 					// Situation et Coordonnées
-					//this.situation.setSite(this.site);
-					//this.coordonnee.setSite(this.site);
+					// this.situation.setSite(this.site);
+					// this.coordonnee.setSite(this.site);
 
 					// Altitudes
 					if (this.altMax.getAlt() != null) {
 						System.out.println("non null");
 						this.altMax.setTypeAlt("max");
-						//this.altMax.setSite(this.site);
+						// this.altMax.setSite(this.site);
 						this.listeAltitudeOut.add(this.altMax);
 					}
 					if (this.altMin.getAlt() != null) {
 						System.out.println("non null");
 						this.altMin.setTypeAlt("min");
-						//this.altMin.setSite(this.site);
+						// this.altMin.setSite(this.site);
 						this.listeAltitudeOut.add(this.altMin);
 					}
 					if (this.altMoy.getAlt() != null) {
 						System.out.println("non null");
 						this.altMoy.setTypeAlt("moy");
-						//this.altMoy.setSite(this.site);
+						// this.altMoy.setSite(this.site);
 						this.listeAltitudeOut.add(this.altMoy);
 					}
 
@@ -415,14 +445,13 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 					if (session.containsKey("listOrientation"))
 						this.listeOrientation = (List<Orientation>) session.get("listOrientation");
-					
+
 					if (session.containsKey("listState"))
 						this.listeState = (List<State>) session.get("listState");
-					
-					
+
 					if (this.cotMinValue != null) {
 						this.cotMin = new Cotation();
-						//this.cotMin.setSite(this.site);
+						// this.cotMin.setSite(this.site);
 						this.cotMin.setTypeCot("min");
 
 						// Récupération des objets dans les listes précédemment récupérée en BD
@@ -437,7 +466,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 					if (this.cotMaxValue != null) {
 						this.cotMax = new Cotation();
-						//this.cotMax.setSite(this.site);
+						// this.cotMax.setSite(this.site);
 						this.cotMax.setTypeCot("max");
 						// Récupération des objets dans les listes précédemment récupérée en BD
 						for (ListCot j : this.listeCotation) {
@@ -462,30 +491,25 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 							}
 						}
 					}
-					
+
 					for (Pays p : this.listePays) {
 						if (this.paysIdOut.equals(p.getId())) {
 							this.site.setPays(p);
 
-						
-							
 						}
-	
+
 					}
-					
+
 					for (State s : this.listeState) {
 						if (this.stateIdOut.equals(s.getId())) {
 							this.site.setState(s);
-							
+
 						}
-				
-						
+
 					}
-					
-					
 
 					// Insertion de chaque élément dans le site avant insertion en BD
-					
+
 					this.site.setCoordonnee(this.coordonnee);
 					if (this.listeOrientationOut != null)
 						this.site.setListeOrientation(this.listeOrientationOut);
@@ -516,8 +540,6 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		}
 		return result;
 	}
-	
-
 
 	// -------------- Getters et Setters----------------
 	// -------------------------------------------------
@@ -569,7 +591,6 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	public void setSite(Site site) {
 		this.site = site;
 	}
-
 
 	public Coordonnee getCoordonnee() {
 		return coordonnee;
@@ -780,7 +801,5 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	public void setStatut(int statut) {
 		this.statut = statut;
 	}
-
-
 
 }

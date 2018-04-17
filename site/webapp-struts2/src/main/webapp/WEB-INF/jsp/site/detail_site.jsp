@@ -135,6 +135,133 @@ Ajout d'un secteur
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+         <h5 class="collapsible-title mt-3" data-toggle="collapse" data-target="#associated-voie" aria-expanded="true" aria-controls="associated-voie">
+      	   		<i class="fa fa-tree"></i> Voies <i class="fa fa-arrow-down"></i>
+      	    </h5>
+      	    
+      	    <div class="collapse collapse show mt-3 mb-3" id="associated-voie" aria-expanded="true">
+    		
+      		<div class="card card-body bg-light text-dark rounded">
+      	
+        
+     		     	
+				 <s:iterator value="site.listeVoie">
+				 <ul>
+				 		<li> <h5> <s:property value="nom" /> 				 		
+				 		<button class="btn btn-secondary btn-sm m3"  data-toggle="modal" data-target="#myModal3">
+ 							 Description
+						</button></h5> 
+				 		<p>
+				 		<b>Type :</b> <s:property value="typeVoie" /> 
+				 		<b>Hauteur :</b> <s:property value="hauteur" /> 
+				 		<b>Nombre de points :</b> <s:property value="nbPoint" />
+				 		<b>Difficulté :</b> <s:property value="cotation.cot" /> </p></li>
+				 		
+				 					<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalDesc" aria-hidden="true">
+									<div class="modal-dialog">
+									<div class="modal-content">
+									<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									
+									</div>
+									<div class="modal-body">
+									<h5 class="modal-title text-left"  id="myModalDesc">
+									Description
+									</h5>
+									
+									<p><s:property value="description" /></p>
+									
+									</div>
+									</div><!-- /.modal-content -->
+									</div><!-- /.modal-dialog -->
+									</div><!-- /.modal -->
+									
+									
+
+				</ul> 		
+				</s:iterator> 
+				
+
+       		</div>
+       		</div>
+
+
+
+        	<button class="btn btn-primary btn-md m3"  data-toggle="modal" data-target="#myModal2">
+  Ajouter une voie
+			</button>
+			<!-- Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalVoie" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+</div>
+<div class="modal-body">
+<h5 class="modal-title text-left"  id="myModalVoie">
+Ajout d'une voie
+</h5>
+<s:form action="add_voie" method="post" cssClass="well form-vertical " theme="bootstrap" enctype="multipart/form-data">
+		    
+		    <s:textfield
+			class="form-control col-9"
+            label="Nom de la voie" 
+            name="voie.nom" 
+            requiredLabel="true"
+            />
+            
+            <s:textfield
+			class="form-control col-9"
+            label="Type de voie" 
+            name="voie.typeVoie" 
+            requiredLabel="true"
+            />
+            
+            <s:textfield
+			class="form-control col-9"
+            label="Nombre de points" 
+            name="voie.nbPoint" 
+            requiredLabel="true"
+            />
+            
+            <s:textfield
+			class="form-control col-9"
+            label="Hauteur" 
+            name="voie.hauteur" 
+            requiredLabel="true"
+            />
+            
+            		<s:select 
+			label="Cotation de la voie"
+			required="true"
+       		name="cotVoie"
+       		list="session.listeCotation"
+        	listKey="id"
+       		listValue="cot"
+       		value="%{listeCotation.{id}}"
+ 		/>
+		       
+       	 	<s:textarea 
+        	class="form-control" 
+        	rows="5" 
+        	name="voie.description" 
+        	label="Description de la voie" 	
+        	requiredLabel="true" 
+        	/>
+        	
+        	<s:hidden  value="%{site.id}" name="site.id"></s:hidden>
+        	
+        	
+        	
+        	<s:submit class="btn btn-primary mb-3" value="Ajouter une voie"/>
+        	
+        	</s:form>
+</div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
         
           <h5 class="collapsible-title mt-3" data-toggle="collapse" data-target="#associated-comment" aria-expanded="true" aria-controls="associated-comment">
       	   		<i class="fa fa-comment-o"></i> Commentaires <i class="fa fa-arrow-down"></i>
@@ -144,12 +271,14 @@ Ajout d'un secteur
     		
       		<div class="card card-body bg-light text-dark rounded">
       	
-        
-     		     	
-				 <s:iterator value="site.listeComment">
-				 		<h6><s:property value="date" /> <s:property value="user.pseudo" /></h6>
+        			
+        			<s:bean name="fr.mb.projet.converter.DateComp" var="DateComp"/>
+     		     <s:sort comparator="#DateComp" source="site.listeComment">
+				 <s:iterator >
+				 		<h6>Posté le : <s:date  format="dd/MM/yyyy" name="date" /> par <s:property value="user.pseudo" /></h6>
   						<p><s:property value="message" /></p>
 				</s:iterator> 
+				</s:sort>
 				
 		
        		</div>

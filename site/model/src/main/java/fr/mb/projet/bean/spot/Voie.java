@@ -66,8 +66,8 @@ public class Voie {
 	/**
 	 * Relation n-1 avec un Site
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "site_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name="site_id")
 	private Site site;
 
 	public Voie() {
@@ -135,6 +135,7 @@ public class Voie {
 	}
 
 	public void setSite(Site site) {
+		site.getListeVoie().add(this);
 		this.site = site;
 	}
 

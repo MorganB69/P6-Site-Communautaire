@@ -134,7 +134,7 @@ public class SiteManagerImpl implements SiteManager {
 		List<Site>list=new ArrayList<Site>();
 
 		
-		list = siteDao.recherche(nbPage, offset,recherche);
+		list = siteDao.rechercheNew(nbPage, offset,recherche);
 		
 
 		double page = (double) nbPage;

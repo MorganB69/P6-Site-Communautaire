@@ -315,5 +315,136 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	public List<Site> rechercheNew(Integer nbPage, Integer offset, RechercheSite recherche) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		//Liste à retourner
+		List<Site>listReturn=new ArrayList<Site>();
+		
+		//-------------CREATION REQUETE HQL DYNAMIQUE--------------
+		
+		//-------------SELECTION DES SITES-------------
+		String SQL = " SELECT site FROM Site as site ";
+		
+		//-------------JOINTURES OBLIGATOIRES---------------
+			  SQL += " JOIN site.listeCotation as cotation ";
+		
+		//-------------JOINTURES FACULTATIVES----------------
+		//Altitudes
+		if(recherche.getrAltMax()!=null||recherche.getrAltMin()!=null) {
+			  SQL += " JOIN site.listeAltitude as altitude ";
+		}
+		//Orientation
+		if(recherche.getrOrient()!=10000) {
+			  SQL += " JOIN site.listeOrientation as orientation ";
+			  }
+		
+		//-------------CRITERE DE RECHERCHE---------------
+		
+		//-------------CRITERES OBLIGATOIRES---------------
+		
+			  SQL+=" WHERE (cotation.typeCot=(:cotMaxType) AND cotation.cot.id<=(:cotMax))";
+			  
+		//-----------sous requête obligatoire--------------
+			  
+			  SQL+=" AND site.id IN(SELECT site from Site as site "
+				+ " JOIN site.listeCotation as cotation "
+				+ " WHERE (cotation.typeCot=(:cotMinType) AND cotation.cot.id>=(:cotMin))) ";
+			  
+		//-----------CRITERES FACULTATIFS-------------------
+		
+		//Altitude Minimum
+		if(recherche.getrAltMin()!=null) {
+			SQL+=" AND (altitude.typeAlt=(:altMinType) AND altitude.alt>(:altMin)) ";}
+
+		//Altitude Maximum
+		if(recherche.getrAltMax()!=null) {
+			SQL+=" AND site.id IN(SELECT site from Site as site "
+				+ " JOIN site.listeAltitude as altitude "
+				+ " WHERE (altitude.typeAlt=(:altMaxType) AND altitude.alt<(:altMax))) ";
+		}
+
+		//Orientation
+		if(recherche.getrOrient()!=10000) {
+			 SQL += " AND (orientation.id=(:orient)) ";
+			  }
+		
+		//Pays
+		if(recherche.getrPays()!=10000) {
+			 SQL += " AND (site.pays.id=(:paysId)) ";
+			  }
+		
+		//State
+		if(recherche.getrDepartement()!=10000) {
+			 SQL += " AND (site.state.id=(:stateId)) ";
+			  }
+		
+		//Type
+		if(recherche.getrType().equals("ALL")==false) {
+			SQL += " AND (site.type=(:type)) ";
+			
+		}
+		
+		//TRI
+		SQL+=" ORDER BY site.id DESC ";
+		
+		
+		//CREATION DE LA QUERY
+		Query query = session.createQuery(SQL);
+		
+		//PARAMETRAGE
+		//----------Obligatoire-------------------------
+		query.setParameter("cotMinType", "min");
+		query.setParameter("cotMin", recherche.getrCotMin());
+		query.setParameter("cotMaxType", "max");
+		query.setParameter("cotMax", recherche.getrCotMax());
+		
+	
+		
+		//---------Conditions--------------------------
+		
+		// Altitude
+		if(recherche.getrAltMin()!=null) {
+			 query.setParameter("altMinType", "min");
+			 query.setParameter("altMin", recherche.getrAltMin());
+			
+		}
+
+		
+		if(recherche.getrAltMax()!=null) {
+			query.setParameter("altMaxType", "max");
+			 query.setParameter("altMax", recherche.getrAltMax());
+		}
+		
+		
+		//Orientation
+		if(recherche.getrOrient()!=10000) {
+			query.setParameter("orient", recherche.getrOrient());
+		}
+		
+		//Pays
+		if(recherche.getrPays()!=10000) {
+			query.setParameter("paysId", recherche.getrPays());
+		}
+		
+		//States
+		if(recherche.getrDepartement()!=10000) {
+			query.setParameter("stateId", recherche.getrDepartement());
+		}
+		//Type
+		if(recherche.getrType().equals("ALL")==false) {
+			query.setParameter("type", recherche.getrType());
+			
+		}
+		//Recherche des résultats de la Query
+		listReturn=query.getResultList();		
+
+		session.close();		
+		
+		return listReturn;
+	}
 
 }

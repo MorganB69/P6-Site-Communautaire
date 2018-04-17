@@ -10,7 +10,7 @@ import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import fr.mb.projet.contract.CommentManager;
+import fr.mb.projet.contract.AjoutManager;
 import fr.mb.projet.contract.DetailManager;
 import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.contract.SiteManager;
@@ -51,10 +51,9 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	private DetailManager<?> stateManager;
 	
 	@Inject
-	private CommentManager<?> commentManager;
+	private AjoutManager<?> ajoutManager;
 	
-	@Inject
-	private CommentManager<?> secteurManager;
+
 	
 	
 	
@@ -118,14 +117,14 @@ public class ManagerFactoryImpl implements ManagerFactory {
 		return stateManager;
 	}
 
-	public CommentManager<?> getCommentManager() {
-		return commentManager;
+	public AjoutManager<?> getCommentManager() {
+		return ajoutManager;
 	}
 
 
 
-	public CommentManager<?> getSecteurManager() {
-		return secteurManager;
+	public AjoutManager<?> getSecteurManager() {
+		return ajoutManager;
 	}
 	
 	
@@ -141,14 +140,26 @@ public class ManagerFactoryImpl implements ManagerFactory {
 
 
 	@Override
-	public void SetCommentManager(CommentManager<?> pCommentManager) {
-		this.commentManager = pCommentManager;
+	public void SetCommentManager(AjoutManager<?> pCommentManager) {
+		this.ajoutManager = pCommentManager;
 		
 	}
 
 	@Override
-	public void SetSecteurManager(CommentManager<?> pCommentManager) {
-		this.secteurManager = pCommentManager;
+	public void SetSecteurManager(AjoutManager<?> pCommentManager) {
+		this.ajoutManager = pCommentManager;
+		
+	}
+
+	@Override
+	public AjoutManager<?> getVoieManager() {
+		// TODO Auto-generated method stub
+		return ajoutManager;
+	}
+
+	@Override
+	public void SetVoieManager(AjoutManager<?> pCommentManager) {
+	this.ajoutManager=pCommentManager;
 		
 	}
 

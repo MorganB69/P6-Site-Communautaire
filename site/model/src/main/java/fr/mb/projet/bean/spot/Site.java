@@ -104,7 +104,7 @@ public class Site implements Serializable{
 	/**
 	 * Relation 1-n avec Voie
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "site")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site")
 	private Set <Voie> listeVoie=new HashSet<Voie>();
 	
 	/**

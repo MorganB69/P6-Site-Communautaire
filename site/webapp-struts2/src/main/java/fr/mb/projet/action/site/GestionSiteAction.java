@@ -311,12 +311,12 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 				session.put("statut", this.statut);
 
 		}
-		System.out.println(this.statut);
+		
 
 		if (session.containsKey("statut")) {
 			this.statut = (int) session.get("statut");
 		}
-		System.out.println(this.statut);
+		
 		if (session.containsKey("listSite")) {
 			this.listSite = (List<Site>) session.get("listSite");
 		}
@@ -336,6 +336,9 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * @return Succes si pas d'erreur et Error si une erreur est présente
 	 */
 	public String doDetail() {
+		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
+		session.put("listeCotation", this.listeCotation);
+		
 		if (id == null) {
 			this.addActionError(getText("error.project.missing.id"));
 		} else {

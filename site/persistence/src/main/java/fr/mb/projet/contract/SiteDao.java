@@ -76,6 +76,8 @@ public interface SiteDao extends Serializable{
 	 * @return
 	 */
 	public Long getCountRecherche();
+	
+	public List<Site> rechercheNew(Integer nbPage, Integer offset, RechercheSite recherche);
 
 	
 }

@@ -149,7 +149,7 @@ Ajout d'un secteur
 				 <s:iterator value="site.listeVoie">
 				 <ul>
 				 		<li> <h5> <s:property value="nom" /> 				 		
-				 		<button class="btn btn-secondary btn-sm m3"  data-toggle="modal" data-target="#myModal3">
+				 		<button class="btn btn-secondary btn-sm m3"  data-toggle="modal" data-target="#<s:property value="voieId"/>">
  							 Description
 						</button></h5> 
 				 		<p>
@@ -158,7 +158,7 @@ Ajout d'un secteur
 				 		<b>Nombre de points :</b> <s:property value="nbPoint" />
 				 		<b>Difficulté :</b> <s:property value="cotation.cot" /> </p></li>
 				 		
-				 					<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalDesc" aria-hidden="true">
+				 					<div class="modal fade" id="<s:property value="voieId"/>" tabindex="-1" role="dialog" aria-labelledby="myModalDesc" aria-hidden="true">
 									<div class="modal-dialog">
 									<div class="modal-content">
 									<div class="modal-header">

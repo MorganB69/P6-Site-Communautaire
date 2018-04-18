@@ -1,13 +1,20 @@
 package fr.mb.projet.bean.user;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import fr.mb.projet.bean.spot.Secteur;
+import fr.mb.projet.bean.topo.Topo;
 
 /**
  * Classe pour définir un Utilisateur
@@ -46,6 +53,12 @@ public class Utilisateur implements Serializable {
 	 */
 	@Column(name = "mail")
 	private String mail;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "emprunteur")
+	private Set <Topo> listeTopoEmprunt=new HashSet<Topo>();
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "proprietaire")
+	private Set <Topo> listeTopoPret=new HashSet<Topo>();
 
 	public Utilisateur() {
 
@@ -89,6 +102,22 @@ public class Utilisateur implements Serializable {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public Set<Topo> getListeTopoEmprunt() {
+		return listeTopoEmprunt;
+	}
+
+	public void setListeTopoEmprunt(Set<Topo> listeTopoEmprunt) {
+		this.listeTopoEmprunt = listeTopoEmprunt;
+	}
+
+	public Set<Topo> getListeTopoPret() {
+		return listeTopoPret;
+	}
+
+	public void setListeTopoPret(Set<Topo> listeTopoPret) {
+		this.listeTopoPret = listeTopoPret;
 	}
 
 }

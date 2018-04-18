@@ -148,9 +148,51 @@
 				<param name="id">${site.id}</param>		
 			</result>
 		</action>
+		
+				<action name="lier_topo" class="fr.mb.projet.action.site.GestionSiteAction"
+			method="lierTopo">
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>	
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			
+			<result name="input" type="redirectAction">
+				<param name="actionName"> detail_site </param>
+				<param name="id">${site.id}</param>		
+			</result>
+			
+			<result name="success" type="redirectAction">
+				<param name="actionName"> detail_site </param>
+				<param name="id">${site.id}</param>		
+			</result>
+		</action>
 
 
+<!-- AJOUTER DES TOPOS -->
+		<action name="add_topo" class="fr.mb.projet.action.topo.GestionTopoAction"
+				method="addTopo">
+<interceptor-ref name="loginInterceptor"></interceptor-ref>	
+<interceptor-ref name="defaultStack">
+    <param name="fileUpload.maximumSize">2097152</param>
+    <param name="fileUpload.allowedTypes">
+        image/png,image/gif,image/jpeg,image/pjpeg
+    </param>  
+              
+</interceptor-ref>
+				
+			<result name="input">/WEB-INF/jsp/topo/add_topo.jsp </result>
 
+			<result name="success" type="redirectAction">
+				<param name="actionName"> detail_topo </param>
+				<param name="id">${topo.id}</param>
+			</result>
+		</action>
+		
+		
+				<!-- DETAIL DES SITES -->
+		<action name="detail_topo" class="fr.mb.projet.action.topo.GestionTopoAction"
+			method="doDetail">
+			<result name="input">/WEB-INF/jsp/topo/detail_topo.jsp </result>
+			<result>/WEB-INF/jsp/topo/detail_topo.jsp</result>
+		</action>
 
 
 

@@ -64,8 +64,9 @@
 						aria-haspopup="true" aria-expanded="false"> TOPOS </a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownBlog">
+						<s:a class="dropdown-item" action="add_topo">PROPOSER UN TOPO</s:a>
 						<a class="dropdown-item" href="#">TROUVER UN TOPO</a>
-						<a class="dropdown-item" href="#">PROPOSER UN TOPO</a>
+						
 						
 					</div>
 				</li>

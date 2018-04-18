@@ -41,6 +41,8 @@ public interface ManagerFactory {
 	
 	public void SetVoieManager(AjoutManager<?> pCommentManager);
 	
+	public TopoManager getTopoManager();
 	
+	public void setTopoManager(TopoManager pTopoManager);
 
 }

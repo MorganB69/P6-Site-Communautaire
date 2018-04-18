@@ -56,6 +56,11 @@ body {
 	max-width : 980px;
 	overflow: hidden;
 }
+#detailImgTopo{
+	margin : 1%;
+	background-color :#ddefff;
+	overflow: hidden;
+}
 
 #detail-cont{
 

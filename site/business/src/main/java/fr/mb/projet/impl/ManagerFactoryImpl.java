@@ -14,6 +14,7 @@ import fr.mb.projet.contract.AjoutManager;
 import fr.mb.projet.contract.DetailManager;
 import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.contract.SiteManager;
+import fr.mb.projet.contract.TopoManager;
 import fr.mb.projet.contract.UserManager;
 
 
@@ -35,6 +36,10 @@ public class ManagerFactoryImpl implements ManagerFactory {
 
 	@Inject
 	private SiteManager siteManager;
+	
+	@Inject
+	private TopoManager topoManager;
+	
 	@Inject
 	private UserManager userManager;
 	
@@ -161,6 +166,14 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	public void SetVoieManager(AjoutManager<?> pCommentManager) {
 	this.ajoutManager=pCommentManager;
 		
+	}
+
+	public TopoManager getTopoManager() {
+		return topoManager;
+	}
+
+	public void setTopoManager(TopoManager topoManager) {
+		this.topoManager = topoManager;
 	}
 
 

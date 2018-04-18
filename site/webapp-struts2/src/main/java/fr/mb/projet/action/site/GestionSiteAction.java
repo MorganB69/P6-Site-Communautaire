@@ -28,6 +28,7 @@ import fr.mb.projet.bean.detail.Pays;
 import fr.mb.projet.bean.detail.Situation;
 import fr.mb.projet.bean.detail.State;
 import fr.mb.projet.bean.spot.Site;
+import fr.mb.projet.bean.topo.Topo;
 import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.exception.FunctionalException;
 import fr.mb.projet.exception.NotFoundException;
@@ -125,6 +126,11 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Liste pour l'affichage de site
 	 */
 	private List<Site> listSite = new ArrayList<Site>();
+	
+	/**
+	 * Liste pour l'affichage de site
+	 */
+	private List<Topo> listTopo = new ArrayList<Topo>();
 
 	/**
 	 * Attribut en sortie pour alimenter le Site
@@ -165,6 +171,8 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Attribut en sortie de l'ID d'une région
 	 */
 	private Integer stateIdOut;
+	
+	private Integer topoIdOut;
 
 	/**
 	 * Liste des types de site à choisir dans le formulaire de rajout d'un site
@@ -338,6 +346,12 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	public String doDetail() {
 		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
 		session.put("listeCotation", this.listeCotation);
+		
+
+			this.listTopo = (List<Topo>) managerFactory.getTopoManager().getListAllTopo();
+			session.put("listTopo", this.listTopo);
+		
+		
 		
 		if (id == null) {
 			this.addActionError(getText("error.project.missing.id"));
@@ -542,6 +556,39 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 		}
 		return result;
+	}
+	
+	public String lierTopo() {
+		
+		if (session.containsKey("listTopo"))
+			this.listTopo = (List<Topo>) session.get("listTopo");
+		else
+			this.listTopo = (List<Topo>) managerFactory.getTopoManager().getListAllTopo();
+		
+		try {
+			this.site = (Site) managerFactory.getSiteManager().getSite(this.site.getId());
+			for (Topo t : this.listTopo) {
+				if (this.topoIdOut == t.getId()) {
+					this.site.getListeTopo().add(t);
+					t.getListeSite().add(this.site);
+				}
+			}
+			this.managerFactory.getSiteManager().update(this.site);
+			
+			
+			
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		
+		
+		
+		
+		
+		return ActionSupport.SUCCESS;
 	}
 
 	// -------------- Getters et Setters----------------
@@ -803,6 +850,22 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 	public void setStatut(int statut) {
 		this.statut = statut;
+	}
+
+	public List<Topo> getListTopo() {
+		return listTopo;
+	}
+
+	public void setListTopo(List<Topo> listTopo) {
+		this.listTopo = listTopo;
+	}
+
+	public Integer getTopoIdOut() {
+		return topoIdOut;
+	}
+
+	public void setTopoIdOut(Integer topoIdOut) {
+		this.topoIdOut = topoIdOut;
 	}
 
 }

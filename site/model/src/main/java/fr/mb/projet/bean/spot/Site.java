@@ -35,6 +35,7 @@ import fr.mb.projet.bean.detail.Orientation;
 import fr.mb.projet.bean.detail.Pays;
 import fr.mb.projet.bean.detail.Situation;
 import fr.mb.projet.bean.detail.State;
+import fr.mb.projet.bean.topo.Topo;
 /**
  * Classe principale permettant de définir un Site
  * @author Morgan
@@ -136,20 +137,39 @@ public class Site implements Serializable{
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
 	private Set <Cotation> listeCotation=new HashSet<Cotation>();
 	
+	/**
+	 * Relation n-1 avec Pays
+	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="country_id")
 	private Pays pays;
 	
+	/**
+	 *Relation n-1 avec State 
+	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="state_id")
 	private State state;
 	
 	
+	/**
+	 *Définit le type d'un site 
+	 */
 	@Column(name = "type")
 	private String type;
 	
+	/**
+	 *Relations 1-n pour les commentaires d'un site 
+	 */
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site")
 	private Set <Comment> listeComment=new HashSet<Comment>();
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "topo_site",catalog = "projet", joinColumns = { 
+	@JoinColumn(name = "site_id",  nullable = false, updatable = false) }, 
+				inverseJoinColumns = { @JoinColumn(name = "topo_id", 
+				nullable = false, updatable = false) })
+	private Set<Topo> listeTopo=new HashSet<Topo>();
 	
 	
 	public Site() {
@@ -336,6 +356,14 @@ public class Site implements Serializable{
 
 	public void setListeComment(Set<Comment> listeComment) {
 		this.listeComment = listeComment;
+	}
+
+	public Set<Topo> getListeTopo() {
+		return listeTopo;
+	}
+
+	public void setListeTopo(Set<Topo> listeTopo) {
+		this.listeTopo = listeTopo;
 	}
 
 

@@ -65,7 +65,7 @@
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownBlog">
 						<s:a class="dropdown-item" action="add_topo">PROPOSER UN TOPO</s:a>
-						<a class="dropdown-item" href="#">TROUVER UN TOPO</a>
+						<s:a class="dropdown-item"  action="liste_topo">TROUVER UN TOPO</s:a>
 						
 						
 					</div>
@@ -75,15 +75,18 @@
 				
 			</ul>
 		</div>
-						<s:if test="#session.user">
-            Utilisateur connecté :
+			
+			<s:if test="#session.user">
+            Bienvenue 
             
-            <s:property value="#session.user.nom" />
+            <s:property value="#session.user.pseudo" />
+            <s:a action="acces_perso" class="btn btn-outline-primary my-2 my-sm-0 justify-content-right m-3">Espace personnel</s:a>
 
-            <s:a action="logout" class="btn btn-outline-primary my-2 my-sm-0 justify-content-right">Deconnexion</s:a>
+            <s:a action="logout" class="btn btn-outline-primary my-2 my-sm-0 justify-content-right m-3">Deconnexion</s:a>
+    		
     		</s:if>
     			<s:else>
-       				 <s:a action="login" class="btn btn-outline-primary my-2 my-sm-0 justify-content-right">Connexion</s:a>
+       				 <s:a action="login" class="btn btn-outline-primary my-2 my-sm-0 justify-content-right m-3">Connexion</s:a>
     			</s:else>
 	
 	</nav>

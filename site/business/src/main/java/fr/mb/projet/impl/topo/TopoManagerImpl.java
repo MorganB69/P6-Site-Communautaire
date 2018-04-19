@@ -34,8 +34,10 @@ public class TopoManagerImpl implements TopoManager {
 
 	@Override
 	public List<Topo> getListTopo(Integer nbPage, Integer start) {
-		// TODO Auto-generated method stub
-		return null;
+		Integer offset = (start - 1) * nbPage;
+		List<Topo> list = topoDao.findAll(nbPage, offset);
+
+		return list;
 	}
 
 	@Override
@@ -55,8 +57,15 @@ public class TopoManagerImpl implements TopoManager {
 
 	@Override
 	public Integer getCount(Integer pageSize, Integer start) {
-		// TODO Auto-generated method stub
-		return null;
+		Long nbTopo = topoDao.getCount();
+
+		
+		double page = (double) pageSize;
+
+		double lastPageNumber = (Math.ceil(nbTopo / page));
+
+		int value = (int) lastPageNumber;
+		return value;
 	}
 
 	@Override

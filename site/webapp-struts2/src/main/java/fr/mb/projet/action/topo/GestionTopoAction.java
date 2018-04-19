@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 import fr.mb.projet.bean.spot.Site;
+import fr.mb.projet.bean.topo.Pret;
 import fr.mb.projet.bean.topo.Topo;
 import fr.mb.projet.bean.user.Utilisateur;
 import fr.mb.projet.contract.ManagerFactory;
@@ -43,11 +45,26 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	 */
 	private Utilisateur proprietaire;
 	
+	/**
+	 * Pour définir l'utilisateur en cours sur le site
+	 */
+	private Utilisateur user;
 	
+	
+	public Utilisateur getUser() {
+		return user;
+	}
+
+	public void setUser(Utilisateur user) {
+		this.user = user;
+	}
+
 	/**
 	 * Pour définir l'emprunteur d'un topo s'il y en a un
 	 */
 	private Utilisateur emprunteur;
+	
+	private Pret DemandePret;
 	
 	/**
 	 * Classe Topo pour obtenir ou rajouter des détails au topo
@@ -75,6 +92,21 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	 */
 	private Integer id;
 	
+	/**
+	 * Pour définir si le topo visité est déjà en demande d'emprunt par l'utilisateur
+	 */
+	private Boolean topoEmprunt=false;
+	
+	private List<Topo>listeTopo=new ArrayList<Topo>();
+
+	private Integer pageSize=12;
+
+	private Integer start=0;
+
+	private Object lastPage;
+	
+	
+	
 	// METHODES
 	
 	/**
@@ -89,8 +121,16 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 		
 		String result = ActionSupport.INPUT;
 		
-		if(this.topo!=null) {
 		
+		
+		if(this.topo!=null) {
+			// -------------- Validation des données saisies--------------
+			if (this.topo.getAuteur().length() == 0 || this.topo.getAuteur() == null) {
+				this.addFieldError("topo.auteur", "ne doit pas être vide");
+			}
+			if (this.topo.getTitre().length() == 0 || this.topo.getTitre() == null) {
+				this.addFieldError("topo.titre", "ne doit pas être vide");
+			}
 		
 		// Enregistrement de l'image
 					if (this.file != null) {
@@ -107,7 +147,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 					}
 					// Si image null, enregistrement d'une image par défaut
 					else
-						this.topo.setImage("defautTopo.jpg");
+						this.topo.setImage("defautTopo.png");
 					
 					if (!this.hasErrors()) {
 						try {
@@ -148,6 +188,12 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	 * @return succès lorsque la liste est obtenue
 	 */
 	public String doList() {
+		
+		this.lastPage = managerFactory.getTopoManager().getCount(this.pageSize, this.start);
+		
+		this.listeTopo = managerFactory.getTopoManager().getListTopo(this.pageSize, this.start);
+		session.put("lastPageTopo", this.lastPage);
+		session.put("listTopo", this.listeTopo);
 		return ActionSupport.SUCCESS;
 	}
 	
@@ -160,9 +206,20 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 			this.addActionError(getText("error.project.missing.id"));
 		} else {
 			try {
-
+				this.user = (Utilisateur) session.get("user");
 				topo = (Topo) managerFactory.getTopoManager().getTopo(id);
-
+				
+				if (this.user!=null) {
+					System.out.println("Dans la boucle");
+				for (Iterator iterator = topo.getListePret().iterator(); iterator.hasNext();) {
+					Pret pret = (Pret) iterator.next();
+					System.out.println(pret.getEmprunteur().getNom());
+					if (pret.getEmprunteur().getId()==this.user.getId())this.topoEmprunt=true;
+					
+					
+				}
+				}
+				System.out.println(this.topoEmprunt);
 			} catch (NotFoundException Notfound) {
 				this.addActionError(getText("error.project.notfound", Collections.singletonList(id)));
 			}
@@ -171,6 +228,39 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
 	}
 	
+	public String reservation() {
+		
+		try {
+			this.emprunteur = (Utilisateur) session.get("user");
+			
+			this.topo = (Topo) managerFactory.getTopoManager().getTopo(this.id);
+			
+			this.DemandePret=new Pret();
+			this.DemandePret.setEmprunteur(this.emprunteur);
+			this.DemandePret.setTopo(this.topo);
+			this.DemandePret.setStatut("En cours");
+			
+			try {
+				managerFactory.getPretManager().insert(this.DemandePret);
+				addActionMessage("Votre demande a bien été effectuée");
+				this.topoEmprunt=true;
+			} catch (FunctionalException | TechnicalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
+	}
+		
+		
+		
 	
 	
 	
@@ -242,8 +332,48 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 		return emprunteur;
 	}
 
+	public Pret getDemandePret() {
+		return DemandePret;
+	}
+
+	public void setDemandePret(Pret demandePret) {
+		DemandePret = demandePret;
+	}
+
 	public void setEmprunteur(Utilisateur emprunteur) {
 		this.emprunteur = emprunteur;
+	}
+
+	public Boolean getTopoEmprunt() {
+		return topoEmprunt;
+	}
+
+	public void setTopoEmprunt(Boolean topoEmprunt) {
+		this.topoEmprunt = topoEmprunt;
+	}
+
+	public List<Topo> getListeTopo() {
+		return listeTopo;
+	}
+
+	public void setListeTopo(List<Topo> listeTopo) {
+		this.listeTopo = listeTopo;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public Integer getStart() {
+		return start;
+	}
+
+	public void setStart(Integer start) {
+		this.start = start;
 	}
 	
 	

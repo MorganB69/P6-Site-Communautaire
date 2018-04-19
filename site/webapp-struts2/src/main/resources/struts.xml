@@ -39,6 +39,12 @@
 			<result>/WEB-INF/jsp/site/list.jsp</result>
 		</action>
 		
+		<!-- LISTE DES Topo -->
+		<action name="liste_topo" class="fr.mb.projet.action.topo.GestionTopoAction"
+			method="doList">
+			<result>/WEB-INF/jsp/topo/listTopo.jsp</result>
+		</action>
+		
 
 		
 		
@@ -98,6 +104,12 @@
 				<param name="actionName"> login </param>
 				
 			</result>
+		</action>
+		
+				<!-- Espace personnel -->
+		<action name="acces_perso"
+			class="fr.mb.projet.action.user.GestionUserAction" method="espace">
+			<result name="success">/WEB-INF/jsp/personnel.jsp</result>
 		</action>
 		
 				<!-- Actions Commentaire -->
@@ -187,13 +199,27 @@
 		</action>
 		
 		
-				<!-- DETAIL DES SITES -->
+				<!-- DETAIL DES TOPO -->
 		<action name="detail_topo" class="fr.mb.projet.action.topo.GestionTopoAction"
 			method="doDetail">
 			<result name="input">/WEB-INF/jsp/topo/detail_topo.jsp </result>
 			<result>/WEB-INF/jsp/topo/detail_topo.jsp</result>
 		</action>
 
+						<!-- DETAIL DES TOPO -->
+		<action name="resa_topo" class="fr.mb.projet.action.topo.GestionTopoAction"
+			method="reservation">
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>	
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input" type="redirectAction">
+				<param name="actionName"> detail_topo </param>
+				<param name="id">${topo.id}</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName"> detail_topo </param>
+				<param name="id">${topo.id}</param>
+			</result>
+		</action>
 
 
 

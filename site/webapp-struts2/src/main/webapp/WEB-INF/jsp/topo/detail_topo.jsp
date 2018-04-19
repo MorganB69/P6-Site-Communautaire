@@ -76,38 +76,17 @@
 
 	
 
-        	<button class="btn btn-primary btn-md m3"  data-toggle="modal" data-target="#myModalSite">
-  Ajouter un site
-			</button>
+        	
+        	<s:a class="btn btn-primary btn-md m3" action="add_site">Créer un site</s:a>
+
+			        	
+			<s:a class="btn btn-primary btn-md m3" action="recherche_site">Ajouter un site existant</s:a>
+  			
+			
 			
 
 			
-			<!-- Modal -->
-<div class="modal fade" id="myModalSite" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-</div>
-
-<div class="modal-body">
-<h5 class="modal-title text-left"  id="myModalLabel">
-Ajout d'un site
-</h5>
-<s:form action="add_site" method="post" cssClass="well form-vertical " theme="bootstrap" enctype="multipart/form-data">
-		    
-		    
-        	
-        	
-        	
-        	<s:submit class="btn btn-primary mb-3" value="Ajouter un site"/>
-        	
-        	</s:form>
-</div>
-</div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
         
       
@@ -135,13 +114,27 @@ Ajout d'un site
 						 <li><b>Auteur : </b><s:property value="topo.auteur"/></li>
            				 <li><a  href="<s:property value="topo.lien"/>"><b>Lien</b> </a></li>
            				 <li><b>Statut : </b><s:property value="topo.statut"/></li>
+           				 <li><b>Propriétaire du Topo : </b><s:property value="topo.proprietaire.pseudo"/></li>
            				 
            				    
 		</ul>
+
+		
+			<s:if test="topoEmprunt==true">
+			Vous avez une demande de réservation en cours sur ce Topo.
+			</s:if>
+			<s:else>
+			<s:a action="resa_topo"  class="btn btn-primary btn-md m3">Demander une réservation
+			<s:param name="id" value="topo.id"></s:param>
+	
+			</s:a>
+			Une demande sera envoyée au propriétaire qui obtiendra vos coordonnées et qui vous recontactera pour les modalités d'envoie en cas d'acceptation.
+			</s:else>
 		
 		
     
   </div>
+  <s:actionmessage/>
       	    
       </div>
       

@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.mb.projet.bean.spot.Secteur;
+import fr.mb.projet.bean.topo.Pret;
 import fr.mb.projet.bean.topo.Topo;
 
 /**
@@ -55,7 +56,7 @@ public class Utilisateur implements Serializable {
 	private String mail;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "emprunteur")
-	private Set <Topo> listeTopoEmprunt=new HashSet<Topo>();
+	private Set <Pret> listeTopoEmprunt=new HashSet<Pret>();
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "proprietaire")
 	private Set <Topo> listeTopoPret=new HashSet<Topo>();
@@ -104,13 +105,7 @@ public class Utilisateur implements Serializable {
 		this.mail = mail;
 	}
 
-	public Set<Topo> getListeTopoEmprunt() {
-		return listeTopoEmprunt;
-	}
 
-	public void setListeTopoEmprunt(Set<Topo> listeTopoEmprunt) {
-		this.listeTopoEmprunt = listeTopoEmprunt;
-	}
 
 	public Set<Topo> getListeTopoPret() {
 		return listeTopoPret;
@@ -118,6 +113,14 @@ public class Utilisateur implements Serializable {
 
 	public void setListeTopoPret(Set<Topo> listeTopoPret) {
 		this.listeTopoPret = listeTopoPret;
+	}
+
+	public Set<Pret> getListeTopoEmprunt() {
+		return listeTopoEmprunt;
+	}
+
+	public void setListeTopoEmprunt(Set<Pret> listeTopoEmprunt) {
+		this.listeTopoEmprunt = listeTopoEmprunt;
 	}
 
 }

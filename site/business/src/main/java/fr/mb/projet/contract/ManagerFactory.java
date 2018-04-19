@@ -44,5 +44,9 @@ public interface ManagerFactory {
 	public TopoManager getTopoManager();
 	
 	public void setTopoManager(TopoManager pTopoManager);
+	
+	public PretManager getPretManager();
+	
+	public void setPretManager(PretManager pPretManager);
 
 }

@@ -83,6 +83,10 @@ public class GestionUserAction extends ActionSupport {
 		return result;
 
 	}
+	
+	public String espace() {
+		return ActionSupport.SUCCESS;
+	}
 
 	// ---------------------GETTERS/SETTERS---------------------------
 

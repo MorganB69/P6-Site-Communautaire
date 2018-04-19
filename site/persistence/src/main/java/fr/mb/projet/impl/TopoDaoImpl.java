@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Named;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.mb.projet.bean.spot.Site;
@@ -41,8 +43,18 @@ public class TopoDaoImpl extends AbstractDaoImpl implements TopoDao{
 
 	@Override
 	public List<Topo> findAll(Integer nbPage, Integer start) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("FROM Topo ORDER BY id DESC");
+
+		query.setFirstResult(start);
+		query.setMaxResults(nbPage);
+
+		List<Topo> list = query.list();
+
+		session.close();
+
+		return list;
 	}
 
 	@Override
@@ -53,8 +65,14 @@ public class TopoDaoImpl extends AbstractDaoImpl implements TopoDao{
 
 	@Override
 	public Long getCount() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		String countQ = "SELECT COUNT(*) FROM Topo";
+		Query countQuery = session.createQuery(countQ);
+		Long countResults = (Long) countQuery.uniqueResult();
+
+		session.close();
+		return countResults;
 	}
 
 	@Override

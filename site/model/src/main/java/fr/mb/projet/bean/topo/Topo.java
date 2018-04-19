@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.mb.projet.bean.spot.Site;
@@ -74,12 +75,10 @@ public class Topo implements Serializable {
 	@JoinColumn(name="user_id")
 	private Utilisateur proprietaire;
 	
-	/**
-	 *L'utiliseur qui a emprunté le livre 
-	 */
-	@ManyToOne
-	@JoinColumn(name="emprunteur")
-	private Utilisateur emprunteur;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "topo")
+	private Set<Pret>listePret=new HashSet<Pret>();
+	
+
 	
 	/**
 	 *Liste des sites associés au topo 
@@ -158,13 +157,7 @@ public class Topo implements Serializable {
 		this.proprietaire = proprietaire;
 	}
 
-	public Utilisateur getEmprunteur() {
-		return emprunteur;
-	}
 
-	public void setEmprunteur(Utilisateur emprunteur) {
-		this.emprunteur = emprunteur;
-	}
 
 	public Set<Site> getListeSite() {
 		return listeSite;
@@ -172,5 +165,13 @@ public class Topo implements Serializable {
 
 	public void setListeSite(Set<Site> listeSite) {
 		this.listeSite = listeSite;
+	}
+
+	public Set<Pret> getListePret() {
+		return listePret;
+	}
+
+	public void setListePret(Set<Pret> listePret) {
+		this.listePret = listePret;
 	}
 }

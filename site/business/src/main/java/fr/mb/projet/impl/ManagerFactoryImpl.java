@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import fr.mb.projet.contract.AjoutManager;
 import fr.mb.projet.contract.DetailManager;
 import fr.mb.projet.contract.ManagerFactory;
+import fr.mb.projet.contract.PretManager;
 import fr.mb.projet.contract.SiteManager;
 import fr.mb.projet.contract.TopoManager;
 import fr.mb.projet.contract.UserManager;
@@ -57,6 +58,9 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	
 	@Inject
 	private AjoutManager<?> ajoutManager;
+	
+	@Inject
+	private PretManager pretManager;
 	
 
 	
@@ -174,6 +178,18 @@ public class ManagerFactoryImpl implements ManagerFactory {
 
 	public void setTopoManager(TopoManager topoManager) {
 		this.topoManager = topoManager;
+	}
+
+	
+	public PretManager getPretManager() {
+		// TODO Auto-generated method stub
+		return pretManager;
+	}
+
+	
+	public void setPretManager(PretManager pPretManager) {
+		this.pretManager=pPretManager;
+		
 	}
 
 

@@ -25,7 +25,7 @@ public class TopoDaoImpl extends AbstractDaoImpl implements TopoDao{
 
 	@Override
 	public void update(Topo topo) {
-		// TODO Auto-generated method stub
+		template.saveOrUpdate(topo);
 		
 	}
 

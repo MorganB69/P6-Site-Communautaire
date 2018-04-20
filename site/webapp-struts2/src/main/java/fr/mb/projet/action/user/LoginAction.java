@@ -76,6 +76,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	
 	public String doLogout() {
 		this.session.remove("user");
+		this.session.remove("lastAction");
 		return ActionSupport.SUCCESS;
 	}
 	

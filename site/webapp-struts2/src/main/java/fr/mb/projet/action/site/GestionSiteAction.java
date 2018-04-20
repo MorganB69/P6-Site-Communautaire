@@ -128,7 +128,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	private List<Site> listSite = new ArrayList<Site>();
 	
 	/**
-	 * Liste pour l'affichage de site
+	 * Liste pour l'affichage de topo
 	 */
 	private List<Topo> listTopo = new ArrayList<Topo>();
 

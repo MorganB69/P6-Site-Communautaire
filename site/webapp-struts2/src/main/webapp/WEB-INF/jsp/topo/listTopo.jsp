@@ -11,9 +11,9 @@
 
 <header> <%@ include file="../include/menu.jsp"%>  </header>
 
-<div class="container-fluid">
+<div class="container">
 
-<div class="row justify-content-center">
+<div class="row justify-content-center m-3">
 
 <h1>Liste des Topos</h1>
 
@@ -27,34 +27,40 @@
 <div class="row">
 <s:iterator value="session.listTopo">
 
-<div class="col-lg-2 col-md-3 col-sm-3 portfolio-item" >
-			<div class="card bg-light border-dark h-100" id="card-list">
-				<s:a action="detail_topo">
-				<s:param name="id" value="id"></s:param>
-					<img class="img-fluid card-img-top" id="img-card" src="image/topo/<s:property value="image"/>" alt="">
-				</s:a>
-				<div class="card-body">
-					<h4 class="card-title">
-						<s:a action="detail_topo">
+<div class="col-lg-4 mb-4">
+				<div class="card h-100">
+					<h4 class="card-header"><s:a action="detail_topo">
 						<s:param name="id" value="id"></s:param>
-						<s:property value="titre" /></s:a>
-					</h4>
-					       
-     							<ul>
-						 			<li>Auteur : <s:property value="auteur"/></li>
-						 			<li>Statut : <s:property value="statut"/></li>
-						 			<li>Propriétaire : <s:property value="proprietaire.pseudo"/></li>
+						<s:property value="titre" /></s:a></h4>
+					<div class="card-body">
+								<div class="row">
+								<ul class="col-5 m-1">
+						 			<li><b>Auteur : </b><s:property value="auteur"/></li>
+						 			<li><b>Statut :</b> <s:property value="statut"/></li>
+						 			<li><b>Propriétaire :</b> <s:property value="proprietaire.pseudo"/></li>
 						 		
 								</ul>
+								
+								<img class="img-fluid col-6" id="img-card" src="image/topo/<s:property value="image"/>" alt="">
+								</div>
+								
+
+					</div>
+					<div class="card-footer">
+						<s:a action="detail_topo" class="btn btn-primary">
+						<s:param name="id" value="id"></s:param>
+						En savoir plus</s:a>
+						
+					</div>
 				</div>
+				
 			</div>
-		</div>
 </s:iterator>  
 </div>
 </div>
 </div>
 
-<s:property value="session.lastPageTopo"/>
+
 
 <div class="row justify-content-md-center">
 <nav aria-label="...">

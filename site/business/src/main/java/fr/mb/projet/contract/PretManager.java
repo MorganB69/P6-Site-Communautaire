@@ -13,5 +13,7 @@ public interface PretManager {
 
 	public void update(Pret pret);
 	
+	public void delete(Pret pret);
+	
 
 }

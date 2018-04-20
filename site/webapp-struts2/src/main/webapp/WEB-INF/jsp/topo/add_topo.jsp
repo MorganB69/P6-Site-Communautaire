@@ -35,7 +35,7 @@
 		
 			
 	
-			<s:form action="add_topo" method="post" cssClass="well form-vertical" theme="bootstrap" enctype="multipart/form-data">
+			<s:form action="add_topo" method="post" cssClass="well form-vertical bg-light m-3 p-4" theme="bootstrap" enctype="multipart/form-data">
 	
 	
 			
@@ -77,9 +77,9 @@
 		<s:file name="file" label="Ajouter une image au Topo"/>
 		
 	
-		
+		<div class="row justify-content-center">
         <s:submit class="btn btn-primary" value="Validation"/>
-
+		</div>
         
     </s:form>
     

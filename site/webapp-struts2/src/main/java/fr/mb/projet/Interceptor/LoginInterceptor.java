@@ -32,6 +32,11 @@ public class LoginInterceptor implements Interceptor, SessionAware {
 		
 		Map<String, Object> session = actionInvocation.getInvocationContext()
 				    .getSession();
+		
+		String actionName = actionInvocation.getInvocationContext().getName();
+		if (!"login".equalsIgnoreCase(actionName)) {
+		    session.put("lastAction", actionName);
+		}
 
 		
 		Utilisateur user = (Utilisateur) session.get("user");

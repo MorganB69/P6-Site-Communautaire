@@ -21,12 +21,12 @@
     	<section>
 
       <!-- Page Heading/Breadcrumbs -->
-
+		             <h1 class="text-center text-uppercase"><s:property value="site.nom"/>
+      		</h1>
       
       <div class="row">
              <div class="col-xs-12 col-md-8 col-lg-9" id="left-column">
-             <h1 class="text-center text-uppercase"><s:property value="site.nom"/>
-      		</h1>
+
        <div class="row">
        	 <figure class="figure" id="detailImg">
           <img class="figure-img img-fluid rounded" src="image/site/<s:property value="site.image"/>"alt="Site image">
@@ -78,7 +78,7 @@
         
      		     	
 				 <s:iterator value="site.listeSecteur">
-				 		<h6><s:property value="Nom du secteur" /> <s:property value="nom" /></h6>
+				 		<h5><s:property value="Nom du secteur" /> <s:property value="nom" /></h5>
   						<p><s:property value="description" /></p>
 				</s:iterator> 
 				
@@ -147,8 +147,8 @@ Ajout d'un secteur
         
      		     	
 				 <s:iterator value="site.listeVoie">
-				 <ul>
-				 		<li> <h5> <s:property value="nom" /> 				 		
+				 
+				 		<h5> <s:property value="nom" /> 				 		
 				 		<button class="btn btn-secondary pull-right btn-sm m3"  data-toggle="modal" data-target="#<s:property value="voieId"/>">
  							 Description
 						</button></h5> 
@@ -156,7 +156,7 @@ Ajout d'un secteur
 				 		<b>Type :</b> <s:property value="typeVoie" /> 
 				 		<b>Hauteur :</b> <s:property value="hauteur" /> 
 				 		<b>Nombre de points :</b> <s:property value="nbPoint" />
-				 		<b>Difficulté :</b> <s:property value="cotation.cot" /> </p></li>
+				 		<b>Difficulté :</b> <s:property value="cotation.cot" /> </p>
 				 		
 				 					<div class="modal fade" id="<s:property value="voieId"/>" tabindex="-1" role="dialog" aria-labelledby="myModalDesc" aria-hidden="true">
 									<div class="modal-dialog">
@@ -179,7 +179,7 @@ Ajout d'un secteur
 									
 									
 
-				</ul> 		
+						
 				</s:iterator> 
 				
 
@@ -274,11 +274,16 @@ Ajout d'une voie
         
      		     	
 				 <s:iterator value="site.listeTopo">
-				 		<h6>
+				 		<h5>
 						<s:a action="detail_topo">
 						<s:param name="id" value="id"></s:param>
 						<s:property value="Titre" /></s:a>
-				 		</h6>
+				 		</h5>
+				 		<p>
+				 		<b>Auteur :</b> <s:property value="auteur" /> 
+				 		<b>Statut :</b> <s:property value="statut" /> 
+				 		
+				 		</p>
 				 		
   						
 				</s:iterator> 
@@ -397,8 +402,8 @@ Liste des topos disponibles
       	
         <h6> <i class="fa fa-globe"></i> Situation géographique</h6>
      	<ul>
-						 <li>Pays: <s:property value="site.pays.name"/></li>
-           				 <li>Région/département : <s:property value="site.state.name"/></li>
+						 <li><b>Pays : </b> <s:property value="site.pays.name"/></li>
+           				 <li><b>Région/département : </b><s:property value="site.state.name"/></li>
            				    
 		</ul>
 		
@@ -406,9 +411,9 @@ Liste des topos disponibles
 		<h6> <i class="fa fa-map-marker"></i> Coordonnées GPS </h6>
      	<ul>
      					
-						<li>Latitude : <s:property value="site.coordonnee.x"/></li>
+						<li><b>Latitude :</b> <s:property value="site.coordonnee.x"/></li>
 						
-                      	<li>Longitude : <s:property value="site.coordonnee.y"/></li>
+                      	<li><b>Longitude :</b> <s:property value="site.coordonnee.y"/></li>
            				
 		</ul>
 		</s:if>
@@ -416,13 +421,13 @@ Liste des topos disponibles
 	   	<h6> <i class="fa fa-flag-o"></i> Détail du site</h6>
      	<ul>
      					<s:if test="%{site.situation.type!=''}">
-						<li>Type de site : <s:property value="site.situation.type"/></li>
+						<li><b>Type de site :</b> <s:property value="site.situation.type"/></li>
 						</s:if>
           				<s:if test="%{site.nbVoie!=null}">
-           				<li>Nombre de voies : <s:property value="site.nbVoie"/>  </li>
+           				<li><b>Nombre de voies :</b> <s:property value="site.nbVoie"/>  </li>
 						</s:if>
 						<s:if test="%{site.nbSecteur!=null}">
-						<li>Nombre de secteurs: <s:property value="site.nbSecteur"/>  </li>
+						<li><b>Nombre de secteurs:</b> <s:property value="site.nbSecteur"/>  </li>
 						</s:if>
 		</ul>
 		
@@ -444,7 +449,7 @@ Liste des topos disponibles
         
      	<ul>
 				<s:iterator value="site.listeAltitude">
-  						<li><s:property value="typeAlt" /> : <s:property value="alt" /> mètres</li>
+  						<li><b>Altitude <s:property value="typeAlt" /> :</b> <s:property value="alt" /> mètres</li>
 				</s:iterator>    
 		</ul>
 		
@@ -483,7 +488,7 @@ Liste des topos disponibles
      	<ul>
 				
 				<s:iterator value="site.listeCotation">
-  						<li> Cotation <s:property value="typeCot" /> : <s:property value="cot.cot" /></li>
+  						<li> <b>Cotation <s:property value="typeCot" /> :</b> <s:property value="cot.cot" /></li>
 				</s:iterator> 
 				 
 		</ul>

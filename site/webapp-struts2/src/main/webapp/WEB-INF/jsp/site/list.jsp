@@ -13,7 +13,7 @@
 
 <div class="container-fluid">
 
-<div class="row justify-content-center">
+<div class="row justify-content-center m-3">
 
 <h1>Recherche d'un site</h1>
 
@@ -171,18 +171,18 @@
 					</h4>
 					       
      							<ul>
-						 			<li>ID: <s:property value="id"/></li>
+						 			
 						 		<s:if test="%{pays!=null}">
-						 			<li>Pays: <s:property value="pays.name"/></li>
+						 			<li><b>Pays :</b> <s:property value="pays.name"/></li>
 						 		</s:if>
 						 		<s:if test="%{state!=null}">
-           							<li>Région/Département : <s:property value="state.name"/></li>
+           							<li><b>Région/Département :</b> <s:property value="state.name"/></li>
            				        </s:if>
            				        
            				         <s:if test="%{type!=null}">
-										<li>Type de site : <s:property value="type"/></li>
+										<li><b>Type de site :</b> <s:property value="type"/></li>
 								</s:if>
-								<li>Orientation : 
+								<li><b>Orientation : </b>
 									<s:iterator value="listeOrientation">
   											|<s:property value="orientation" />| 
 									</s:iterator> 

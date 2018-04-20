@@ -32,7 +32,7 @@
 		
 			
 	
-			<s:form action="add_site" method="post" cssClass="well form-vertical" theme="bootstrap" enctype="multipart/form-data">
+			<s:form action="add_site" method="post" cssClass="well form-vertical bg-light m-3 p-5" theme="bootstrap" enctype="multipart/form-data">
 	
 	
 			<h3>Informations générales sur le site d'escalade </h3>
@@ -186,9 +186,9 @@
 		<s:file name="file" label="Ajouter une image du site"/>
 		
 	
-		
-        <s:submit class="btn btn-primary" value="Validation"/>
-
+		<div class="row justify-content-center">
+        <s:submit class="btn btn-primary btn-lg" value="Validation"/>
+		</div>
         
     </s:form>
     

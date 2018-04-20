@@ -1,6 +1,7 @@
 package fr.mb.projet.bean.topo;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -24,9 +25,9 @@ public class Pret implements Serializable{
 	private Integer id;
 	
 	@Column(name = "date_debut")
-	private Date debut;
+	private LocalDate debut;
 	@Column(name = "date_fin")
-	private Date fin;
+	private LocalDate fin;
 	@Column(name = "statut")
 	private String statut;
 	
@@ -54,22 +55,22 @@ public class Pret implements Serializable{
 	}
 
 
-	public Date getDebut() {
+	public LocalDate getDebut() {
 		return debut;
 	}
 
 
-	public void setDebut(Date debut) {
+	public void setDebut(LocalDate debut) {
 		this.debut = debut;
 	}
 
 
-	public Date getFin() {
+	public LocalDate getFin() {
 		return fin;
 	}
 
 
-	public void setFin(Date fin) {
+	public void setFin(LocalDate fin) {
 		this.fin = fin;
 	}
 

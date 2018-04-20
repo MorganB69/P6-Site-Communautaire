@@ -51,7 +51,7 @@ public class TopoManagerImpl implements TopoManager {
 
 	@Override
 	public void update(Topo topo) {
-		// TODO Auto-generated method stub
+		topoDao.update(topo);
 		
 	}
 

@@ -41,6 +41,14 @@ public class UserManagerImpl implements UserManager {
 
 		return user;
 	}
+	
+	public Utilisateur getUserById(Integer id) throws NotFoundException {
+
+		Utilisateur user = userDao.getUtilisateurById(id);
+		
+
+		return user;
+	}
 
 	/*
 	 * (non-Javadoc)

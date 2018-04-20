@@ -17,4 +17,8 @@ public Utilisateur getUser (String login, String mdp) throws NotFoundException;
 	
 
 	public void insert(Utilisateur user) throws FunctionalException, TechnicalException;
+	
+	public Utilisateur getUserById(Integer id) throws NotFoundException ;
 }
+
+

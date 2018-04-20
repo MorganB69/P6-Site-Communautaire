@@ -15,7 +15,19 @@
  */
 package fr.mb.projet.action;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
+
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.opensymphony.xwork2.ActionSupport;
+
+import fr.mb.projet.bean.spot.Site;
+import fr.mb.projet.bean.topo.Topo;
+import fr.mb.projet.contract.ManagerFactory;
 
 
 
@@ -24,15 +36,109 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author Morgan
  *
  */
-public class IndexAction extends ActionSupport {
+public class IndexAction extends ActionSupport implements SessionAware{
+    
+	/**
+	 * Factory pour obtenir les managers de la couche business
+	 */
+	@Inject
+	private ManagerFactory managerFactory;
+
+	/**
+	 * Permet de stocker les objets en session
+	 */
+	private Map<String, Object> session;
+	
+	/**
+	 * Nombre de sites à afficher par page
+	 */
+	private Integer pageSize = 3;
+	
+	/**
+	 * Liste pour l'affichage de site
+	 */
+	private List<Site> listSite = new ArrayList<Site>();
+	
+	/**
+	 * Liste pour l'affichage de topo
+	 */
+	private List<Topo> listTopo = new ArrayList<Topo>();
+	
+	/**
+	 * Page sélectionnée et permet de définir l'Offset pour le changement de page
+	 */
+	private Integer start = 0;
+    
     
 
-    
-    /* (non-Javadoc)
+	/* (non-Javadoc)
      * @see com.opensymphony.xwork2.ActionSupport#execute()
      */
     public String execute() throws Exception {
+    	
+    	this.listSite = managerFactory.getSiteManager().getListSite(this.pageSize, this.start);
+    	this.listTopo =managerFactory.getTopoManager().getListTopo(this.pageSize, this.start);
        
         return SUCCESS;
     }
+
+
+
+	public ManagerFactory getManagerFactory() {
+		return managerFactory;
+	}
+
+
+
+	public void setManagerFactory(ManagerFactory managerFactory) {
+		this.managerFactory = managerFactory;
+	}
+
+
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
+
+
+	public List<Site> getListSite() {
+		return listSite;
+	}
+
+
+
+	public void setListSite(List<Site> listSite) {
+		this.listSite = listSite;
+	}
+
+
+
+	public List<Topo> getListTopo() {
+		return listTopo;
+	}
+
+
+
+	public void setListTopo(List<Topo> listTopo) {
+		this.listTopo = listTopo;
+	}
 }

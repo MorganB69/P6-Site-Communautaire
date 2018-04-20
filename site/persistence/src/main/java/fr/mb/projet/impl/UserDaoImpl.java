@@ -89,4 +89,10 @@ public class UserDaoImpl extends AbstractDaoImpl implements UserDao {
 
 	}
 
+	@Override
+	public Utilisateur getUtilisateurById(Integer id) {
+		Utilisateur u=template.get(fr.mb.projet.bean.user.Utilisateur.class, id);
+		return u;
+	}
+
 }

@@ -2,6 +2,10 @@ html {
   height: 100%;
 }
 
+li{
+	list-style-type: none;
+}
+
 section{
 	padding-top : 30px;
 }
@@ -19,6 +23,15 @@ footer{
 	font-size : large;
 }
 
+.form-vertical{
+	border-radius: 25px;
+	
+	
+}
+
+.card{
+	
+}
 
 body {
   padding-top: 100px;
@@ -34,14 +47,18 @@ body {
 #couvertureDetail{
 	position:absolute;
 }
-#card-list{
- 	
-	
-}
+
 
 #img-card{
 	max-height:175px;
 	overflow:hidden;
+}
+
+#detailImgTopo{
+	border-width:1px;
+ border-style:solid;
+ border-color:blue;
+ 
 }
 
 #couvertureCont{

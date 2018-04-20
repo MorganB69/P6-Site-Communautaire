@@ -40,7 +40,13 @@ public class PretManagerImpl implements PretManager{
 
 	@Override
 	public void update(Pret pret) {
-		// TODO Auto-generated method stub
+		pretDao.update(pret);
+		
+	}
+
+	@Override
+	public void delete(Pret pret) {
+		pretDao.delete(pret);
 		
 	}
 

@@ -28,7 +28,9 @@
 	    <s:actionmessage/>
 	    
 	    <div>
-	    <s:form action="add_user" cssClass="well form-vertical" theme="bootstrap" enctype="multipart/form-data">
+	    <s:form action="add_user" cssClass="well form-vertical bg-light m-3 p-5" theme="bootstrap" enctype="multipart/form-data">
+	    
+	    <h3> Informations personnelles</h3>
 	    <div>
         <s:textfield class="form-control" name="user.pseudo" label="Identifiant" requiredLabel="true" />
        	</div>
@@ -43,7 +45,7 @@
       	</div>
        
 		
-		<div>
+		<div class="row justify-content-center">
         <s:submit class="btn btn-primary" value="Validation"/>
         </div>
     </s:form>

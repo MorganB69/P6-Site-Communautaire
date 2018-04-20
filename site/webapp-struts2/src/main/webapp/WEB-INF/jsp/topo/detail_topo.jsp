@@ -22,11 +22,19 @@
 
       <!-- Page Heading/Breadcrumbs -->
 
-      
-      <div class="row">
-             <div class="col-xs-12 col-md-8 col-lg-9" id="left-column">
-             <h1 class="text-center text-uppercase"><s:property value="topo.titre"/>
+            <h1 class="text-center text-uppercase"><s:property value="topo.titre"/>
       		</h1>
+      <div class="row">
+      		<div class="col-xs-12 col-md-2 col-lg-2" id="left-column">
+      		            <div class="row">
+       	 <figure class="figure m-3 " >
+          <img class="figure-img img-fluid rounded " id="detailImgTopo" src="image/topo/<s:property value="topo.image"/>"alt="Topo image">
+        </figure>
+       </div>
+      		</div>
+      
+             <div class="col-xs-12 col-md-6 col-lg-7" id="center-column">
+
 
         
         <s:if test="%{topo.description!=''}">
@@ -58,14 +66,14 @@
         
      		     	
 				 <s:iterator value="topo.listeSite">
-				 		<h6>
+				 		<h5>
 						<s:a action="detail_site">
 						<s:param name="id" value="id"></s:param>
 						<s:property value="nom" /></s:a>
-						</h6>
+						</h5>
 						<ul>
-							<li>Pays : <s:property value="pays.name"/> </li>
-							<li>Région : <s:property value="state.name"/> </li>
+							<li><b>Pays :</b> <s:property value="pays.name"/> </li>
+							<li><b>Région :</b> <s:property value="state.name"/> </li>
 						</ul>
   						
 				</s:iterator> 
@@ -95,11 +103,7 @@
       </div>
       <div class="col-xs-12 col-md-4 col-lg-3" id="right-column">
       
-             <div class="row">
-       	 <figure class="figure" id="detailImgTopo">
-          <img class="figure-img img-fluid rounded" src="image/topo/<s:property value="topo.image"/>"alt="Topo image">
-        </figure>
-       </div>
+ 
       
       <h5 class="mt-3" data-toggle="collapse" href="#associated-situ" aria-expanded="true" aria-controls="associated-situ">
       	   		<i class="fa fa-info-circle"></i> Informations <i class="fa fa-arrow-down pull-right" ></i>

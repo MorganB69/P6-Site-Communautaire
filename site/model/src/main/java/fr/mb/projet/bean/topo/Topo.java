@@ -71,11 +71,11 @@ public class Topo implements Serializable {
 	/**
 	 * L'utilisateur à qui appartient le topo
 	 */
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name="user_id")
 	private Utilisateur proprietaire;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "topo")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "topo",cascade = CascadeType.REFRESH)
 	private Set<Pret>listePret=new HashSet<Pret>();
 	
 

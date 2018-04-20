@@ -1,13 +1,20 @@
 package fr.mb.projet.action.user;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import javax.inject.Inject;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
+import fr.mb.projet.bean.topo.Pret;
 import fr.mb.projet.bean.user.Utilisateur;
 import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.exception.FunctionalException;
+import fr.mb.projet.exception.NotFoundException;
 import fr.mb.projet.exception.TechnicalException;
 
 /**
@@ -16,7 +23,7 @@ import fr.mb.projet.exception.TechnicalException;
  * @author Morgan
  *
  */
-public class GestionUserAction extends ActionSupport {
+public class GestionUserAction extends ActionSupport implements SessionAware {
 	// ATTRIBUTS
 
 	// Factory
@@ -39,6 +46,11 @@ public class GestionUserAction extends ActionSupport {
 	 * Mot de passe de l'utilisateur
 	 */
 	private String password;
+	
+	/**
+	 * Permet de stocker les objets en session
+	 */
+	private Map<String, Object> session;
 
 	// METHODES
 
@@ -85,6 +97,19 @@ public class GestionUserAction extends ActionSupport {
 	}
 	
 	public String espace() {
+		this.user=(Utilisateur) session.get("user");
+		try {
+			this.user=managerFactory.getUserManager().getUserById(this.user.getId());
+			session.replace("user", this.user);
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+				
+			
+			
+		
 		return ActionSupport.SUCCESS;
 	}
 
@@ -120,5 +145,13 @@ public class GestionUserAction extends ActionSupport {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 }

@@ -18,7 +18,7 @@
 	
 		<div class="row justify-content-center"> 
 		
-			<h1 class="text-center"> Formulaire d'authentification</h1>
+			<h1 class="text-center"> Authentification</h1>
 		
 
 	
@@ -28,11 +28,14 @@
 			Veuillez saisir le formulaire pour vous identifier
 		</div>
 	
-		<div class="row justify-content-center"> 
+		<div class="row justify-content-center "> 
 		
-
+			
 	
-			<s:form action="login" cssClass="well form-vertical" theme="bootstrap" enctype="multipart/form-data">
+			<s:form action="login" cssClass="well form-vertical bg-light m-3 p-5" theme="bootstrap" enctype="multipart/form-data">
+        		
+        		<h3> Formulaire d'authentification</h3>
+        		
         		<s:textfield class="form-control" name="login" label="Identifiant" requiredLabel="true" />
        	
        
@@ -40,14 +43,15 @@
       
        
 		
-		
+				<div class="row justify-content-center">
         		<s:submit class="btn btn-primary" value="Validation"/>
+        		</div>
     		</s:form>
     		
     		</div>
     		
     		<div class="row justify-content-center">
-					<s:a class="btn btn-primary m-3" label=" Créer un compte" action="add_user">Créer un compte</s:a>
+					<s:a class="btn btn-success m-3" label=" Créer un compte" action="add_user">Créer un compte</s:a>
 			    
 			</div>
 			

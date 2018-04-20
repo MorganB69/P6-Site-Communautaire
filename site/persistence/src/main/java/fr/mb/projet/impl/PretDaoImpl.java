@@ -33,7 +33,7 @@ public class PretDaoImpl extends AbstractDaoImpl implements PretDao {
 
 	@Override
 	public void delete(Pret pret) {
-		// TODO Auto-generated method stub
+		template.delete(pret);
 		
 	}
 

@@ -2,6 +2,7 @@ package fr.mb.projet.action.topo;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -104,6 +105,8 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	private Integer start=0;
 
 	private Object lastPage;
+	
+	private Integer idPret;
 	
 	
 	
@@ -258,6 +261,111 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 		
 		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
 	}
+	
+	
+	public String acceptResa(){
+		LocalDate dateDebut=LocalDate.now();
+		LocalDate dateFin=dateDebut.plusDays(21);
+		
+		
+		try {
+			this.topo = (Topo) managerFactory.getTopoManager().getTopo(this.id);
+			this.topo.setStatut("Réservé");
+			
+			for (Iterator iterator = this.topo.getListePret().iterator(); iterator.hasNext();) {
+				Pret pret = (Pret) iterator.next();
+				if(pret.getId()==this.idPret) {
+					pret.setDebut(dateDebut);
+					pret.setFin(dateFin);
+					pret.setStatut("Accepté");
+					managerFactory.getPretManager().update(pret);
+					managerFactory.getTopoManager().update(this.topo);
+					this.user=(Utilisateur) session.get("user");
+					this.user=managerFactory.getUserManager().getUserById(this.user.getId());
+
+							session.replace("user", this.user);
+						
+						
+					
+				}
+				
+			}
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ActionSupport.SUCCESS;
+	}
+	
+	public String refusResa() {
+		return ActionSupport.SUCCESS;
+	}
+	
+	public String annulerResa() {
+		try {
+			this.topo = (Topo) managerFactory.getTopoManager().getTopo(this.id);
+			this.topo.setStatut("Disponible");
+			
+			for (Iterator iterator = this.topo.getListePret().iterator(); iterator.hasNext();) {
+				Pret pret = (Pret) iterator.next();
+				if(pret.getId()==this.idPret) {
+					pret.setDebut(null);
+					pret.setFin(null);
+					pret.setStatut("Annulé");
+					managerFactory.getPretManager().update(pret);
+					managerFactory.getTopoManager().update(this.topo);
+					this.user=(Utilisateur) session.get("user");
+					this.user=managerFactory.getUserManager().getUserById(this.user.getId());
+					session.replace("user", this.user);
+						
+						
+					
+				}
+				
+			}
+			
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return ActionSupport.SUCCESS;
+	}
+	
+	public String deleteResa() {
+		
+		try {
+			this.topo = (Topo) managerFactory.getTopoManager().getTopo(this.id);
+			
+			
+			for (Iterator iterator = this.topo.getListePret().iterator(); iterator.hasNext();) {
+				Pret pret = (Pret) iterator.next();
+				if(pret.getId()==this.idPret) {
+					pret.setDebut(null);
+					pret.setFin(null);
+					pret.setStatut("Annulé");
+					managerFactory.getPretManager().delete(pret);
+					
+					this.user=(Utilisateur) session.get("user");
+					this.user=managerFactory.getUserManager().getUserById(this.user.getId());
+					session.replace("user", this.user);
+						
+						
+					
+				}
+				
+			}
+			
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return ActionSupport.SUCCESS;
+	}
 		
 		
 		
@@ -374,6 +482,22 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 
 	public void setStart(Integer start) {
 		this.start = start;
+	}
+
+	public Object getLastPage() {
+		return lastPage;
+	}
+
+	public void setLastPage(Object lastPage) {
+		this.lastPage = lastPage;
+	}
+
+	public Integer getIdPret() {
+		return idPret;
+	}
+
+	public void setIdPret(Integer idPret) {
+		this.idPret = idPret;
 	}
 	
 	

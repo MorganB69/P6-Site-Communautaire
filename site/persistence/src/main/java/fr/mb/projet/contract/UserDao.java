@@ -50,5 +50,13 @@ public interface UserDao extends Serializable {
 	 * 
 	 */
 	public void deleteAll();
+	
+	/**
+	 * Obtention de l'utilisateur en base de donnée en fonction de son login et mot de passe
+	 * @param login
+	 * @param mdp
+	 * @return l'utilisateur trouvé en base de donnée
+	 */
+	public Utilisateur getUtilisateurById(Integer id);
 
 }

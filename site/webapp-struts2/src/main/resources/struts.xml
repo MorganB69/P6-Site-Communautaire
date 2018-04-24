@@ -28,6 +28,10 @@
 		<action name="index" class="fr.mb.projet.action.IndexAction">
 			<result>/WEB-INF/jsp/index.jsp</result>
 		</action>
+		
+		<action name="mentions" class="fr.mb.projet.action.IndexAction" method="mentions">
+			<result>/WEB-INF/jsp/mentions.jsp</result>
+		</action>
 
 
 
@@ -109,6 +113,8 @@
 			<result name="input">/WEB-INF/jsp/login.jsp</result>
 			<result name="success" type="redirectAction">
 				<param name="actionName">${#session['lastAction']}</param>
+				
+					
         
 			</result>
 		</action>
@@ -132,6 +138,8 @@
 				<!-- Espace personnel -->
 		<action name="acces_perso"
 			class="fr.mb.projet.action.user.GestionUserAction" method="espace">
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>	
+			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="success">/WEB-INF/jsp/personnel.jsp</result>
 		</action>
 		
@@ -205,7 +213,6 @@
 <!-- AJOUTER DES TOPOS -->
 		<action name="add_topo" class="fr.mb.projet.action.topo.GestionTopoAction"
 				method="addTopo">
-<interceptor-ref name="params"/>
 <interceptor-ref name="loginInterceptor"></interceptor-ref>	
 <interceptor-ref name="defaultStack">
     <param name="fileUpload.maximumSize">2097152</param>

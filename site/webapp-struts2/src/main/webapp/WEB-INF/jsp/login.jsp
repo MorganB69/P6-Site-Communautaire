@@ -44,7 +44,7 @@
        
 		
 				<div class="row justify-content-center">
-        		<s:submit class="btn btn-primary" value="Validation"/>
+        		<s:submit class="btn btn-primary col-4" value="Validation"/>
         		</div>
     		</s:form>
     		

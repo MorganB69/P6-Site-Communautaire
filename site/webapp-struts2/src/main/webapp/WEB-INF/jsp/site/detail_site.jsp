@@ -497,7 +497,7 @@ Liste des topos disponibles
     
   </div>
   
-  		<s:a class="btn btn-primary mb-3 mt-3" action="update_site">Modifier ce site
+  		<s:a class="btn btn-primary mb-3 mt-3 col-12" action="update_site">Modifier ce site
   		<s:param name="id" value="id"></s:param>
   		</s:a>
       	    

@@ -81,6 +81,10 @@ public class IndexAction extends ActionSupport implements SessionAware{
        
         return SUCCESS;
     }
+    
+    public String mentions() {
+    	return ActionSupport.SUCCESS;
+    }
 
 
 

@@ -1,10 +1,13 @@
 package fr.mb.projet.Interceptor;
 
 
+import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.struts2.dispatcher.HttpParameters;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
@@ -33,10 +36,16 @@ public class LoginInterceptor implements Interceptor, SessionAware {
 		Map<String, Object> session = actionInvocation.getInvocationContext()
 				    .getSession();
 		
+		
 		String actionName = actionInvocation.getInvocationContext().getName();
+		
+		
+		
 		if (!"login".equalsIgnoreCase(actionName)) {
 		    session.put("lastAction", actionName);
+
 		}
+		
 
 		
 		Utilisateur user = (Utilisateur) session.get("user");

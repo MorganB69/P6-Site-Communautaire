@@ -24,7 +24,7 @@
 
 <div class="col-lg-3 col-md-3">
 <div class="row">
-<div class="card card-body bg-light text-dark rounded ">
+<div class="card card-body bg-light text-dark rounded m-3 ">
 <s:form action="recherche_site" method="post" cssClass="form-vertical well" theme="bootstrap" enctype="multipart/form-data">
 	<h3 class="text-center">Formulaire de recherche </h3>
 	
@@ -196,7 +196,7 @@
 </div>
 </div>
 
-<s:property value="session.lastPage"/>
+
 
 <div class="row justify-content-md-center">
 <nav aria-label="...">

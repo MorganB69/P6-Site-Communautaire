@@ -43,17 +43,17 @@
 
 			
 				<li class="nav-item">
-					<a class="nav-link" href="#">ACCUEIL</a>
+					<s:a class="nav-link" action="index">ACCUEIL</s:a>
 				</li>
 
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownPortfolio" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> SPOTS </a>
+						aria-haspopup="true" aria-expanded="false"> SITE D'ESCALADE </a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
-						<s:a class="dropdown-item" action="add_site">PARTAGER UN SPOT</s:a>
-						<s:a class="dropdown-item" action="recherche_site">RECHERCHE D'UN SPOT</s:a>
+						<s:a class="dropdown-item" action="add_site">PARTAGER UN SITE</s:a>
+						<s:a class="dropdown-item" action="recherche_site">RECHERCHER UN SITE</s:a>
 						
 
 					</div>
@@ -61,11 +61,12 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownBlog" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> TOPOS </a>
+						aria-haspopup="true" aria-expanded="false"> TOPO </a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownBlog">
-						<s:a class="dropdown-item" action="add_topo">PROPOSER UN TOPO</s:a>
-						<s:a class="dropdown-item"  action="liste_topo">TROUVER UN TOPO</s:a>
+						<s:a class="dropdown-item" action="add_topo">PARTAGER UN TOPO</s:a>
+						<s:a class="dropdown-item"  action="liste_topo">RECHERCHER UN TOPO</s:a>
+						<s:a class="dropdown-item"  action="acces_perso">MON ESPACE DE TOPO</s:a>
 						
 						
 					</div>

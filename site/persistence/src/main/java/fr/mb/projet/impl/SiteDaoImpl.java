@@ -328,7 +328,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		//-------------CREATION REQUETE HQL DYNAMIQUE--------------
 		
 		//-------------SELECTION DES SITES-------------
-		String SQL = " SELECT site FROM Site as site ";
+		String SQL = " SELECT DISTINCT site FROM Site as site ";
 		
 		//-------------JOINTURES OBLIGATOIRES---------------
 			  SQL += " JOIN site.listeCotation as cotation ";
@@ -390,7 +390,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		}
 		
 		//TRI
-		SQL+=" ORDER BY site.id DESC ";
+		SQL+="  ORDER BY site.id DESC ";
 		
 		
 		//CREATION DE LA QUERY

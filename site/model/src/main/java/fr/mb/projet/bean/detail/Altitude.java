@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import fr.mb.projet.bean.spot.Site;
 
 /**
@@ -46,6 +49,7 @@ public class Altitude implements Serializable{
 	 * Relation ManytoOne avec un Site
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "site_id", nullable = false)
 	private Site site;
 	

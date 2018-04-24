@@ -37,7 +37,7 @@ public class Coordonnee implements Serializable {
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "site"))
 	@Id
 	@GeneratedValue(generator = "generator")
-	@Column(name = "coord_id", unique = true, nullable = false)
+	@Column(name = "coord_id", unique = true, nullable = false, updatable=true)
 	private Integer id;
 
 	/**
@@ -54,7 +54,7 @@ public class Coordonnee implements Serializable {
 	/**
 	 * Classe site pour définir la relation 1-1
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@PrimaryKeyJoinColumn
 	private Site site;
 
@@ -75,6 +75,7 @@ public class Coordonnee implements Serializable {
 	}
 
 	public void setX(Double x) {
+		this.site.setCoordonnee(this);
 		this.x = x;
 	}
 
@@ -83,6 +84,7 @@ public class Coordonnee implements Serializable {
 	}
 
 	public void setY(Double y) {
+		this.site.setCoordonnee(this);
 		this.y = y;
 	}
 

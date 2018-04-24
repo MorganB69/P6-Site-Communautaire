@@ -93,13 +93,13 @@ public class Site implements Serializable{
 	/**
 	 * Relation 1-1 avec Situation
 	 */
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "site", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
 	private Situation situation;
 	
 	/**
 	 * Relation 1-1 avec Coordonnee
 	 */
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "site", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
 	private Coordonnee coordonnee;
 	
 	/**
@@ -292,6 +292,7 @@ public class Site implements Serializable{
 		
 		this.listeAltitude = listeAltitude;
 	}
+	
 
 	public Set<Orientation> getListeOrientation() {
 		return listeOrientation;

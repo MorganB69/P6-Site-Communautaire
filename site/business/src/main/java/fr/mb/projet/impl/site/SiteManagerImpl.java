@@ -97,6 +97,7 @@ public class SiteManagerImpl implements SiteManager {
 	 * @see fr.mb.projet.contract.SiteManager#update(fr.mb.projet.bean.spot.Site)
 	 */
 	@Override
+	@Transactional
 	public void update(Site site) {
 		siteDao.update(site);
 

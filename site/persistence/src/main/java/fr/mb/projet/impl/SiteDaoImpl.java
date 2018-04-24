@@ -51,6 +51,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 	 * @see fr.mb.projet.contract.SiteDao#update(fr.mb.projet.bean.spot.Site)
 	 */
 	@Override
+	@Transactional
 	public void update(Site entity) {
 		// TODO Auto-generated method stub
 		template.update(entity);

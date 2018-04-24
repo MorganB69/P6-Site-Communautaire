@@ -420,8 +420,8 @@ Liste des topos disponibles
 		
 	   	<h6> <i class="fa fa-flag-o"></i> Détail du site</h6>
      	<ul>
-     					<s:if test="%{site.situation.type!=''}">
-						<li><b>Type de site :</b> <s:property value="site.situation.type"/></li>
+     					<s:if test="%{site.type!=''}">
+						<li><b>Type de site :</b> <s:property value="site.type"/></li>
 						</s:if>
           				<s:if test="%{site.nbVoie!=null}">
            				<li><b>Nombre de voies :</b> <s:property value="site.nbVoie"/>  </li>
@@ -496,6 +496,10 @@ Liste des topos disponibles
        		</div>
     
   </div>
+  
+  		<s:a class="btn btn-primary mb-3 mt-3" action="update_site">Modifier ce site
+  		<s:param name="id" value="id"></s:param>
+  		</s:a>
       	    
       </div>
       

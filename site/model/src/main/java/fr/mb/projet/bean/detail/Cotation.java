@@ -1,5 +1,7 @@
 package fr.mb.projet.bean.detail;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +21,7 @@ import fr.mb.projet.bean.spot.Site;
  */
 @Entity
 @Table(name = "cotation")
-public class Cotation {
+public class Cotation implements Serializable {
 	/**
 	 * l'Id est généré automatiquement
 	 */

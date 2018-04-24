@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,6 +18,7 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Preparable;
 
 import fr.mb.projet.bean.detail.Altitude;
 import fr.mb.projet.bean.detail.Coordonnee;
@@ -126,7 +127,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Liste pour l'affichage de site
 	 */
 	private List<Site> listSite = new ArrayList<Site>();
-	
+
 	/**
 	 * Liste pour l'affichage de topo
 	 */
@@ -171,7 +172,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Attribut en sortie de l'ID d'une région
 	 */
 	private Integer stateIdOut;
-	
+
 	private Integer topoIdOut;
 
 	/**
@@ -210,6 +211,8 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * site
 	 */
 	private RechercheSite recherche;
+
+	
 
 	// ------------------------ Méthodes-------------------------
 	// ----------------------------------------------------------
@@ -292,26 +295,27 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 			} else
 				session.put("listSiteOffSet", this.listSite);
 		}
-		
-		//Liste qui comprendra notre liste recherchée ainsi que le numéro de la dernière apge
+
+		// Liste qui comprendra notre liste recherchée ainsi que le numéro de la
+		// dernière apge
 		ArrayList<Object> recherche = new ArrayList<Object>();
-		
-		//Recherche en Bd en fonction des critères 
+
+		// Recherche en Bd en fonction des critères
 		if (this.recherche != null) {
 			recherche = (ArrayList<Object>) managerFactory.getSiteManager().getListSiteRecherche(this.pageSize,
 					this.start, this.recherche);
 
 			this.lastPage = (Integer) recherche.get(0);
 			this.listSite = (List<Site>) recherche.get(1);
-			
-			//Enregistrement de la liste obtenue en session
+
+			// Enregistrement de la liste obtenue en session
 			session.put("listSite", this.listSite);
-			//Enregistrement de la dernière page en session
+			// Enregistrement de la dernière page en session
 			if (session.containsKey("lastPage")) {
 				session.replace("lastPage", this.lastPage);
 			} else
 				session.put("lastPage", this.lastPage);
-			//Changement du statut pour ne plus obtenir tous les sites par défaut
+			// Changement du statut pour ne plus obtenir tous les sites par défaut
 			this.statut = 1;
 			if (session.containsKey("statut")) {
 				session.replace("statut", this.statut);
@@ -319,16 +323,15 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 				session.put("statut", this.statut);
 
 		}
-		
 
 		if (session.containsKey("statut")) {
 			this.statut = (int) session.get("statut");
 		}
-		
+
 		if (session.containsKey("listSite")) {
 			this.listSite = (List<Site>) session.get("listSite");
 		}
-		//Offset de la liste obtenue qui sera renvoyée à la vue
+		// Offset de la liste obtenue qui sera renvoyée à la vue
 		if (this.statut == 1) {
 			this.listSiteOffset = managerFactory.getSiteManager().doOffSet(this.listSite, this.start, this.pageSize);
 			session.replace("listSiteOffSet", this.listSiteOffset);
@@ -346,13 +349,10 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	public String doDetail() {
 		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
 		session.put("listeCotation", this.listeCotation);
-		
 
-			this.listTopo = (List<Topo>) managerFactory.getTopoManager().getListAllTopo();
-			session.put("listTopo", this.listTopo);
-		
-		
-		
+		this.listTopo = (List<Topo>) managerFactory.getTopoManager().getListAllTopo();
+		session.put("listTopo", this.listTopo);
+
 		if (id == null) {
 			this.addActionError(getText("error.project.missing.id"));
 		} else {
@@ -557,14 +557,19 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		}
 		return result;
 	}
-	
+
+	/**
+	 * Méthode pour lier un topo à un site
+	 * 
+	 * @return success si effectif
+	 */
 	public String lierTopo() {
-		
+
 		if (session.containsKey("listTopo"))
 			this.listTopo = (List<Topo>) session.get("listTopo");
 		else
 			this.listTopo = (List<Topo>) managerFactory.getTopoManager().getListAllTopo();
-		
+
 		try {
 			this.site = (Site) managerFactory.getSiteManager().getSite(this.site.getId());
 			for (Topo t : this.listTopo) {
@@ -574,22 +579,16 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 				}
 			}
 			this.managerFactory.getSiteManager().update(this.site);
-			
-			
-			
+
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
-		
-		
-		
-		
-		
 		return ActionSupport.SUCCESS;
 	}
+
+	
 
 	// -------------- Getters et Setters----------------
 	// -------------------------------------------------
@@ -718,7 +717,6 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		return session;
 	}
 
-	@Override
 	public void setSession(Map<String, Object> pSession) {
 
 		this.session = pSession;
@@ -867,5 +865,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	public void setTopoIdOut(Integer topoIdOut) {
 		this.topoIdOut = topoIdOut;
 	}
+
+	
 
 }

@@ -59,8 +59,8 @@
 		<!-- AJOUTER DES SITES -->
 		<action name="add_site" class="fr.mb.projet.action.site.GestionSiteAction"
 				method="add">
-<interceptor-ref name="loginInterceptor"></interceptor-ref>	
-<interceptor-ref name="defaultStack">
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>	
+			<interceptor-ref name="defaultStack">
     <param name="fileUpload.maximumSize">2097152</param>
     <param name="fileUpload.allowedTypes">
         image/png,image/gif,image/jpeg,image/pjpeg
@@ -69,6 +69,26 @@
 </interceptor-ref>
 				
 			<result name="input">/WEB-INF/jsp/site/add_site.jsp </result>
+
+			<result name="success" type="redirectAction">
+				<param name="actionName"> detail_site </param>
+				<param name="id">${site.id}</param>
+			</result>
+		</action>
+		
+		
+				<!-- AJOUTER DES SITES -->
+		<action name="update_site" class="fr.mb.projet.action.site.updateAction"
+				method="update">
+<interceptor-ref name="params"/>
+<interceptor-ref name="loginInterceptor"></interceptor-ref>	
+<interceptor-ref name="defaultStack">
+ 
+              
+</interceptor-ref>
+				
+			<result name="input">/WEB-INF/jsp/site/update_site.jsp 
+			</result>
 
 			<result name="success" type="redirectAction">
 				<param name="actionName"> detail_site </param>
@@ -118,6 +138,7 @@
 				<!-- Actions Commentaire -->
 		<action name="add_comment" class="fr.mb.projet.action.site.AjoutAction"
 			method="addComment">
+			
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>	
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			
@@ -184,6 +205,7 @@
 <!-- AJOUTER DES TOPOS -->
 		<action name="add_topo" class="fr.mb.projet.action.topo.GestionTopoAction"
 				method="addTopo">
+<interceptor-ref name="params"/>
 <interceptor-ref name="loginInterceptor"></interceptor-ref>	
 <interceptor-ref name="defaultStack">
     <param name="fileUpload.maximumSize">2097152</param>

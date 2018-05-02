@@ -280,10 +280,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 		// (Renvoie tous les sites par défaut (page d'accueil de la recherche))
 		if (this.statut == 0) {
-			System.out.println("Réinit");
-			System.out.println(this.statut);
 			this.lastPage = managerFactory.getSiteManager().getCount(this.pageSize, this.start);
-			System.out.println(this.lastPage);
 			this.listSite = managerFactory.getSiteManager().getListSite(this.pageSize, this.start);
 			if (session.containsKey("lastPage")) {
 				session.replace("lastPage", this.lastPage);
@@ -346,7 +343,8 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * 
 	 * @return Succes si pas d'erreur et Error si une erreur est présente
 	 */
-	public String doDetail() {
+	public String doDetail() throws NotFoundException {
+		//Récupérer des listes
 		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
 		session.put("listeCotation", this.listeCotation);
 
@@ -362,6 +360,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 			} catch (NotFoundException Notfound) {
 				this.addActionError(getText("error.project.notfound", Collections.singletonList(id)));
+				
 			}
 		}
 
@@ -372,10 +371,10 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	 * Méthode d'ajout d'un Site en reprenant les infos du formulaire
 	 * 
 	 * @return
-	 * @throws NotFoundException
-	 *             si le site est non trouvé
+	 * @throws FunctionalException
+	 *             si le site ajouté est null
 	 */
-	public String add() throws NotFoundException {
+	public String add() throws FunctionalException {
 
 		String result = ActionSupport.INPUT;
 
@@ -399,7 +398,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		if (this.site != null) {
 			// -------------- Validation des données saisies--------------
 			if (this.site.getNom().length() == 0 || this.site.getNom() == null) {
-				this.addFieldError("site.nom", "ne doit pas être vide");
+				this.addFieldError("site.nom", getText("error.empty"));
 			}
 
 			// Enregistrement de l'image
@@ -412,7 +411,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 					// Ajout du lien de l'image au site
 					this.site.setImage(this.fileFileName);
 				} catch (IOException ex) {
-					this.addActionError("Enregistrement de l'image impossible: " + ex.getMessage());
+					this.addActionError(getText("error.image") + ex.getMessage());
 				}
 			}
 			// Si image null, enregistrement d'une image par défaut
@@ -436,21 +435,15 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 					// Altitudes
 					if (this.altMax.getAlt() != null) {
-						System.out.println("non null");
 						this.altMax.setTypeAlt("max");
-						// this.altMax.setSite(this.site);
 						this.listeAltitudeOut.add(this.altMax);
 					}
 					if (this.altMin.getAlt() != null) {
-						System.out.println("non null");
 						this.altMin.setTypeAlt("min");
-						// this.altMin.setSite(this.site);
 						this.listeAltitudeOut.add(this.altMin);
 					}
 					if (this.altMoy.getAlt() != null) {
-						System.out.println("non null");
 						this.altMoy.setTypeAlt("moy");
-						// this.altMoy.setSite(this.site);
 						this.listeAltitudeOut.add(this.altMoy);
 					}
 
@@ -468,7 +461,6 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 					if (this.cotMinValue != null) {
 						this.cotMin = new Cotation();
-						// this.cotMin.setSite(this.site);
 						this.cotMin.setTypeCot("min");
 
 						// Récupération des objets dans les listes précédemment récupérée en BD
@@ -483,7 +475,6 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 					if (this.cotMaxValue != null) {
 						this.cotMax = new Cotation();
-						// this.cotMax.setSite(this.site);
 						this.cotMax.setTypeCot("max");
 						// Récupération des objets dans les listes précédemment récupérée en BD
 						for (ListCot j : this.listeCotation) {
@@ -508,7 +499,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 							}
 						}
 					}
-
+					// Récupération des pays
 					for (Pays p : this.listePays) {
 						if (this.paysIdOut.equals(p.getId())) {
 							this.site.setPays(p);
@@ -516,7 +507,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 						}
 
 					}
-
+					// Récupération des états
 					for (State s : this.listeState) {
 						if (this.stateIdOut.equals(s.getId())) {
 							this.site.setState(s);
@@ -548,7 +539,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 					this.addActionError(functExcep.getMessage());
 
 				} catch (TechnicalException techExcep) {
-					// on part sur le result "error"
+					// Autre erreur, on part sur le result "error"
 					this.addActionError(techExcep.getMessage());
 					result = ActionSupport.ERROR;
 				}
@@ -581,8 +572,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 			this.managerFactory.getSiteManager().update(this.site);
 
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.addActionError(getText("error.project.notfound", Collections.singletonList(id)));
 		}
 
 		return ActionSupport.SUCCESS;

@@ -13,6 +13,15 @@ import fr.mb.projet.bean.user.Utilisateur;
 import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.exception.NotFoundException;
 
+/**
+ * Action de login
+ * @author Morgan
+ *
+ */
+/**
+ * @author Morgan
+ *
+ */
 public class LoginAction extends ActionSupport implements SessionAware {
 
 	//ATTRIBUTS
@@ -20,10 +29,23 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	//Factory
 	@Inject
 	private ManagerFactory managerFactory;
+	
+	/**
+	 *Utilisateur voulant se logger 
+	 */
 	private Utilisateur user;
+	/**
+	 *login saisi de l'utilisateur 
+	 */
 	private String login;
+	/**
+	 *mdp saisi de l'utilisateur 
+	 */
 	private String password;
 	
+	/**
+	 *objet de session 
+	 */
 	private Map<String, Object> session;
 	
 	//Getters Setters
@@ -56,6 +78,10 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
 	
 	//Methodes
+	/**
+	 * Méthode pour se login
+	 * @return
+	 */
 	public String doLogin() {
 		String result = ActionSupport.INPUT;
         if (!StringUtils.isAllEmpty(login, password)) {
@@ -74,6 +100,10 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		
 	}
 	
+	/**
+	 * Méthode pour se logout
+	 * @return
+	 */
 	public String doLogout() {
 		this.session.remove("user");
 		this.session.remove("lastAction");

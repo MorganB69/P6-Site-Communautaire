@@ -65,6 +65,9 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	 */
 	private Utilisateur emprunteur;
 	
+	/**
+	 * Pour définir une demande de prêt
+	 */
 	private Pret DemandePret;
 	
 	/**
@@ -98,14 +101,29 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	 */
 	private Boolean topoEmprunt=false;
 	
+	/**
+	 *Liste des topos à obtenir 
+	 */
 	private List<Topo>listeTopo=new ArrayList<Topo>();
 
+	/**
+	 *Nombre de Topo à afficher par page 
+	 */
 	private Integer pageSize=12;
 
+	/**
+	 *Page choisit à afficher pour définir l'offset 
+	 */
 	private Integer start=0;
 
+	/**
+	 *Numéro de la dernière page 
+	 */
 	private Object lastPage;
 	
+	/**
+	 *Id du prêt 
+	 */
 	private Integer idPret;
 	
 	
@@ -175,7 +193,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 							this.addActionError(functExcep.getMessage());
 
 						} catch (TechnicalException techExcep) {
-							// on part sur le result "error"
+							// Autres erreurs, on part sur le result "error"
 							this.addActionError(techExcep.getMessage());
 							result = ActionSupport.ERROR;
 							
@@ -213,16 +231,16 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 				topo = (Topo) managerFactory.getTopoManager().getTopo(id);
 				
 				if (this.user!=null) {
-					System.out.println("Dans la boucle");
+					
 				for (Iterator iterator = topo.getListePret().iterator(); iterator.hasNext();) {
 					Pret pret = (Pret) iterator.next();
-					System.out.println(pret.getEmprunteur().getNom());
+				
 					if (pret.getEmprunteur().getId()==this.user.getId())this.topoEmprunt=true;
 					
 					
 				}
 				}
-				System.out.println(this.topoEmprunt);
+				
 			} catch (NotFoundException Notfound) {
 				this.addActionError(getText("error.project.notfound", Collections.singletonList(id)));
 			}
@@ -231,6 +249,10 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
 	}
 	
+	/**
+	 * Création d'une demande de réservation
+	 * @return
+	 */
 	public String reservation() {
 		
 		try {
@@ -247,24 +269,36 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 				managerFactory.getPretManager().insert(this.DemandePret);
 				addActionMessage("Votre demande a bien été effectuée");
 				this.topoEmprunt=true;
-			} catch (FunctionalException | TechnicalException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+			} catch (FunctionalException functExcep) {
+				// On reste sur la saisie
+				this.addActionError(functExcep.getMessage());
+
+			} catch (TechnicalException techExcep) {
+				// Autre erreur, on part sur le result "error"
+				this.addActionError(techExcep.getMessage());
+				
 			}
 			
 			
 			
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.addActionError(getText("error.project.notfound", Collections.singletonList(id)));
 		}
 		
 		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
 	}
 	
 	
+	/**
+	 * Acceptation de la réservation
+	 * @return
+	 */
 	public String acceptResa(){
+		
+		//On définit la date du jour comme date de départ
 		LocalDate dateDebut=LocalDate.now();
+		//On définit la date de fin 21 jours plus tard
 		LocalDate dateFin=dateDebut.plusDays(21);
 		
 		
@@ -284,24 +318,29 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 					this.user=managerFactory.getUserManager().getUserById(this.user.getId());
 
 							session.replace("user", this.user);
-						
-						
-					
+
 				}
 				
 			}
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.addActionError(getText("error.project.notfound", Collections.singletonList(id)));
 		}
 		
-		return ActionSupport.SUCCESS;
+		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
 	}
 	
+	/**
+	 * Refus de la réservation
+	 * @return
+	 */
 	public String refusResa() {
 		return ActionSupport.SUCCESS;
 	}
 	
+	/**
+	 * Annulation de la réservation
+	 * @return
+	 */
 	public String annulerResa() {
 		try {
 			this.topo = (Topo) managerFactory.getTopoManager().getTopo(this.id);
@@ -326,14 +365,17 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 			}
 			
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.addActionError(getText("error.project.notfound", Collections.singletonList(id)));
 		}
 		
 		
-		return ActionSupport.SUCCESS;
+		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
 	}
 	
+	/**
+	 * Suppression d'une réservation
+	 * @return
+	 */
 	public String deleteResa() {
 		
 		try {
@@ -359,12 +401,11 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 			}
 			
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.addActionError(getText("error.project.notfound", Collections.singletonList(id)));
 		}
 		
 		
-		return ActionSupport.SUCCESS;
+		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
 	}
 		
 		

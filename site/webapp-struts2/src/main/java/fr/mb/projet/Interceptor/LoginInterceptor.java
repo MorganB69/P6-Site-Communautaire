@@ -13,9 +13,17 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
 
 import fr.mb.projet.bean.user.Utilisateur;
 
+/**
+ * Interceptor pour s'authentifier avant d'accéder à certaines pages
+ * @author Morgan
+ *
+ */
 public class LoginInterceptor implements Interceptor, SessionAware {
 
 
+	/**
+	 *Objet de session 
+	 */
 	private Map<String, Object> session;
 
 
@@ -29,6 +37,9 @@ public class LoginInterceptor implements Interceptor, SessionAware {
 		// create resources here
 	}
 
+	/* (non-Javadoc)
+	 * @see com.opensymphony.xwork2.interceptor.Interceptor#intercept(com.opensymphony.xwork2.ActionInvocation)
+	 */
 	@Override
 	public String intercept(ActionInvocation actionInvocation)
 			throws Exception {

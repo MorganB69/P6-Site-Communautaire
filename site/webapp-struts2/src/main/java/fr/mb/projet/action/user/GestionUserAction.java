@@ -1,5 +1,6 @@
 package fr.mb.projet.action.user;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -102,15 +103,14 @@ public class GestionUserAction extends ActionSupport implements SessionAware {
 			this.user=managerFactory.getUserManager().getUserById(this.user.getId());
 			session.replace("user", this.user);
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.addActionError(getText("error.user.notfound"));
 		}
 
 				
 			
 			
 		
-		return ActionSupport.SUCCESS;
+		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
 	}
 
 	// ---------------------GETTERS/SETTERS---------------------------

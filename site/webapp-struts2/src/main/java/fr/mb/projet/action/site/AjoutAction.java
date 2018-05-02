@@ -50,6 +50,10 @@ public class AjoutAction extends ActionSupport implements SessionAware {
 
 	
 	
+	/**
+	 * Ajout d'un commentaire
+	 * @return
+	 */
 	public String addComment() {
 				
 		
@@ -69,6 +73,10 @@ public class AjoutAction extends ActionSupport implements SessionAware {
 		return ActionSupport.SUCCESS;
 	}
 	
+	/**
+	 * Ajout d'un secteur
+	 * @return
+	 */
 	public String addSecteur() {
 		
 		this.user = (Utilisateur) session.get("user");
@@ -84,6 +92,10 @@ public class AjoutAction extends ActionSupport implements SessionAware {
 			return ActionSupport.SUCCESS;
 	}
 	
+	/**
+	 * Ajout d'une voie
+	 * @return
+	 */
 	public String addVoie() {
 		
 		this.user = (Utilisateur) session.get("user");
@@ -96,13 +108,13 @@ public class AjoutAction extends ActionSupport implements SessionAware {
 			else
 				this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
 			
-			System.out.println(this.cotVoie);
+			
 			
 			// Récupération des objets dans les listes précédemment récupérée en BD
 			for (ListCot l : this.listeCotation) {
 				if (this.cotVoie == l.getId()) {
 					this.voie.setCotation(l);
-					System.out.println("Egalité : "+ l.getId());
+
 				}
 			}
 			

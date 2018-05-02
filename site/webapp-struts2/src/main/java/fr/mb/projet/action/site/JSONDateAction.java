@@ -17,21 +17,54 @@ import fr.mb.projet.bean.detail.Pays;
 import fr.mb.projet.bean.detail.State;
 import fr.mb.projet.contract.ManagerFactory;
 
+/**
+ * Action permettant l'obtention de la liste des Pays/Régions en Json
+ * @author Morgan
+ *
+ */
+/**
+ * @author Morgan
+ *
+ */
 public class JSONDateAction extends ActionSupport implements SessionAware {
 	
+	/**
+	 * Manager factory
+	 */
 	@Inject
 	private ManagerFactory managerFactory;
 	
+	/**
+	 * Session
+	 */
 	private Map<String, Object> session;
 	
+	/**
+	 * Pays
+	 */
 	private Pays pays;
 
 
 
+	/**
+	 *Id du Pays en sortie selectionné par l'user pour récupérer les régions correspondantes 
+	 */
 	private Integer paysIdOut=75;
+	/**
+	 *Liste des régions 
+	 */
 	private List<State>listState=new ArrayList<State>();
+	/**
+	 *Liste Json 
+	 */
 	private ArrayList <String> listJson = new ArrayList<String>();
+	/**
+	 *Permet la convertion en Json 
+	 */
 	private Gson gson=new Gson();
+	/**
+	 *Résultat en Json 
+	 */
 	private String result;
 	
 	
@@ -39,14 +72,21 @@ public class JSONDateAction extends ActionSupport implements SessionAware {
 		
 	}
 
-
+	
+	/**
+	 * Obtention de la liste des régions en fonction du pays puis retour en Json (utilisé dans formulaire global)
+	 * @return
+	 */
 	public String getListDb() {
 		this.listState = (List<State>) managerFactory.getStateManager().getDetailListByIdDb(this.paysIdOut);
 		this.result=this.gson.toJson(this.listState);
 		this.session.put("listState", this.listState);
 		return ActionSupport.SUCCESS;
 	}
-	
+	/**
+	 * Obtention de la liste des régions en fonction du pays puis retour en Json(utilisé dans formulaire recherche de site)
+	 * @return
+	 */
 	public String getList() {
 		
 	

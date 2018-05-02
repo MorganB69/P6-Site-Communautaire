@@ -27,7 +27,11 @@ public class TopoManagerImpl implements TopoManager {
 
 	@Override
 	public Topo getTopo(Integer topoId) throws NotFoundException {
+		
 		Topo vTopo = topoDao.findById(topoId);
+		if (vTopo==null) {
+			throw new NotFoundException("Topo non trouvé");
+		}
 
 		return vTopo;
 	}

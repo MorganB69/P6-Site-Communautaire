@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" strict="true" name="XMLConfig">
+	
+<Properties>
+	<!-- Modifier le path de sortie des logs si besoin -->
+    <Property name="filenameSpring">D:/logs/log4jSpring.log</Property>
+    <Property name="filenameStruts">D:/logs/log4jStruts.log</Property>
+    <Property name="filenameHibernate">D:logs/log4jHibernate.log</Property>
+       <Property name="filenameGeneral">D:/logs/log4jGeneral.log</Property>
+  </Properties>
+
+    <!-- ===== Appenders ===== -->
+    <Appenders>
+        <!-- == Sortie sur la console == -->
+        <Console name="STDOUT">
+        	<filters>
+       			 <ThresholdFilter level="info"/>
+       		</filters>
+            <PatternLayout pattern="%highlight{%-5level} [%t] %c : %m%n"/>
+        </Console>
+        
+        <!-- == Sortie sur un fichier de log == -->
+        <Appender type="File" name="FileGeneral" fileName="${filenameGeneral}" append="false">
+        	
+      		<Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}%C %level %m %n"/>
+   		 </Appender>
+   		 
+   		 <Appender type="File" name="FileStruts" fileName="${filenameStruts}" append="false">
+   		 	
+      		<Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}%C %level %m %n"/>
+   		 </Appender>
+   		 
+   		         <Appender type="File" name="FileSpring" fileName="${filenameSpring}" append="false">
+      		<Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}%C %level %m %n"/>
+   		 </Appender>
+   		 
+   		         <Appender type="File" name="FileHibernate" fileName="${filenameHibernate}" append="false">
+      		<Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}%C %level %m %n"/>
+   		 </Appender>
+    </Appenders>
+    
+    
+
+    <!-- ===== Loggers ===== -->
+    <Loggers>
+        <!-- == Logger pour Struts == -->
+        <Logger name="com.opensymphony.xwork2" level="debug">
+            <AppenderRef ref="FileSpring"/>
+        </Logger>
+        <Logger name="org.apache.struts2" level="debug">
+            <AppenderRef ref="FileStruts"/>
+        </Logger>
+        
+        <Logger name="org.hibernate" level="debug" >
+        	<AppenderRef ref="FileHibernate"/>
+        </Logger>
+
+        <!-- == Logger pour l'application == -->
+        <Logger name="fr.mb.projet" level="info" additivity="false">
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+        
+        <Logger name="fr.mb.projet" level="debug" additivity="false">
+            <AppenderRef ref="FileGeneral"/>
+        </Logger>
+        
+
+
+        <!-- == Logger de base == -->
+        <Root level="trace">
+            <AppenderRef ref="STDOUT"/>
+
+        </Root>
+    </Loggers>
+</Configuration>

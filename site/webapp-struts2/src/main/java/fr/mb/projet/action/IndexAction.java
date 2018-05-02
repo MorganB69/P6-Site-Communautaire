@@ -36,6 +36,10 @@ import fr.mb.projet.contract.ManagerFactory;
  * @author Morgan
  *
  */
+/**
+ * @author Morgan
+ *
+ */
 public class IndexAction extends ActionSupport implements SessionAware{
     
 	/**
@@ -82,10 +86,16 @@ public class IndexAction extends ActionSupport implements SessionAware{
         return SUCCESS;
     }
     
+    /**
+     * Affichage des mentions légales
+     * @return
+     */
     public String mentions() {
     	return ActionSupport.SUCCESS;
     }
 
+    
+    //GETTERS ET SETTERS
 
 
 	public ManagerFactory getManagerFactory() {

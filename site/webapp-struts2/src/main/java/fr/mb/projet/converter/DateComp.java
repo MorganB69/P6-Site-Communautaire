@@ -5,6 +5,11 @@ import java.util.Date;
 
 import fr.mb.projet.bean.comment.Comment;
 
+/**
+ * Comparateur de dates pour trier les commentaires d'une page
+ * @author Morgan
+ *
+ */
 public class DateComp implements Comparator<Comment>{
 
 	public int compare(Comment com1, Comment com2) {

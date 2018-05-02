@@ -40,15 +40,39 @@ public class updateAction extends ActionSupport implements SessionAware, Prepara
 	 */
 	private Integer id;
 	
+	/**
+	 * Type de site possibles
+	 */
 	private List<String> listType=new ArrayList<String>();
 	
+	/**
+	 * Boolean permettant de définir si le site a été modifié ou non
+	 */
 	private Boolean modif=false;
 	
+	/**
+	 *Site à modifier 
+	 */
 	private Site site;
+	
+	/**
+	 * Informations d'un site à récupérer en sortie
+	 * 
+	 */
 	private Site siteOut;
 	
+	/**
+	 *permet de modifier l'altitude minimum
+	 */
 	private Altitude altMin;
+	/**
+	 *permet de modifier l'altitude maximum
+	 */
 	private Altitude altMax;
+	
+	/**
+	 *permet de modifier l'altitude moyenne 
+	 */
 	private Altitude altMoy;
 	
 	/**
@@ -60,6 +84,10 @@ public class updateAction extends ActionSupport implements SessionAware, Prepara
 	
 	
 	
+	/**
+	 * Méthode de modification du site
+	 * @return
+	 */
 	public String update() {
 		
 				String result = ActionSupport.INPUT;
@@ -195,14 +223,7 @@ public class updateAction extends ActionSupport implements SessionAware, Prepara
 				if (this.modif == false) {
 					this.site = (Site) managerFactory.getSiteManager().getSite(this.id);
 					session.put("siteOut", this.site);
-					System.out.println("site: "+this.site);
-					System.out.println("id : "+this.site.getId());
-					System.out.println("coord"+this.site.getCoordonnee().getX());
-					
 
-					System.out.println("site: "+this.site);
-					System.out.println("id : "+this.site.getId());
-					System.out.println("coord"+this.site.getCoordonnee().getX());
 					
 
 

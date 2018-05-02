@@ -54,6 +54,10 @@ public class SiteManagerImpl implements SiteManager {
 	public Site getSite(Integer siteId) throws NotFoundException {
 
 		Site vSite = siteDao.findById(siteId);
+		if(vSite==null){
+			throw new NotFoundException("Site non trouvé");
+		}
+		
 
 		return vSite;
 	}

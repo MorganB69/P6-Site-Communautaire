@@ -15,8 +15,10 @@
 
 	</header>
 	
+	
 	    <!-- Page Content -->
     <div class="container" id="detail-cont">
+   		 <s:actionerror/>
     
     	<section>
 
@@ -348,13 +350,18 @@ Liste des topos disponibles
       		<div class="card card-body bg-light text-dark rounded">
       	
         			
-        			<s:bean name="fr.mb.projet.converter.DateComp" var="DateComp"/>
-     		     <s:sort comparator="#DateComp" source="site.listeComment">
+        		
+        		<s:if test="site.listeComment!=null">
+        		<s:bean name="fr.mb.projet.converter.DateComp" var="DateComp"/>
+        		<s:sort comparator="#DateComp" source="site.listeComment">
 				 <s:iterator >
 				 		<h6>Posté le : <s:date  format="dd/MM/yyyy" name="date" /> par <s:property value="user.pseudo" /></h6>
   						<p><s:property value="message" /></p>
 				</s:iterator> 
 				</s:sort>
+        		
+        		</s:if>
+
 				
 		
        		</div>

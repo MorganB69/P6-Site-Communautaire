@@ -19,8 +19,7 @@
 
 </div>
 
-<div class="row">
-      		
+<div class="row">   		
 
 <div class="col-lg-3 col-md-3">
 <div class="row">
@@ -155,6 +154,7 @@
 </div>
 <div class="col-lg-9 col-md-9">
 <div class="row">
+<s:if test="%{session.listSiteOffSet.isEmpty()==false}">
 <s:iterator value="session.listSiteOffSet">
 
 <div class="col-lg-4 col-md-6 col-sm-6 portfolio-item" >
@@ -191,7 +191,9 @@
 				</div>
 			</div>
 		</div>
-</s:iterator>  
+</s:iterator> 
+</s:if>
+<s:else>Aucun site d'escalade correspondant à vos critères n'a été trouvé</s:else> 
 </div>
 </div>
 </div>

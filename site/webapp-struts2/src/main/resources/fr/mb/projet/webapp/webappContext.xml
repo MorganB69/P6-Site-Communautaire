@@ -7,17 +7,25 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
+        
+    
 
 
-	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+        <list>
+            <value>classpath:hibernate.properties</value>
+        </list>
+    </property>
+	</bean>
 
 		
    <bean id="hibernateDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://localhost:5432/P6 OCR" />
-		<property name="username" value="postgres" />
-		<property name="password" value="admin" />
+		<property name="driverClassName" value="${hibernate.connection.driver_class}" />
+		<property name="url" value="${hibernate.connection.url}" />
+		<property name="username" value="${hibernate.connection.username}" />
+		<property name="password" value="${hibernate.connection.password}" />
 	</bean> 
       
     <bean id="sessionFactory"  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">  

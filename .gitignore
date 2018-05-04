@@ -6,3 +6,4 @@ site/technical/target/
 site/webapp-struts2/target/
 multiselect
 savedb
+site/webapp-struts2/src/main/resources/hibernate.properties

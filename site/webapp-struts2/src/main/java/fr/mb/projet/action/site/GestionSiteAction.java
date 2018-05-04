@@ -34,6 +34,7 @@ import fr.mb.projet.contract.ManagerFactory;
 import fr.mb.projet.exception.FunctionalException;
 import fr.mb.projet.exception.NotFoundException;
 import fr.mb.projet.exception.TechnicalException;
+import fr.mb.projet.execution.LogExecutionTime;
 import fr.mb.projet.recherche.RechercheSite;
 
 /**

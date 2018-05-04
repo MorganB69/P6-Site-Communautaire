@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="debug" strict="true" name="XMLConfig">
+<Configuration status="error" strict="true" name="XMLConfig">
 	
 <Properties>
 	<!-- Modifier le path de sortie des logs si besoin -->

@@ -20,7 +20,7 @@ import fr.mb.projet.contract.SiteDao;
 import fr.mb.projet.contract.SiteManager;
 import fr.mb.projet.exception.FunctionalException;
 import fr.mb.projet.exception.NotFoundException;
-import fr.mb.projet.exception.TechnicalException;
+import fr.mb.projet.execution.LogExecutionTime;
 import fr.mb.projet.recherche.RechercheSite;
 
 /**
@@ -68,9 +68,10 @@ public class SiteManagerImpl implements SiteManager {
 	 * @see fr.mb.projet.contract.SiteManager#getListSite(java.lang.Integer,
 	 * java.lang.Integer)
 	 */
+	@LogExecutionTime
+	@Transactional
 	@Override
 	public List<Site> getListSite(Integer nbPage, Integer start) {
-
 		Integer offset = (start - 1) * nbPage;
 		List<Site> list = siteDao.findAll(nbPage, offset);
 

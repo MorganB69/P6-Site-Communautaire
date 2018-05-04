@@ -49,6 +49,11 @@ Hibernate : Rajouter un fichier hibernate.properties dans les ressources spécif
 	hibernate.connection.username
 	hibernate.connection.password
 
+DEPLOIEMENT
+
+L'application a été packagé via Maven et peut être déployée sur une serveur via le fichier web.war.
+ex pour Tomcat, mettre le fichier war dans le dossier webapps de Tomcat.
+
 
 
 

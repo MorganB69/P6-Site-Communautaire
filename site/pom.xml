@@ -274,7 +274,6 @@
 					<configuration>
 						<showDeprecation>true</showDeprecation>
 						<showWarnings>true</showWarnings>
-						<encoding>Cp1252</encoding>
 					
 					</configuration>
 				</plugin>

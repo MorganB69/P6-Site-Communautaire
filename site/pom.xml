@@ -171,7 +171,7 @@
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-jcl</artifactId>
 				<version>2.9.1</version>
-				<scope>runtime</scope>
+				<scope>compile</scope>
 			</dependency>
 			
 			<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-jul -->
@@ -179,7 +179,7 @@
 			    <groupId>org.apache.logging.log4j</groupId>
 			    <artifactId>log4j-jul</artifactId>
 			    <version>2.9.1</version>
-			    <scope>runtime</scope>
+			    <scope>compile</scope>
 			</dependency>
 			
 			
@@ -274,6 +274,8 @@
 					<configuration>
 						<showDeprecation>true</showDeprecation>
 						<showWarnings>true</showWarnings>
+						<encoding>Cp1252</encoding>
+					
 					</configuration>
 				</plugin>
 

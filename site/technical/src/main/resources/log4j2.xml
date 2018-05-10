@@ -5,7 +5,7 @@
 	<!-- Modifier le path de sortie des logs si besoin -->
     <Property name="filenameSpring">D:/logs/log4jSpring.log</Property>
     <Property name="filenameStruts">D:/logs/log4jStruts.log</Property>
-    <Property name="filenameHibernate">D:logs/log4jHibernate.log</Property>
+    <Property name="filenameHibernate">D:/logs/log4jHibernate.log</Property>
        <Property name="filenameGeneral">D:/logs/log4jGeneral.log</Property>
   </Properties>
 
@@ -43,7 +43,9 @@
 
     <!-- ===== Loggers ===== -->
     <Loggers>
-        <!-- == Logger pour Struts == -->
+        <!-- == Logger détaillé pour pour Struts, Hibernate, Spring à activer si besoin == -->
+        
+        <!--  
         <Logger name="com.opensymphony.xwork2" level="debug">
             <AppenderRef ref="FileSpring"/>
         </Logger>
@@ -54,6 +56,7 @@
         <Logger name="org.hibernate" level="debug" >
         	<AppenderRef ref="FileHibernate"/>
         </Logger>
+        -->
 
         <!-- == Logger pour l'application == -->
         <Logger name="fr.mb.projet" level="info" additivity="false">

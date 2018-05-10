@@ -56,7 +56,7 @@ public class GestionUserAction extends ActionSupport implements SessionAware {
 	// METHODES
 
 	/**
-	 * Méthode d'ajout d'un utilisateur en base de donnée
+	 * MÃ©thode d'ajout d'un utilisateur en base de donnÃ©e
 	 * 
 	 * @return Succes si pas d'erreur
 	 */
@@ -65,20 +65,20 @@ public class GestionUserAction extends ActionSupport implements SessionAware {
 
 		if (this.user != null) {
 
-			// Vérification des données non nulles
+			// VÃ©rification des donnÃ©es non nulles
 			if (this.user.getPseudo().length() == 0 || this.user.getMdp().length() == 0
 					|| this.user.getNom().length() == 0 || this.user.getMail().length() == 0) {
-				this.addFieldError("user.pseudo", "Les champs ne doivent pas être vides");
+				this.addFieldError("user.pseudo", "Les champs ne doivent pas Ãªtre vides");
 			}
 
 			if (!this.hasErrors()) {
 				try {
-					// Enregistrement en base de donnée
+					// Enregistrement en base de donnÃ©e
 					managerFactory.getUserManager().insert(this.user);
 
 					result = ActionSupport.SUCCESS;
 
-					this.addActionMessage("Utilisateur ajouté avec succès");
+					this.addActionMessage("Utilisateur ajoutÃ© avec succÃ¨s");
 
 				} catch (FunctionalException functExcep) {
 					// On reste sur la saisie

@@ -36,7 +36,7 @@ public class updateAction extends ActionSupport implements SessionAware, Prepara
 	// ------------ Attributs-------------
 
 	/**
-	 * Entrée ID permettant d'obtenir le détail d'un site
+	 * EntrÃ©e ID permettant d'obtenir le dÃ©tail d'un site
 	 */
 	private Integer id;
 	
@@ -46,17 +46,17 @@ public class updateAction extends ActionSupport implements SessionAware, Prepara
 	private List<String> listType=new ArrayList<String>();
 	
 	/**
-	 * Boolean permettant de définir si le site a été modifié ou non
+	 * Boolean permettant de dÃ©finir si le site a Ã©tÃ© modifiÃ© ou non
 	 */
 	private Boolean modif=false;
 	
 	/**
-	 *Site à modifier 
+	 *Site Ã  modifier 
 	 */
 	private Site site;
 	
 	/**
-	 * Informations d'un site à récupérer en sortie
+	 * Informations d'un site Ã  rÃ©cupÃ©rer en sortie
 	 * 
 	 */
 	private Site siteOut;
@@ -85,7 +85,7 @@ public class updateAction extends ActionSupport implements SessionAware, Prepara
 	
 	
 	/**
-	 * Méthode de modification du site
+	 * MÃ©thode de modification du site
 	 * @return
 	 */
 	public String update() {
@@ -98,7 +98,7 @@ public class updateAction extends ActionSupport implements SessionAware, Prepara
 				this.listType.add("Artificiel");
 
 				session.put("listeType", this.listType);
-				// Accès à la BD pour récupérer les listes prédéfinies d'Orientation et Cotation
+				// AccÃ¨s Ã  la BD pour rÃ©cupÃ©rer les listes prÃ©dÃ©finies d'Orientation et Cotation
 				// et les mettre
 				// dans une session
 
@@ -106,12 +106,12 @@ public class updateAction extends ActionSupport implements SessionAware, Prepara
 
 				if (this.modif != false) {
 
-					// -------------- Validation des données saisies--------------
+					// -------------- Validation des donnÃ©es saisies--------------
 					if (this.site.getNom().length() == 0 || this.site.getNom() == null) {
-						this.addFieldError("site.nom", "ne doit pas être vide");
+						this.addFieldError("site.nom", "ne doit pas ï¿½tre vide");
 					}
 
-					// Si pas d'erreur, rajout des différents attributs au site enregistrement du
+					// Si pas d'erreur, rajout des diffÃ©rents attributs au site enregistrement du
 					// site
 					if (!this.hasErrors()) {
 						System.out.println("site: "+this.site);
@@ -119,7 +119,7 @@ public class updateAction extends ActionSupport implements SessionAware, Prepara
 						this.siteOut=(Site)session.get("siteOut");
 						
 						
-						//Modification du site récupéré en base de donnée avec les nouvelles informations
+						//Modification du site rÃ©cupÃ©rÃ© en base de donnÃ©e avec les nouvelles informations
 						
 						this.siteOut.setNom(this.site.getNom());
 						this.siteOut.setAcces(this.site.getAcces());
@@ -200,7 +200,7 @@ public class updateAction extends ActionSupport implements SessionAware, Prepara
 						// Fin de l'action
 						result = ActionSupport.SUCCESS;
 
-						this.addActionMessage("Site modifié avec succès");
+						this.addActionMessage("Site modifiï¿½ avec succï¿½s");
 
 					}
 				}

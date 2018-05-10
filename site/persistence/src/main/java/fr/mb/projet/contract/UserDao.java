@@ -14,48 +14,48 @@ import fr.mb.projet.bean.user.Utilisateur;
 public interface UserDao extends Serializable {
 	
 	/**
-	 * Enregistrement d'un utilisateur dans la base de données
-	 * @param user Utilisateur à enregistrer
+	 * Enregistrement d'un utilisateur dans la base de donnÃ©es
+	 * @param user Utilisateur Ã  enregistrer
 	 */
 	public void persist(Utilisateur user);
 	
 	/**
-	 * Mise à jour d'un utilisateur en base de données
-	 * @param user Utilisateur à mettre à jour
+	 * Mise Ã  jour d'un utilisateur en base de donnÃ©es
+	 * @param user Utilisateur Ã  mettre Ã  jour
 	 */
 	public void update(Utilisateur user);
 	
 	/**
-	 * Obtention de l'utilisateur en base de donnée en fonction de son login et mot de passe
+	 * Obtention de l'utilisateur en base de donnÃ©e en fonction de son login et mot de passe
 	 * @param login
 	 * @param mdp
-	 * @return l'utilisateur trouvé en base de donnée
+	 * @return l'utilisateur trouvÃ© en base de donnÃ©e
 	 */
 	public Utilisateur getUtilisateur(String login, String mdp);
 	
 	/**
-	 * Supprime l'utilisateur de la base de donnée
-	 * @param user à supprimer
+	 * Supprime l'utilisateur de la base de donnÃ©e
+	 * @param user Ã  supprimer
 	 */
 	public void delete(Utilisateur user);
 	
 	/**
-	 * Obtention d'une liste d'utilisateur à récupérer en base de données
+	 * Obtention d'une liste d'utilisateur Ã  rÃ©cupÃ©rer en base de donnÃ©es
 	 * @return liste des utilisateurs
 	 */
 	public List<Utilisateur> findAll();
 	
 	/**
-	 * Supprime tous les utilisateurs de la base de donnée.
+	 * Supprime tous les utilisateurs de la base de donnÃ©e.
 	 * 
 	 */
 	public void deleteAll();
 	
 	/**
-	 * Obtention de l'utilisateur en base de donnée en fonction de son login et mot de passe
+	 * Obtention de l'utilisateur en base de donnÃ©e en fonction de son login et mot de passe
 	 * @param login
 	 * @param mdp
-	 * @return l'utilisateur trouvé en base de donnée
+	 * @return l'utilisateur trouvÃ© en base de donnÃ©e
 	 */
 	public Utilisateur getUtilisateurById(Integer id);
 

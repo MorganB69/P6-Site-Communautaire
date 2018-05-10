@@ -30,7 +30,7 @@ public class TopoManagerImpl implements TopoManager {
 		
 		Topo vTopo = topoDao.findById(topoId);
 		if (vTopo==null) {
-			throw new NotFoundException("Topo non trouvé");
+			throw new NotFoundException("Topo non trouvÃ©");
 		}
 
 		return vTopo;

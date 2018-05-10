@@ -58,7 +58,7 @@ public class Topo implements Serializable {
 	@Column(name = "description")
 	private String description;
 	/**
-	 * Attribut pour définir si le topo est disponible ou non 
+	 * Attribut pour dÃ©finir si le topo est disponible ou non 
 	 */
 	@Column(name = "statut")
 	private String statut;
@@ -69,7 +69,7 @@ public class Topo implements Serializable {
 	private String lien;
 	
 	/**
-	 * L'utilisateur à qui appartient le topo
+	 * L'utilisateur Ã  qui appartient le topo
 	 */
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name="user_id")
@@ -81,7 +81,7 @@ public class Topo implements Serializable {
 
 	
 	/**
-	 *Liste des sites associés au topo 
+	 *Liste des sites associÃ©s au topo 
 	 */
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "listeTopo")
 	private Set<Site>listeSite=new HashSet<Site>();

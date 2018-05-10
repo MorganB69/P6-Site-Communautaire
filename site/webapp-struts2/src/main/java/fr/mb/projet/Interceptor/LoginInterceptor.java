@@ -14,7 +14,7 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
 import fr.mb.projet.bean.user.Utilisateur;
 
 /**
- * Interceptor pour s'authentifier avant d'accéder à certaines pages
+ * Interceptor pour s'authentifier avant d'accÃ©der Ã  certaines pages
  * @author Morgan
  *
  */

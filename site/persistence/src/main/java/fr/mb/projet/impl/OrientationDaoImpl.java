@@ -12,7 +12,7 @@ import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.contract.DetailDao;
 
 /**
- * Classe pour récupérer en bd la liste des Orientations
+ * Classe pour rÃ©cupÃ©rer en bd la liste des Orientations
  * @author Morgan
  *
  */

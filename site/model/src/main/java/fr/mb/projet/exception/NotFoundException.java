@@ -1,14 +1,14 @@
 package fr.mb.projet.exception;
 
 /**
- * Classe d'exception levée quand l'objet métier demandé n'a pas été trouvé
+ * Classe d'exception levÃ©e quand l'objet mï¿½tier demandï¿½ n'a pas Ã©tÃ© trouvÃ©
  *
  *
  */
 public class NotFoundException extends Exception {
 
     /**
-     * Constructeur par défaut.
+     * Constructeur par dÃ©faut.
      */
     public NotFoundException() {
     }

@@ -7,7 +7,7 @@ import fr.mb.projet.bean.detail.State;
 import fr.mb.projet.bean.spot.Site;
 
 /**
- * Interface générique pour l'obtention des listes de détails d'un site (Listes fixes ex: Orientation etc.)
+ * Interface gÃ©nÃ©rique pour l'obtention des listes de dÃ©tails d'un site (Listes fixes ex: Orientation etc.)
  * @author Morgan
  *
  * @param <T>
@@ -17,7 +17,7 @@ public interface DetailDao<T> {
 	
 	
 	/**
-	 * Méthode pour l'obtention de la liste en bd
+	 * MÃ©thode pour l'obtention de la liste en bd
 	 * @return
 	 */
 	public List<T> findAll();

@@ -42,12 +42,12 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	private Map<String, Object> session;
 	
 	/**
-	 * Pour définir le propriétaire du topo
+	 * Pour dÃ©finir le propriÃ©taire du topo
 	 */
 	private Utilisateur proprietaire;
 	
 	/**
-	 * Pour définir l'utilisateur en cours sur le site
+	 * Pour dÃ©finir l'utilisateur en cours sur le site
 	 */
 	private Utilisateur user;
 	
@@ -61,34 +61,34 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	}
 
 	/**
-	 * Pour définir l'emprunteur d'un topo s'il y en a un
+	 * Pour dÃ©finir l'emprunteur d'un topo s'il y en a un
 	 */
 	private Utilisateur emprunteur;
 	
 	/**
-	 * Pour définir une demande de prêt
+	 * Pour dÃ©finir une demande de prÃªt
 	 */
 	private Pret DemandePret;
 	
 	/**
-	 * Classe Topo pour obtenir ou rajouter des détails au topo
+	 * Classe Topo pour obtenir ou rajouter des dÃ©tails au topo
 	 */
 	private Topo topo;
 	
 	/**
-	 * Liste des sites pour associer à un topo
+	 * Liste des sites pour associer Ã  un topo
 	 */
 	private List<Site>listeSite=new ArrayList<Site>();
 	/**
-	 * Liste des id des sites à associer
+	 * Liste des id des sites Ã  associer
 	 */
 	private List<Integer>listeSiteValues=new ArrayList<Integer>();
 	/**
-	 *Utilisée pour ajouter une image au topo 
+	 *UtilisÃ©e pour ajouter une image au topo 
 	 */
 	private File file;
 	/**
-	 *Utilisée pour donner un nom à l'image 
+	 *UtilisÃ©e pour donner un nom Ã  l'image 
 	 */
 	private String fileFileName;
 	/**
@@ -97,32 +97,32 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	private Integer id;
 	
 	/**
-	 * Pour définir si le topo visité est déjà en demande d'emprunt par l'utilisateur
+	 * Pour dÃ©finir si le topo visitÃ© est dÃ©jÃ  en demande d'emprunt par l'utilisateur
 	 */
 	private Boolean topoEmprunt=false;
 	
 	/**
-	 *Liste des topos à obtenir 
+	 *Liste des topos Ã  obtenir 
 	 */
 	private List<Topo>listeTopo=new ArrayList<Topo>();
 
 	/**
-	 *Nombre de Topo à afficher par page 
+	 *Nombre de Topo Ã  afficher par page 
 	 */
 	private Integer pageSize=12;
 
 	/**
-	 *Page choisit à afficher pour définir l'offset 
+	 *Page choisit Ã  afficher pour dÃ©finir l'offset 
 	 */
 	private Integer start=0;
 
 	/**
-	 *Numéro de la dernière page 
+	 *NumÃ©ro de la derniÃ¨re page 
 	 */
 	private Object lastPage;
 	
 	/**
-	 *Id du prêt 
+	 *Id du prÃªt 
 	 */
 	private Integer idPret;
 	
@@ -131,12 +131,12 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	// METHODES
 	
 	/**
-	 * Méthode de rajout d'un topo
-	 * @return retourne succes si le rajout a réussi
+	 * MÃ©thode de rajout d'un topo
+	 * @return retourne succes si le rajout a rÃ©ussi
 	 */
 	public String addTopo() {
 		
-		// Accès à la BD pour récupérer les listes prédéfinies d'Orientation et Cotation
+		// AccÃ¨s Ã  la BD pour rÃ©cupÃ©rer les listes prÃ©dÃ©finies d'Orientation et Cotation
 		// et les mettre
 		// dans une session
 		
@@ -145,12 +145,12 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 		
 		
 		if(this.topo!=null) {
-			// -------------- Validation des données saisies--------------
+			// -------------- Validation des donnÃ©es saisies--------------
 			if (this.topo.getAuteur().length() == 0 || this.topo.getAuteur() == null) {
-				this.addFieldError("topo.auteur", "ne doit pas être vide");
+				this.addFieldError("topo.auteur", "ne doit pas Ãªtre vide");
 			}
 			if (this.topo.getTitre().length() == 0 || this.topo.getTitre() == null) {
-				this.addFieldError("topo.titre", "ne doit pas être vide");
+				this.addFieldError("topo.titre", "ne doit pas Ãªtre vide");
 			}
 		
 		// Enregistrement de l'image
@@ -166,7 +166,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 							this.addActionError("Enregistrement de l'image impossible: " + ex.getMessage());
 						}
 					}
-					// Si image null, enregistrement d'une image par défaut
+					// Si image null, enregistrement d'une image par dÃ©faut
 					else
 						this.topo.setImage("defautTopo.png");
 					
@@ -185,7 +185,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 
 
 
-							this.addActionMessage("Topo ajouté avec succès");
+							this.addActionMessage("Topo ajoutÃ© avec succÃ¨s");
 							result = ActionSupport.SUCCESS;
 
 						} catch (FunctionalException functExcep) {
@@ -206,7 +206,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	
 	/**
 	 * Obtenir la liste des topos
-	 * @return succès lorsque la liste est obtenue
+	 * @return succÃ¨s lorsque la liste est obtenue
 	 */
 	public String doList() {
 		
@@ -219,8 +219,8 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	}
 	
 	/**
-	 * Obtenir le détail d'un topo
-	 * @return succès lorsque le topo est obtenu
+	 * Obtenir le dÃ©tail d'un topo
+	 * @return succÃ¨s lorsque le topo est obtenu
 	 */
 	public String doDetail() {
 		if (id == null) {
@@ -250,7 +250,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	}
 	
 	/**
-	 * Création d'une demande de réservation
+	 * CrÃ©ation d'une demande de rÃ©servation
 	 * @return
 	 */
 	public String reservation() {
@@ -267,7 +267,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 			
 			try {
 				managerFactory.getPretManager().insert(this.DemandePret);
-				addActionMessage("Votre demande a bien été effectuée");
+				addActionMessage("Votre demande a bien Ã©tÃ© effectuÃ©e");
 				this.topoEmprunt=true;
 				
 			} catch (FunctionalException functExcep) {
@@ -291,27 +291,27 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	
 	
 	/**
-	 * Acceptation de la réservation
+	 * Acceptation de la rÃ©servation
 	 * @return
 	 */
 	public String acceptResa(){
 		
-		//On définit la date du jour comme date de départ
+		//On dÃ©finit la date du jour comme date de dÃ©part
 		LocalDate dateDebut=LocalDate.now();
-		//On définit la date de fin 21 jours plus tard
+		//On dÃ©finit la date de fin 21 jours plus tard
 		LocalDate dateFin=dateDebut.plusDays(21);
 		
 		
 		try {
 			this.topo = (Topo) managerFactory.getTopoManager().getTopo(this.id);
-			this.topo.setStatut("Réservé");
+			this.topo.setStatut("RÃ©servÃ©");
 			
 			for (Iterator iterator = this.topo.getListePret().iterator(); iterator.hasNext();) {
 				Pret pret = (Pret) iterator.next();
 				if(pret.getId()==this.idPret) {
 					pret.setDebut(dateDebut);
 					pret.setFin(dateFin);
-					pret.setStatut("Accepté");
+					pret.setStatut("AcceptÃ©");
 					managerFactory.getPretManager().update(pret);
 					managerFactory.getTopoManager().update(this.topo);
 					this.user=(Utilisateur) session.get("user");
@@ -330,7 +330,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	}
 	
 	/**
-	 * Refus de la réservation
+	 * Refus de la rÃ©servation
 	 * @return
 	 */
 	public String refusResa() {
@@ -338,7 +338,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	}
 	
 	/**
-	 * Annulation de la réservation
+	 * Annulation de la rÃ©servation
 	 * @return
 	 */
 	public String annulerResa() {
@@ -351,7 +351,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 				if(pret.getId()==this.idPret) {
 					pret.setDebut(null);
 					pret.setFin(null);
-					pret.setStatut("Annulé");
+					pret.setStatut("AnnulÃ©");
 					managerFactory.getPretManager().update(pret);
 					managerFactory.getTopoManager().update(this.topo);
 					this.user=(Utilisateur) session.get("user");
@@ -373,7 +373,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 	}
 	
 	/**
-	 * Suppression d'une réservation
+	 * Suppression d'une rÃ©servation
 	 * @return
 	 */
 	public String deleteResa() {
@@ -387,7 +387,7 @@ public class GestionTopoAction extends ActionSupport implements SessionAware {
 				if(pret.getId()==this.idPret) {
 					pret.setDebut(null);
 					pret.setFin(null);
-					pret.setStatut("Annulé");
+					pret.setStatut("AnnulÃ©");
 					managerFactory.getPretManager().delete(pret);
 					
 					this.user=(Utilisateur) session.get("user");

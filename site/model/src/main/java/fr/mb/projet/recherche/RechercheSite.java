@@ -2,7 +2,7 @@ package fr.mb.projet.recherche;
 
 
 /**
- * Classe pour définir les critères de recherche d'un Site
+ * Classe pour dÃ©finir les critÃ¨res de recherche d'un Site
  * @author Morgan
  *
  */

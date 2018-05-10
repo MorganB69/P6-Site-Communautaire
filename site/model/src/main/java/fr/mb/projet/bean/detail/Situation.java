@@ -24,7 +24,7 @@ import org.hibernate.annotations.Parameter;
 import fr.mb.projet.bean.spot.Site;
 
 /**
- * Classe de Situation géographique d'un Site
+ * Classe de Situation gÃ©ographique d'un Site
  * 
  * @author Morgan
  *
@@ -61,14 +61,14 @@ public class Situation implements Serializable {
 	private String type;
 
 	/**
-	 * Classe site permettant de paramétrer la relation 1-1
+	 * Classe site permettant de paramÃ©trer la relation 1-1
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	private Site site;
 
 	public Situation() {
-		logger.info("création d'un situation");
+		logger.info("crÃ©ation d'un situation");
 	}
 
 	public Integer getId() {

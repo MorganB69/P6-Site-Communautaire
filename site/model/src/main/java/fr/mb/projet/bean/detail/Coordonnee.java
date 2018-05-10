@@ -22,7 +22,7 @@ import org.hibernate.annotations.Parameter;
 import fr.mb.projet.bean.spot.Site;
 
 /**
- * Classe permettant de définir les coordonnées d'un Site
+ * Classe permettant de dÃ©finir les coordonnÃ©es d'un Site
  * 
  * @author Morgan
  *
@@ -32,7 +32,7 @@ import fr.mb.projet.bean.spot.Site;
 public class Coordonnee implements Serializable {
 
 	/**
-	 * L'ID est défini par le Site (strategy foreign car relation 1-1)
+	 * L'ID est dÃ©fini par le Site (strategy foreign car relation 1-1)
 	 */
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "site"))
 	@Id
@@ -41,18 +41,18 @@ public class Coordonnee implements Serializable {
 	private Integer id;
 
 	/**
-	 * La latitude des coordonnées
+	 * La latitude des coordonnÃ©es
 	 */
 	@Column(name = "latitude")
 	private Double x;
 	/**
-	 * La longitude des coordonnées
+	 * La longitude des coordonnÃ©es
 	 */
 	@Column(name = "longitude")
 	private Double y;
 
 	/**
-	 * Classe site pour définir la relation 1-1
+	 * Classe site pour dÃ©finir la relation 1-1
 	 */
 	@OneToOne(fetch = FetchType.EAGER)
 	@PrimaryKeyJoinColumn

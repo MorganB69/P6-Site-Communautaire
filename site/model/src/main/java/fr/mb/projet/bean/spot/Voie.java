@@ -1,5 +1,7 @@
 package fr.mb.projet.bean.spot;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,9 +25,9 @@ import fr.mb.projet.bean.detail.ListCot;
  */
 @Entity
 @Table(name = "voie")
-public class Voie {
+public class Voie implements Serializable {
 	/**
-	 * l'Id d'une voie est généré automatiquement
+	 * l'Id d'une voie est gÃ©nÃ©rÃ© automatiquement
 	 */
 	@Id
 	@Column(name = "voie_id")

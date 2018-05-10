@@ -11,7 +11,6 @@ import fr.mb.projet.bean.spot.Secteur;
 import fr.mb.projet.bean.spot.Voie;
 import fr.mb.projet.contract.AjoutDao;
 import fr.mb.projet.contract.AjoutManager;
-import fr.mb.projet.contract.SiteDao;
 
 /**
  * Manager pour le rajout de commentaire

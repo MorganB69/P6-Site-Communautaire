@@ -9,7 +9,7 @@ import fr.mb.projet.exception.NotFoundException;
 import fr.mb.projet.exception.TechnicalException;
 
 /**
- * Interface pour l'obtention d'une liste de détails d'un site
+ * Interface pour l'obtention d'une liste de dÃ©tails d'un site
  * @author Morgan
  *
  * @param <T>

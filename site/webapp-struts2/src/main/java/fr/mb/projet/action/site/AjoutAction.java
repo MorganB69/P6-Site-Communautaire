@@ -23,7 +23,7 @@ import fr.mb.projet.bean.user.Utilisateur;
 import fr.mb.projet.contract.ManagerFactory;
 
 /**
- * Classe d'ajout d'un commentaire/voie/secteur à site
+ * Classe d'ajout d'un commentaire/voie/secteur Ã  un site
  * @author Morgan
  *
  */
@@ -42,7 +42,7 @@ public class AjoutAction extends ActionSupport implements SessionAware {
 	private Secteur secteur;
 	private Voie voie;
 	/**
-	 * Liste des différentes cotations à récupérer en bd
+	 * Liste des diffï¿½rentes cotations Ã  rÃ©cupÃ©rer en bd
 	 */
 	private List<ListCot> listeCotation = new ArrayList<ListCot>();
 	private Integer cotVoie;
@@ -102,7 +102,7 @@ public class AjoutAction extends ActionSupport implements SessionAware {
 		
 		if(user!=null) {
 			
-			// Récupération des objets en session
+			// RÃ©cupÃ©ration des objets en session
 			if (session.containsKey("listCotation"))
 				this.listeCotation = (List<ListCot>) session.get("listCotation");
 			else
@@ -110,7 +110,7 @@ public class AjoutAction extends ActionSupport implements SessionAware {
 			
 			
 			
-			// Récupération des objets dans les listes précédemment récupérée en BD
+			// RÃ©cupÃ©ration des objets dans les listes prÃ©cÃ©demment rÃ©cupÃ©rÃ©e en BD
 			for (ListCot l : this.listeCotation) {
 				if (this.cotVoie == l.getId()) {
 					this.voie.setCotation(l);

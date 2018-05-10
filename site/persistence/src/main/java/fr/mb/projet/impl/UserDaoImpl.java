@@ -8,7 +8,7 @@ import fr.mb.projet.bean.user.Utilisateur;
 import fr.mb.projet.contract.UserDao;
 
 /**
- * Implémentation de la DAO pour la classe Utilisateur
+ * ImplÃ©mentation de la DAO pour la classe Utilisateur
  * 
  * @author Morgan
  *

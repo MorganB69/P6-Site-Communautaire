@@ -10,20 +10,20 @@ public interface PretDao {
 	
 	/**
 	 * Persister  en bd
-	 * @param  à insérer en bd
+	 * @param  Ã  insÃ©rer en bd
 	 */
 	public void persist(Pret pret);
 	
 	/**
-	 * Mettre à jour  en bd
-	 * @param  à mettre à jour en bd
+	 * Mettre Ã  jour  en bd
+	 * @param  Ã  mettre Ã  jour en bd
 	 */
 	public void update(Pret pret);
 	
 	/**
 	 * Trouver le pret en fonction de son id
 	 * @param pret pour trouver le site
-	 * @return le pret trouvé
+	 * @return le pret trouvÃ©
 	 */
 	public Pret findById(int id);
 	
@@ -34,16 +34,16 @@ public interface PretDao {
 	public void delete(Pret pret);
 	
 	/**
-	 * Récupère une liste de Pret en bd
-	 * @param nbPage permet de définir la limite
-	 * @param start permet de définir l'offset
+	 * RÃ©cupÃ¨re une liste de Pret en bd
+	 * @param nbPage permet de dÃ©finir la limite
+	 * @param start permet de dÃ©finir l'offset
 	 * @return une liste de Topo
 	 */
 
 	public List<Pret> findAllPret();
 	
 	/**
-	 * Supprime tous les topo en base de donnée
+	 * Supprime tous les topo en base de donnÃ©e
 	 * 
 	 */
 	
@@ -51,8 +51,8 @@ public interface PretDao {
 	public void deleteAll();
 
 	/**
-	 * Compte le nombre d'objet en base de donnée
-	 * @return le nombre d'objets trouvés
+	 * Compte le nombre d'objet en base de donnÃ©e
+	 * @return le nombre d'objets trouvÃ©s
 	 */
 	public Long getCount();
 

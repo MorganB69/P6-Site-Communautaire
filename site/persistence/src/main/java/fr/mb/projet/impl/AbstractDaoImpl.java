@@ -19,13 +19,13 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 public abstract class AbstractDaoImpl {
 	
 	/**
-	 * Template hibernate utilisé pour les requêtes basiques
+	 * Template hibernate utilisÃ© pour les requÃªtes basiques
 	 */
 	@Inject
 	HibernateTemplate template;
 	
 	/**
-	 * Permet de créer des sessions personnalisées pour des requêtes plus complexes
+	 * Permet de crÃ©er des sessions personnalisÃ©es pour des requÃªtes plus complexes
 	 */
 	@Inject
 	SessionFactory sessionFactory;

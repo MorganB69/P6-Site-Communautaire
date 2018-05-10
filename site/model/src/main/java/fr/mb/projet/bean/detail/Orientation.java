@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import fr.mb.projet.bean.spot.Site;
 
 /**
- * Classe pour définir l'Orientation d'un site
+ * Classe pour dÃ©finir l'Orientation d'un site
  * 
  * @author Morgan
  *
@@ -38,7 +38,7 @@ public class Orientation implements Serializable {
 	@Column(name = "valeur")
 	private String orientation;
 	/**
-	 * Liste de Site pour définir la relations n-n
+	 * Liste de Site pour dÃ©finir la relations n-n
 	 */
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listeOrientation")
 	private Set<Site> sites = new HashSet<Site>();

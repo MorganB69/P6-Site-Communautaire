@@ -39,7 +39,7 @@ import fr.mb.projet.recherche.RechercheSite;
 
 /**
  * @author Morgan Action permettant la gestion des spots, ex : ajouter un
- *         nouveau spot détail d'un spot etc.
+ *         nouveau spot dÃ©tail d'un spot etc.
  */
 public class GestionSiteAction extends ActionSupport implements SessionAware {
 
@@ -57,63 +57,63 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	// ------------ Attributs-------------
 
 	/**
-	 * Entrée ID permettant d'obtenir le détail d'un site
+	 * EntrÃ©e ID permettant d'obtenir le dÃ©tail d'un site
 	 */
 	private Integer id;
 
-	// -----------Paramètres Pagination-------
+	// -----------ParamÃ¨tres Pagination-------
 
 	/**
-	 * Nombre de sites à afficher par page
+	 * Nombre de sites Ã  afficher par page
 	 */
 	private Integer pageSize = 12;
 
 	/**
-	 * Nombre de page nécessaire pour tous les objets (soit le numéro de la dernière
+	 * Nombre de page nÃ©cessaire pour tous les objets (soit le numÃ©ro de la derniÃ¨re
 	 * page)
 	 */
 	private Integer lastPage = 0;
 
 	/**
-	 * Liste à renvoyer aux vues après l'application d'un offset
+	 * Liste Ã  renvoyer aux vues aprÃ¨s l'application d'un offset
 	 */
 	private List<Site> listSiteOffset = new ArrayList<Site>();
 
 	/**
-	 * Page sélectionnée et permet de définir l'Offset pour le changement de page
+	 * Page sÃ©lectionnÃ©e et permet de dÃ©finir l'Offset pour le changement de page
 	 */
 	private Integer start = 0;
 
-	// Attributs utilisés pour alimenter le questionnaire
+	// Attributs utilisÃ©s pour alimenter le questionnaire
 
 	/**
-	 * Liste des différentes orientations à récupérer en bd
+	 * Liste des diffÃ©rentes orientations Ã  rÃ©cupÃ©rer en bd
 	 */
 	private List<Orientation> listeOrientation = new ArrayList<Orientation>();
 	/**
-	 * Liste des différentes cotations à récupérer en bd
+	 * Liste des diffÃ©rentes cotations Ã  rÃ©cupÃ©rer en bd
 	 */
 	private List<ListCot> listeCotation = new ArrayList<ListCot>();
 
 	/**
-	 * Liste des pays à récupérer en bd
+	 * Liste des pays Ã  rÃ©cupÃ©rer en bd
 	 */
 	private List<Pays> listePays = new ArrayList<Pays>();
 
 	/**
-	 * Liste des régions à récupérer en bd
+	 * Liste des rÃ©gions Ã  rÃ©cupÃ©rer en bd
 	 */
 	private List<State> listeState = new ArrayList<State>();
 
 	// Upload fichier
 
 	/**
-	 * File pour la récupération d'image sur le questionnaire d'ajout
+	 * File pour la rÃ©cupÃ©ration d'image sur le questionnaire d'ajout
 	 */
 	private File file;
 
 	/**
-	 * Permet de récupérer le nom du fichier
+	 * Permet de rÃ©cupÃ©rer le nom du fichier
 	 */
 	private String fileFileName;
 
@@ -160,7 +160,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	private Cotation cotMax;
 
 	/**
-	 * Attribut qui à zero permet d'obtenir la liste de tous les sites par défaut
+	 * Attribut qui Ã  zero permet d'obtenir la liste de tous les sites par dÃ©faut
 	 */
 	private int statut = 0;
 
@@ -170,14 +170,14 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	private Integer paysIdOut;
 
 	/**
-	 * Attribut en sortie de l'ID d'une région
+	 * Attribut en sortie de l'ID d'une rÃ©gion
 	 */
 	private Integer stateIdOut;
 
 	private Integer topoIdOut;
 
 	/**
-	 * Liste des types de site à choisir dans le formulaire de rajout d'un site
+	 * Liste des types de site Ã  choisir dans le formulaire de rajout d'un site
 	 */
 	private List<String> listType = new ArrayList();
 
@@ -195,37 +195,37 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	private Set<Cotation> listeCotationOut = new HashSet<Cotation>();
 
 	/**
-	 * Integer en sortie du questionnaire qui serviront à alimenter les listes
+	 * Integer en sortie du questionnaire qui serviront Ã  alimenter les listes
 	 */
 	private List<Integer> listeOrientationValues = new ArrayList<Integer>();
 	/**
-	 * Integer en sortie du questionnaire qui serviront à alimenter les listes
+	 * Integer en sortie du questionnaire qui serviront Ã  alimenter les listes
 	 */
 	private Integer cotMinValue;
 	/**
-	 * Integer en sortie du questionnaire qui serviront à alimenter les listes
+	 * Integer en sortie du questionnaire qui serviront ï¿½ alimenter les listes
 	 */
 	private Integer cotMaxValue;
 
 	/**
-	 * Classe comprenant les attributs correspondants aux critères de recherche d'un
+	 * Classe comprenant les attributs correspondants aux critÃ¨res de recherche d'un
 	 * site
 	 */
 	private RechercheSite recherche;
 
 	
 
-	// ------------------------ Méthodes-------------------------
+	// ------------------------ MÃ©thodes-------------------------
 	// ----------------------------------------------------------
 
 	/**
-	 * Méthode d'obtention de la liste des sites
+	 * MÃ©thode d'obtention de la liste des sites
 	 * 
 	 * @return Retourne succes si pas d'erreur
 	 */
 	public String doList() {
 
-		// Accès à la BD pour récupérer les listes prédéfinies d'Orientation et Cotation
+		// AccÃ¨s Ã  la BD pour rÃ©cupÃ©rer les listes prÃ©dÃ©finies d'Orientation et Cotation
 		// et les mettre
 		// dans une session
 		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
@@ -241,7 +241,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		session.put("listePays", this.listePays);
 		session.put("listeType", this.listType);
 
-		// Obtention de la dernière page
+		// Obtention de la derniï¿½re page
 		this.lastPage = managerFactory.getSiteManager().getCount(this.pageSize, this.start);
 
 		// Obtention de la liste
@@ -252,13 +252,13 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	}
 
 	/**
-	 * Méthode de recherche de site en fonction des critères
+	 * MÃ©thode de recherche de site en fonction des critÃ¨res
 	 * 
 	 * @return
 	 */
 	public String rechercheSite() {
 
-		// Accès à la BD pour récupérer les listes prédéfinies d'Orientation et Cotation
+		// AccÃ¨s Ã  la BD pour rÃ©cupÃ©rer les listes prÃ©dÃ©finies d'Orientation et Cotation
 		// et les mettre
 		// dans une session
 		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
@@ -274,12 +274,12 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		session.put("listePays", this.listePays);
 		session.put("listeType", this.listType);
 
-		// Vérification du statut (si 0 , renvoie tous les sites par défaut)
+		// VÃ©rification du statut (si 0 , renvoie tous les sites par dÃ©faut)
 		if (session.containsKey("statut")) {
 			this.statut = (int) session.get("statut");
 		}
 
-		// (Renvoie tous les sites par défaut (page d'accueil de la recherche))
+		// (Renvoie tous les sites par dÃ©faut (page d'accueil de la recherche))
 		if (this.statut == 0) {
 			this.lastPage = managerFactory.getSiteManager().getCount(this.pageSize, this.start);
 			this.listSite = managerFactory.getSiteManager().getListSite(this.pageSize, this.start);
@@ -294,11 +294,11 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 				session.put("listSiteOffSet", this.listSite);
 		}
 
-		// Liste qui comprendra notre liste recherchée ainsi que le numéro de la
-		// dernière apge
+		// Liste qui comprendra notre liste recherchÃ©e ainsi que le numÃ©ro de la
+		// derniÃ¨re apge
 		ArrayList<Object> recherche = new ArrayList<Object>();
 
-		// Recherche en Bd en fonction des critères
+		// Recherche en Bd en fonction des critÃ¨res
 		if (this.recherche != null) {
 			recherche = (ArrayList<Object>) managerFactory.getSiteManager().getListSiteRecherche(this.pageSize,
 					this.start, this.recherche);
@@ -308,12 +308,12 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 			// Enregistrement de la liste obtenue en session
 			session.put("listSite", this.listSite);
-			// Enregistrement de la dernière page en session
+			// Enregistrement de la derniÃ¨re page en session
 			if (session.containsKey("lastPage")) {
 				session.replace("lastPage", this.lastPage);
 			} else
 				session.put("lastPage", this.lastPage);
-			// Changement du statut pour ne plus obtenir tous les sites par défaut
+			// Changement du statut pour ne plus obtenir tous les sites par dÃ©faut
 			this.statut = 1;
 			if (session.containsKey("statut")) {
 				session.replace("statut", this.statut);
@@ -329,7 +329,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		if (session.containsKey("listSite")) {
 			this.listSite = (List<Site>) session.get("listSite");
 		}
-		// Offset de la liste obtenue qui sera renvoyée à la vue
+		// Offset de la liste obtenue qui sera renvoyÃ©e Ã  la vue
 		if (this.statut == 1) {
 			this.listSiteOffset = managerFactory.getSiteManager().doOffSet(this.listSite, this.start, this.pageSize);
 			session.replace("listSiteOffSet", this.listSiteOffset);
@@ -340,12 +340,12 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	}
 
 	/**
-	 * Méthode d'obtention d'un Site et de ses détails
+	 * MÃ©thode d'obtention d'un Site et de ses dÃ©tails
 	 * 
-	 * @return Succes si pas d'erreur et Error si une erreur est présente
+	 * @return Succes si pas d'erreur et Error si une erreur est prÃ©sente
 	 */
 	public String doDetail() throws NotFoundException {
-		//Récupérer des listes
+		//RÃ©cupÃ©rer des listes
 		this.listeCotation = (List<ListCot>) managerFactory.getCotationManager().getDetailList();
 		session.put("listeCotation", this.listeCotation);
 
@@ -369,17 +369,17 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	}
 
 	/**
-	 * Méthode d'ajout d'un Site en reprenant les infos du formulaire
+	 * MÃ©thode d'ajout d'un Site en reprenant les infos du formulaire
 	 * 
 	 * @return
 	 * @throws FunctionalException
-	 *             si le site ajouté est null
+	 *             si le site ajoutÃ© est null
 	 */
 	public String add() throws FunctionalException {
 
 		String result = ActionSupport.INPUT;
 
-		// Accès à la BD pour récupérer les listes prédéfinies d'Orientation et Cotation
+		// AccÃ¨s Ã  la BD pour rÃ©cupÃ©rer les listes prÃ©dÃ©finies d'Orientation et Cotation
 		// et les mettre
 		// dans une session
 		setListeOrientation((List<Orientation>) managerFactory.getOrientationManager().getDetailList());
@@ -397,7 +397,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 		// ----------ENREGISTREMENT DU SITE----------
 
 		if (this.site != null) {
-			// -------------- Validation des données saisies--------------
+			// -------------- Validation des donnÃ©es saisies--------------
 			if (this.site.getNom().length() == 0 || this.site.getNom() == null) {
 				this.addFieldError("site.nom", getText("error.empty"));
 			}
@@ -415,11 +415,11 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 					this.addActionError(getText("error.image") + ex.getMessage());
 				}
 			}
-			// Si image null, enregistrement d'une image par défaut
+			// Si image null, enregistrement d'une image par dÃ©faut
 			else
 				this.site.setImage("defaut.jpg");
 
-			// Si pas d'erreur, rajout des différents attributs au site enregistrement du
+			// Si pas d'erreur, rajout des diffÃ©rents attributs au site enregistrement du
 			// site
 			if (!this.hasErrors()) {
 				try {
@@ -427,10 +427,10 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 					// Ajout d'une date au site
 					this.site.setDateAjout(new Date());
 
-					// Ajouter d'abord le site aux différents éléments
-					// pour les relations en base de données
+					// Ajouter d'abord le site aux diffÃ©rents Ã©lÃ©ments
+					// pour les relations en base de donnÃ©es
 
-					// Situation et Coordonnées
+					// Situation et CoordonnÃ©es
 					// this.situation.setSite(this.site);
 					// this.coordonnee.setSite(this.site);
 
@@ -450,7 +450,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 					// Cotations
 
-					// Récupération des objets en session
+					// RÃ©cupÃ©ration des objets en session
 					if (session.containsKey("listCotation"))
 						this.listeCotation = (List<ListCot>) session.get("listCotation");
 
@@ -464,43 +464,43 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 						this.cotMin = new Cotation();
 						this.cotMin.setTypeCot("min");
 
-						// Récupération des objets dans les listes précédemment récupérée en BD
+						// RÃ©cupÃ©ration des objets dans les listes prÃ©cÃ©demment rÃ©cupÃ©rÃ©e en BD
 						for (ListCot l : this.listeCotation) {
 							if (this.cotMinValue == l.getId()) {
 								this.cotMin.setCot(l);
 							}
 						}
-						// Ajout à la liste qui sera insérée dans le site
+						// Ajout Ã  la liste qui sera insÃ©rÃ©e dans le site
 						this.listeCotationOut.add(this.cotMin);
 					}
 
 					if (this.cotMaxValue != null) {
 						this.cotMax = new Cotation();
 						this.cotMax.setTypeCot("max");
-						// Récupération des objets dans les listes précédemment récupérée en BD
+						// RÃ©cupÃ©ration des objets dans les listes prÃ©cÃ©demment rÃ©cupÃ©rÃ©e en BD
 						for (ListCot j : this.listeCotation) {
 							if (this.cotMaxValue == j.getId()) {
 								this.cotMax.setCot(j);
 							}
 						}
-						// Ajout à la liste qui sera insérée dans le site
+						// Ajout Ã  la liste qui sera insÃ©rÃ©e dans le site
 						this.listeCotationOut.add(this.cotMax);
 					}
 
 					// Orientation
 
-					// Récupération des objets dans les listes précédemment récupérée en BD
+					// RÃ©cupÃ©ration des objets dans les listes prÃ©cÃ©demment rÃ©cupÃ©rÃ©e en BD
 					if (this.listeOrientationValues != null) {
 						for (Integer val : this.listeOrientationValues) {
 							for (Orientation o : this.listeOrientation) {
 								if (val == o.getOrientationId()) {
-									// Ajout à la liste qui sera insérée dans le site
+									// Ajout Ã  la liste qui sera insÃ©rÃ©e dans le site
 									this.listeOrientationOut.add(o);
 								}
 							}
 						}
 					}
-					// Récupération des pays
+					// RÃ©cupÃ©ration des pays
 					for (Pays p : this.listePays) {
 						if (this.paysIdOut.equals(p.getId())) {
 							this.site.setPays(p);
@@ -508,7 +508,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 						}
 
 					}
-					// Récupération des états
+					// RÃ©cupÃ©ration des Ã©tats
 					for (State s : this.listeState) {
 						if (this.stateIdOut.equals(s.getId())) {
 							this.site.setState(s);
@@ -517,7 +517,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 
 					}
 
-					// Insertion de chaque élément dans le site avant insertion en BD
+					// Insertion de chaque Ã©lÃ©ment dans le site avant insertion en BD
 
 					this.site.setCoordonnee(this.coordonnee);
 					if (this.listeOrientationOut != null)
@@ -533,7 +533,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 					// Fin de l'action
 					result = ActionSupport.SUCCESS;
 
-					this.addActionMessage("Site ajouté avec succès");
+					this.addActionMessage("Site ajoutÃ© avec succÃ¨s");
 
 				} catch (FunctionalException functExcep) {
 					// On reste sur la saisie
@@ -551,7 +551,7 @@ public class GestionSiteAction extends ActionSupport implements SessionAware {
 	}
 
 	/**
-	 * Méthode pour lier un topo à un site
+	 * MÃ©thode pour lier un topo Ã  un site
 	 * 
 	 * @return success si effectif
 	 */

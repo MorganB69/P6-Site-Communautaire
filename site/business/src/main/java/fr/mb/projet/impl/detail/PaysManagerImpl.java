@@ -33,7 +33,7 @@ import fr.mb.projet.exception.TechnicalException;
 public class PaysManagerImpl implements DetailManager<Pays> {
 
 	/**
-	 * Dao pour l'obtention des données
+	 * Dao pour l'obtention des donnÃ©es
 	 */
 	@Inject
 	DetailDao<Pays> paysDao;

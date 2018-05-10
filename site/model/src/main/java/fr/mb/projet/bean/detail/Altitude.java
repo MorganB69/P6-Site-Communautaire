@@ -18,7 +18,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import fr.mb.projet.bean.spot.Site;
 
 /**
- * Classe permettant de définir l'Altitude d'un Site
+ * Classe permettant de dÃ©finir l'Altitude d'un Site
  * @author Morgan
  *
  */
@@ -27,7 +27,7 @@ import fr.mb.projet.bean.spot.Site;
 public class Altitude implements Serializable{
 	
 	/**
-	 * L'Id de l'objet généré automatiquement
+	 * L'Id de l'objet gÃ©nÃ©rÃ© automatiquement
 	 */
 	@Id
 	@Column(name = "alt_id")

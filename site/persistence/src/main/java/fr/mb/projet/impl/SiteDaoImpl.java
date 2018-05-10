@@ -16,7 +16,7 @@ import fr.mb.projet.contract.SiteDao;
 import fr.mb.projet.recherche.RechercheSite;
 
 /**
- * Implémentation de la DAO pour les classes de Site
+ * ImplÃ©mentation de la DAO pour les classes de Site
  * 
  * @author Morgan
  *
@@ -134,9 +134,9 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 	}
 
 	/* 
-	 * Méthode de recherche de site en fonction de multicritères
-	 * Méthode décomposée en plusieurs "sous-requêtes" appelée si le critère est renseigné
-	 * Chaque méthode renvoie une liste de Site que l'on compare à la liste de la requête précédente
+	 * MÃ©thode de recherche de site en fonction de multicritÃ¨res
+	 * MÃ©thode dÃ©composÃ©e en plusieurs "sous-requÃªtes" appelÃ©e si le critÃ¨re est renseignÃ©
+	 * Chaque mÃ©thode renvoie une liste de Site que l'on compare Ã  la liste de la requÃªte prÃ©cÃ©dente
 	 * pour filtrer les sites puis renvoie une liste finale
 	 * 
  	 */
@@ -161,7 +161,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		Query queryAllSite = session.createQuery("SELECT site FROM Site as site ORDER BY site.id DESC");
 		
 		
-		//ALTITUDE MINIMUM (Requête lancée si le critère est renseigné)
+		//ALTITUDE MINIMUM (RequÃªte lancÃ©e si le criÃ¨re est renseignÃ©)
 		if(recherche.getrAltMin()!=null) {
 		Query queryAltMin = session.createQuery("SELECT site FROM Site as site"
 				+ " JOIN site.listeAltitude as altitude"
@@ -174,7 +174,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		
 		
 		
-		//ALTITUDE MAXIMUM (Requête lancée si le critère est renseigné)
+		//ALTITUDE MAXIMUM (RequÃªte lancÃ©e si le critÃ¨re est renseignÃ©)
 		if(recherche.getrAltMax()!=null) {
 		Query queryAltMax = session.createQuery("SELECT site FROM Site as site"
 				+ " JOIN site.listeAltitude as altitude"
@@ -193,7 +193,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		
 		
 		
-		//COTATION MAXIMUM (Requête lancée si le critère est renseigné)
+		//COTATION MAXIMUM (RequÃªte lancÃ©e si le critÃ¨re est renseignÃ©)
 		Query queryCotMax = session.createQuery("SELECT site FROM Site as site"
 				+ " JOIN site.listeCotation as cotation"
 				+ " WHERE (cotation.typeCot=(:cotMaxType) AND cotation.cot.id<=(:cotMax))"
@@ -209,7 +209,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 			if (listCotMax.contains(s)==false)iterator.remove();
 		}}
 		
-		//COTATION MINIMUM (Requête lancée si le critère est renseigné)
+		//COTATION MINIMUM (RequÃªte lancÃ©e si le critÃ¨re est renseignÃ©)
 		Query queryCotMin = session.createQuery("SELECT site FROM Site as site"
 				+ " JOIN site.listeCotation as cotation"
 				+ " WHERE (cotation.typeCot=(:cotMinType) AND cotation.cot.id>=(:cotMin))"
@@ -225,7 +225,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 			if (listCotMin.contains(s)==false)iterator.remove();
 		}}
 		
-		//ORIENTATION (Requête lancée si le critère est spécifié)
+		//ORIENTATION (RequÃªte lancÃ©e si le critÃ¨re est spÃ©cifiÃ©)
 		if(recherche.getrOrient()!=10000) {
 		Query queryOrient = session.createQuery("SELECT site FROM Site as site"
 				+ " JOIN site.listeOrientation as orientation"
@@ -243,7 +243,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		}}}
 		
 		
-		//PAYS (Requête lancée si le critère est renseigné)
+		//PAYS (RequÃªte lancÃ©e si le critÃ¨re est renseignÃ©)
 
 		if(recherche.getrPays()!=10000) {
 		Query queryPays = session.createQuery("SELECT site FROM Site as site"
@@ -262,7 +262,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		}}}
 		
 		
-		//STATE (Requête lancée si le critère est renseigné)
+		//STATE (RequÃªte lancÃ©e si le critÃ¨re est renseignÃ©)
 		if(recherche.getrDepartement()!=10000) {
 		Query queryState = session.createQuery("SELECT site FROM Site as site"
 				+ " WHERE (state.id=(:id))"
@@ -280,7 +280,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		}}}
 		
 		
-		//TYPE (Requête lancée si le critère est renseigné)
+		//TYPE (RequÃªte lancÃ©e si le critÃ¨re est renseignÃ©)
 		if(recherche.getrType().equals("ALL")==false) {
 		Query queryType = session.createQuery("SELECT site FROM Site as site"
 				+ " WHERE (site.type=(:type))"
@@ -322,7 +322,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		//Liste à retourner
+		//Liste Ã  retourner
 		List<Site>listReturn=new ArrayList<Site>();
 		
 		//-------------CREATION REQUETE HQL DYNAMIQUE--------------
@@ -349,7 +349,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 		
 			  SQL+=" WHERE (cotation.typeCot=(:cotMaxType) AND cotation.cot.id<=(:cotMax))";
 			  
-		//-----------sous requête obligatoire--------------
+		//-----------sous requÃªte obligatoire--------------
 			  
 			  SQL+=" AND site.id IN(SELECT site from Site as site "
 				+ " JOIN site.listeCotation as cotation "
@@ -440,7 +440,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao {
 			query.setParameter("type", recherche.getrType());
 			
 		}
-		//Recherche des résultats de la Query
+		//Recherche des rÃ©sultats de la Query
 		listReturn=query.getResultList();		
 
 		session.close();		

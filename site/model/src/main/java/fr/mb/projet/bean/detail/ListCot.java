@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Classe permettant de définir toutes les cotations existantes (liste fixe)
+ * Classe permettant de dÃ©finir toutes les cotations existantes (liste fixe)
  * 
  * @author Morgan
  *

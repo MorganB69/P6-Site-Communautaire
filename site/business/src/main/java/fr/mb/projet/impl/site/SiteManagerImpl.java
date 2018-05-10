@@ -55,7 +55,7 @@ public class SiteManagerImpl implements SiteManager {
 
 		Site vSite = siteDao.findById(siteId);
 		if(vSite==null){
-			throw new NotFoundException("Site non trouvé");
+			throw new NotFoundException("Site non trouvÃ©");
 		}
 		
 
@@ -156,7 +156,7 @@ public class SiteManagerImpl implements SiteManager {
 	}
 	
 	/* 
-	 * Offset d'une liste en fonction du nombre de page et de la page demandée par l'utilisateur(start)
+	 * Offset d'une liste en fonction du nombre de page et de la page demandÃ©e par l'utilisateur(start)
 	 * @see fr.mb.projet.contract.SiteManager#doOffSet(java.util.List, java.lang.Integer, java.lang.Integer)
 	 */
 	public List<Site> doOffSet(List<Site>list, Integer start, Integer nbPage){

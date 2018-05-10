@@ -79,7 +79,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	
 	//Methodes
 	/**
-	 * Méthode pour se login
+	 * MÃ©thode pour se login
 	 * @return
 	 */
 	public String doLogin() {
@@ -101,7 +101,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	}
 	
 	/**
-	 * Méthode pour se logout
+	 * MÃ©thode pour se logout
 	 * @return
 	 */
 	public String doLogout() {

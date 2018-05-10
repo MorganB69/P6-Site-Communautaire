@@ -37,7 +37,7 @@ import fr.mb.projet.bean.detail.Situation;
 import fr.mb.projet.bean.detail.State;
 import fr.mb.projet.bean.topo.Topo;
 /**
- * Classe principale permettant de définir un Site
+ * Classe principale permettant de dÃ©finir un Site
  * @author Morgan
  *
  */
@@ -48,7 +48,7 @@ public class Site implements Serializable{
 	
 	
 	/**
-	 * l'Id est généré automatiquement
+	 * l'Id est gÃ©nÃ©rÃ© automatiquement
 	 */
 	@Id
 	@Column(name = "site_id")
@@ -65,7 +65,7 @@ public class Site implements Serializable{
 	@Column(name = "description")
 	private String description;
 	/**
-	 * Description de l'accès au site
+	 * Description de l'accÃ¨s au site
 	 */
 	@Column(name = "acces")
 	private String acces;
@@ -153,7 +153,7 @@ public class Site implements Serializable{
 	
 	
 	/**
-	 *Définit le type d'un site 
+	 *Dï¿½finit le type d'un site 
 	 */
 	@Column(name = "type")
 	private String type;

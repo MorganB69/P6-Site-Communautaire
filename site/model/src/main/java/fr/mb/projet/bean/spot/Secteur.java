@@ -1,5 +1,7 @@
 package fr.mb.projet.bean.spot;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,16 +13,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Classe permettant de définir le secteur d'un Site
+ * Classe permettant de dÃ©finir le secteur d'un Site
  * 
  * @author Morgan
  *
  */
 @Entity
 @Table(name = "secteur")
-public class Secteur {
+public class Secteur implements Serializable {
 	/**
-	 * l'Id d'un secteur, généré automatiquement
+	 * l'Id d'un secteur, gÃ©nÃ©rÃ© automatiquement
 	 */
 	@Id
 	@Column(name = "secteur_id")

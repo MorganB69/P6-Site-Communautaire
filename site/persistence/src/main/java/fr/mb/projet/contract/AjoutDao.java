@@ -6,7 +6,7 @@ import fr.mb.projet.bean.comment.Comment;
 public interface AjoutDao <T> {
 	/**
 	 * Persister le commentaire en bd
-	 * @param comment à insérer en bd
+	 * @param comment Ã  insÃ©rer en bd
 	 */
 	public void persist(T comment);
 }

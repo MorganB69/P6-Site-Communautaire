@@ -22,7 +22,7 @@ import fr.mb.projet.contract.UserManager;
 
 
 /**
- * Implémentation de la factory des managers
+ * ImplÃ©mentation de la factory des managers
  * @author Morgan
  *
  */

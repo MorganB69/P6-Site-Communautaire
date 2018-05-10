@@ -32,7 +32,7 @@ import fr.mb.projet.exception.TechnicalException;
 public class CotationManagerImpl implements DetailManager<ListCot> {
 
 	/**
-	 * Dao pour l'obtention des données
+	 * Dao pour l'obtention des donnÃ©es
 	 */
 	@Inject
 	DetailDao<ListCot> cotationDao;

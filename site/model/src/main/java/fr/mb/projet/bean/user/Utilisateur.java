@@ -18,7 +18,7 @@ import fr.mb.projet.bean.topo.Pret;
 import fr.mb.projet.bean.topo.Topo;
 
 /**
- * Classe pour définir un Utilisateur
+ * Classe pour dÃ©finir un Utilisateur
  * 
  * @author Morgan
  *
@@ -28,7 +28,7 @@ import fr.mb.projet.bean.topo.Topo;
 public class Utilisateur implements Serializable {
 
 	/**
-	 * l'Id est généré automatiquement
+	 * l'Id est gÃ©nÃ©rÃ© automatiquement
 	 */
 	@Id
 	@Column(name = "user_id")

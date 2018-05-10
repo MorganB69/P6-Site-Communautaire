@@ -33,7 +33,7 @@ import fr.mb.projet.exception.TechnicalException;
 public class StateManagerImpl implements DetailManager<State> {
 
 	/**
-	 * Dao pour l'obtention des données
+	 * Dao pour l'obtention des donnÃ©es
 	 */
 	@Inject
 	DetailDao<State> stateDao;

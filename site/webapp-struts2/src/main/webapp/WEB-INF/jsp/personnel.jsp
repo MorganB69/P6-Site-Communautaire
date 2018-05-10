@@ -87,8 +87,9 @@
 									<s:param name="idPret" value="id"></s:param>
 									</s:a>
 									
-									<s:a class="btn btn-danger m-3" >Refuser le prêt
-									
+									<s:a class="btn btn-danger m-3" action="annulPret" >Refuser le prêt
+										<s:param name="id" value="topo.id"></s:param>
+										<s:param name="idPret" value="id"></s:param>
 									</s:a>
 									</s:if>
 									<s:elseif test="statut=='Annulé'" >

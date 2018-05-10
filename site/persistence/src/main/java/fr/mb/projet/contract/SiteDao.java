@@ -10,7 +10,7 @@ import fr.mb.projet.bean.spot.Site;
 import fr.mb.projet.recherche.RechercheSite;
 
 /**
- * Interface pour la DAO relative à la classe Site
+ * Interface pour la DAO relative Ã  la classe Site
  * @author Morgan
  *
  */
@@ -19,20 +19,20 @@ public interface SiteDao extends Serializable{
 	
 	/**
 	 * Persister le site en bd
-	 * @param site à insérer en bd
+	 * @param site Ã  insÃ©rer en bd
 	 */
 	public void persist(Site site);
 	
 	/**
-	 * Mettre à jour le site en bd
-	 * @param site à mettre à jour en bd
+	 * Mettre Ã  jour le site en bd
+	 * @param site Ã  mettre Ã  jour en bd
 	 */
 	public void update(Site site);
 	
 	/**
 	 * Trouver le site en fonction de son id
 	 * @param id pour trouver le site
-	 * @return le site trouvé
+	 * @return le site trouvÃ©
 	 */
 	public Site findById(int id);
 	
@@ -43,27 +43,27 @@ public interface SiteDao extends Serializable{
 	public void delete(Site site);
 	
 	/**
-	 * Récupère une liste de site en bd
-	 * @param nbPage permet de définir la limite
-	 * @param start permet de définir l'offset
+	 * RÃ©cupÃ¨re une liste de site en bd
+	 * @param nbPage permet de dÃ©finir la limite
+	 * @param start permet de dÃ©finir l'offset
 	 * @return une liste de Site
 	 */
 	public List<Site> findAll(Integer nbPage, Integer start);
 	
 	/**
-	 * Supprime tous les sites en base de donnée
+	 * Supprime tous les sites en base de donnÃ©e
 	 * 
 	 */
 	public void deleteAll();
 
 	/**
-	 * Compte le nombre d'objet en base de donnée
-	 * @return le nombre d'objets trouvés
+	 * Compte le nombre d'objet en base de donnÃ©e
+	 * @return le nombre d'objets trouvÃ©s
 	 */
 	public Long getCount();
 
 	/**
-	 * Récupère la liste de site en fonction des différents critères
+	 * RÃ©cupÃ¨re la liste de site en fonction des diffÃ©rents critÃ¨res
 	 * @param nbPage
 	 * @param offset
 	 * @param recherche
@@ -72,7 +72,7 @@ public interface SiteDao extends Serializable{
 	public List<Site> recherche(Integer nbPage, Integer offset, RechercheSite recherche);
 
 	/**
-	 * Retourne la dernière page en fonction des critères de recherche
+	 * Retourne la derniÃ¨re page en fonction des critÃ¨res de recherche
 	 * @return
 	 */
 	public Long getCountRecherche();

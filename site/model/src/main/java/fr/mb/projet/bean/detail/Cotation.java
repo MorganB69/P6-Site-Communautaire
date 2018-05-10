@@ -23,7 +23,7 @@ import fr.mb.projet.bean.spot.Site;
 @Table(name = "cotation")
 public class Cotation implements Serializable {
 	/**
-	 * l'Id est généré automatiquement
+	 * l'Id est gÃ©nÃ©rÃ© automatiquement
 	 */
 	@Id
 	@Column(name = "cotation_id")
@@ -35,14 +35,14 @@ public class Cotation implements Serializable {
 	@Column(name = "type_cot")
 	private String typeCot;
 	/**
-	 * La liste des différentes cotations (liste fixe en bd)
+	 * La liste des diffÃ©rentes cotations (liste fixe en bd)
 	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="cot_id")
 	private ListCot cot;
 	
 	/**
-	 * La classe Site permettant de définir la relation manytoone
+	 * La classe Site permettant de dÃ©finir la relation manytoone
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "site_id", nullable = false)

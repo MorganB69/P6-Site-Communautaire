@@ -18,7 +18,7 @@ import fr.mb.projet.bean.detail.State;
 import fr.mb.projet.contract.ManagerFactory;
 
 /**
- * Action permettant l'obtention de la liste des Pays/Régions en Json
+ * Action permettant l'obtention de la liste des Pays/RÃ©gions en Json
  * @author Morgan
  *
  */
@@ -47,11 +47,11 @@ public class JSONDateAction extends ActionSupport implements SessionAware {
 
 
 	/**
-	 *Id du Pays en sortie selectionné par l'user pour récupérer les régions correspondantes 
+	 *Id du Pays en sortie selectionnÃ© par l'user pour rÃ©cupÃ©rer les rÃ©gions correspondantes 
 	 */
 	private Integer paysIdOut=75;
 	/**
-	 *Liste des régions 
+	 *Liste des rÃ©gions 
 	 */
 	private List<State>listState=new ArrayList<State>();
 	/**
@@ -63,7 +63,7 @@ public class JSONDateAction extends ActionSupport implements SessionAware {
 	 */
 	private Gson gson=new Gson();
 	/**
-	 *Résultat en Json 
+	 *RÃ©sultat en Json 
 	 */
 	private String result;
 	
@@ -74,7 +74,7 @@ public class JSONDateAction extends ActionSupport implements SessionAware {
 
 	
 	/**
-	 * Obtention de la liste des régions en fonction du pays puis retour en Json (utilisé dans formulaire global)
+	 * Obtention de la liste des rÃ©gions en fonction du pays puis retour en Json (utilisÃ© dans formulaire global)
 	 * @return
 	 */
 	public String getListDb() {
@@ -84,7 +84,7 @@ public class JSONDateAction extends ActionSupport implements SessionAware {
 		return ActionSupport.SUCCESS;
 	}
 	/**
-	 * Obtention de la liste des régions en fonction du pays puis retour en Json(utilisé dans formulaire recherche de site)
+	 * Obtention de la liste des rÃ©gions en fonction du pays puis retour en Json(utilisÃ© dans formulaire recherche de site)
 	 * @return
 	 */
 	public String getList() {
